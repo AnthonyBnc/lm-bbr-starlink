@@ -1,0 +1,129 @@
+import os
+
+
+class Config:
+    _base_dir = '' if 'llm_framework' in os.getcwd() else 'llm_framework/'
+
+    data_dir = _base_dir + 'data/'
+    results_dir = data_dir + 'results/'
+    exp_pools_dir = data_dir + 'exp_pools/'
+
+    # plm special
+    plm_types = ['gpt2', 'llama2', 't5', 'llama3','smollm2', 'gpt_neo']
+    plm_sizes = ['xxs', 'xs', 'small', 'base', 'large', 'xl', 'xxl']  # note that the actual size of plm is dependent on the type of plm. 
+                                                         # for example, for llama, 'base' is 7b, while for gpt2, 'base' is 340M. you can specify it yourself.
+
+    # plm_dir = _base_dir + path to your downloaded_plms
+    plm_dir = _base_dir + ('d:\downloaded_plms')
+    plm_ft_dir = _base_dir + 'data/ft_plms'
+    plm_embed_sizes = {
+        'gpt2': {
+            'base': 1024,
+            'small': 768,
+            'large': 1280,
+            'xl': 1600,
+        },
+        'llama2': {
+            'base': 4096,
+        },
+        't5': {
+            'base': 768,
+            'small': 512,
+            'large': 4096,
+            'xl': 2048,
+        },
+        'llava': {
+            'base': 4096,
+        },
+        'mistral': {
+            'base': 4096,
+        },
+        'opt': {
+            'large': 5120,
+            'base': 4096,
+            'small': 2560,
+            'xs': 2048,
+            'xxs': 512,
+        },
+        'llama3': {
+            'base': 3072,
+        },
+        'llama4': {
+            'base': 4096,
+        },
+        'deepseek': {
+            'base': 4096,
+        },
+        'gemma3': {
+            'base': 640,
+        },
+        'qwen3': {
+            'base': 1024,
+        },
+        'smollm2': {
+            'base': 960,
+        },
+        'pythia': {
+            'base': 1024,
+        },
+        'gpt_neo': {
+            'base': 768,
+        },
+    }
+    plm_layer_sizes = {
+        'gpt2': {
+            'base': 24,
+            'small': 12,
+            'large': 36,
+            'xl': 48
+        },
+        'llama2': {
+            'base': 32,
+        },
+        't5': { 
+            'base': 12,
+            'small': 6,
+            'large': 24,
+            'xl': 24
+        },
+        'llava': {
+            'base': 32,
+        },
+        'mistral': {
+            'base': 32,
+        },
+        'opt': {
+            'large': 40,
+            'base': 32,
+            'small': 32,
+            'xs': 32,
+            'xxs': 16,
+        },
+        'llama3': {
+            'base': 28,
+        },
+        'llama4': {
+            'base': 48,
+        },
+        'deepseek': {
+            'base': 32,
+        },
+        'gemma3': {
+            'base': 18,
+        },
+        'qwen3': {
+            'base': 28,
+        },
+        'smollm2': {
+            'base': 32,
+        },
+        'pythia': {
+            'base': 24,
+        },
+        'gpt_neo': {
+            'base': 12,
+        },
+    }
+
+
+cfg = Config()
