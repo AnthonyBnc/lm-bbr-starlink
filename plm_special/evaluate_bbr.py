@@ -12,8 +12,9 @@ import os
 from datetime import datetime
 import random
 import pickle
-from plm_special.utils.utils import process_batch
+from plm_special.utils.utils import process_bbr_batch
 from plm_special.data.dataset import ExperienceDataset
+from utils.bbr import mask_action_logits
 
 
 
@@ -65,6 +66,7 @@ def convert_exp_pool_to_dataframe(exp_pool, csv_output_path='exp_pool_data.csv',
     df['actions'] = exp_pool.actions
     df['rewards'] = exp_pool.rewards
     df['dones'] = exp_pool.dones
+    df['phases'] = exp_pool.phases
 
     # Step 2: Save the DataFrame to a CSV file
     df.to_csv(csv_output_path, index=False)
@@ -100,7 +102,7 @@ def find_nearest_length(df, user_input):
 
 def test_step(args, model, loss_fn, raw_batch, target_return):
     # Assuming raw_batch is a tuple of numpy arrays or lists
-    states, actions, returns, timesteps = raw_batch
+    states, actions, returns, timesteps, phases = raw_batch
 
     # Convert states to tensor and ensure correct shape
     states = torch.tensor(states[0], dtype=torch.float32).to(args.device).unsqueeze(0)  # Shape [1, 8]
@@ -112,15 +114,19 @@ def test_step(args, model, loss_fn, raw_batch, target_return):
 
     # Create a batch with the correctly formatted tensors
     # Wrap states in a list to avoid TypeError in process_batch
-    batch = ([states], [actions], [returns], [timesteps])  # Ensure states is a list
+    batch = ([states], [actions], [returns], [timesteps], phases)
 
     # Call process_batch
-    states, actions, returns, timesteps, labels = process_batch(batch, device=args.device)
+    states, actions, returns, timesteps, labels, phases = process_bbr_batch(
+        batch, device=args.device
+    )
 
     # Predict actions using the model
     # actions_pred1 = model(states, actions, returns, timesteps)
     queue_action = 0
-    actions_pred1, queue_action = model.sample(states, target_return, timesteps)
+    actions_pred1, queue_action = model.sample(
+        states, target_return, timesteps, phase=phases[-1]
+    )
 
     # Permute for loss calculation
     actions_pred = actions_pred1.permute(0, 2, 1)
@@ -136,7 +142,7 @@ def test_step(args, model, loss_fn, raw_batch, target_return):
 
 def otest_step(args, model, loss_fn, raw_batch, target_return):
     # Assuming raw_batch is a tuple of numpy arrays or lists
-    states, actions, returns, timesteps = raw_batch
+    states, actions, returns, timesteps, phases = raw_batch
 
     # Convert states to tensor and ensure correct shape
     states = torch.tensor(states[0], dtype=torch.float32).to(args.device).unsqueeze(0)  # Shape [1, 8]
@@ -150,18 +156,21 @@ def otest_step(args, model, loss_fn, raw_batch, target_return):
 
     # Create a batch with the correctly formatted tensors
     # Wrap states in a list to avoid TypeError in process_batch
-    batch = ([states], [actions], [returns], [timesteps])  # Ensure states is a list
+    batch = ([states], [actions], [returns], [timesteps], phases)
 
     # Call process_batch
-    states, actions, returns, timesteps, labels = process_batch(batch, device=args.device)
+    states, actions, returns, timesteps, labels, phases = process_bbr_batch(
+        batch, device=args.device
+    )
 
     # Predict actions using the model
     # actions_pred1 = model(states, actions, returns, timesteps)
-    actions_pred1 = model(states, actions, returns, timesteps)
+    raw_actions_pred1 = model(states, actions, returns, timesteps)
+    actions_pred1 = mask_action_logits(raw_actions_pred1, phases[-1])
 
     # Permute for loss calculation
     actions_pred = actions_pred1.permute(0, 2, 1)
-    loss = loss_fn(actions_pred, labels)
+    loss = loss_fn(raw_actions_pred1.permute(0, 2, 1), labels)
 
     queue_action = 0
 
@@ -200,7 +209,8 @@ def evaluate_on_simulated_env(args, model, exp_pool, target_return, loss_fn, pro
         current_action = row['actions']
         reward = row['rewards']
         done = 0
-        batch = [state], [current_action], [reward], [done]
+        phase = row['phases']
+        batch = [state], [current_action], [reward], [done], [phase]
 
         # Run the test step to get predictions
         _, _, _, _, _, _, _, actions_pred = otest_step(args, model, loss_fn, batch, target_return)
@@ -234,5 +244,4 @@ def evaluate_on_simulated_env(args, model, exp_pool, target_return, loss_fn, pro
     # Save the updated DataFrame to CSV
     df_existing.to_csv(csv_filename, index=False)
     print(f"✅ Results saved successfully to '{csv_filename}' under column '{new_column_name}'.")
-
 

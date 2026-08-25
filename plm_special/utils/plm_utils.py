@@ -55,8 +55,6 @@ from transformers import (
     Qwen2Model,
 )
 
-from plm_special.models.llm_models.t5 import T5Model
-                        
 ModelClass = namedtuple("ModelClass", ('config', 'tokenizer', 'model'))
 
 # The ** operator is used for unpacking a dictionary and passing it as keyword arguments to a function or class. In this case, it's unpacking the dictionary

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560">
+<rect width="100%" height="100%" fill="white"/>
+<text x="490.0" y="35" font-size="22" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Phase 3 Modern SML Models: BW_UP Accuracy</text>
+<line x1="90" y1="435.0" x2="940" y2="435.0" stroke="#e5e7eb"/>
+<text x="78" y="440.0" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">25%</text>
+<line x1="90" y1="327.6" x2="940" y2="327.6" stroke="#e5e7eb"/>
+<text x="78" y="332.6470588235294" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">30%</text>
+<line x1="90" y1="220.3" x2="940" y2="220.3" stroke="#e5e7eb"/>
+<text x="78" y="225.2941176470588" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">35%</text>
+<line x1="90" y1="112.9" x2="940" y2="112.9" stroke="#e5e7eb"/>
+<text x="78" y="117.94117647058823" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">40%</text>
+<line x1="90" y1="70" x2="90" y2="435" stroke="#111827"/>
+<line x1="90" y1="435" x2="940" y2="435" stroke="#111827"/>
+<text x="24" y="252.5" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">UP accuracy</text>
+<rect x="150.2" y="146.6" width="92" height="288.4" fill="#D05A28" rx="5"/>
+<text x="196.25" y="138.56980864635017" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">38.43%</text>
+<text x="196.25" y="467" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Qwen3.5</text>
+<text x="196.25" y="485" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">4B Base</text>
+<rect x="362.8" y="180.2" width="92" height="254.8" fill="#D05A28" rx="5"/>
+<text x="408.75" y="172.19844082211205" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">36.87%</text>
+<text x="408.75" y="467" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">LFM2.5</text>
+<text x="408.75" y="485" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">2.6B</text>
+<rect x="575.2" y="239.7" width="92" height="195.3" fill="#D05A28" rx="5"/>
+<text x="621.25" y="231.69525159461372" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">34.10%</text>
+<text x="621.25" y="467" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Gemma 3</text>
+<text x="621.25" y="485" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">4B PT</text>
+<rect x="787.8" y="314.7" width="92" height="120.3" fill="#D05A28" rx="5"/>
+<text x="833.75" y="306.71296952515945" font-size="12" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">30.60%</text>
+<text x="833.75" y="467" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Llama 3.2</text>
+<text x="833.75" y="485" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">3B</text>
+<text x="490.0" y="538" font-size="12" font-weight="normal" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif">OLMo 3 7B excluded from this completed-result chart due compute-limit stop; no final validation result.</text>
+</svg>

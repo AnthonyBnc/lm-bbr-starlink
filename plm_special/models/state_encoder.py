@@ -78,7 +78,7 @@ class EncoderNetwork(nn.Module):
         features6 = self.fc6(feature6).reshape(batch_size, seq_len, -1)
         features7 = self.fc7(feature7).reshape(batch_size, seq_len, -1)
         features8 = self.fc8(feature8).reshape(batch_size, seq_len, -1)
-        features9 = self.fc8(feature9).reshape(batch_size, seq_len, -1)
+        features9 = self.fc9(feature9).reshape(batch_size, seq_len, -1)
 
 
 

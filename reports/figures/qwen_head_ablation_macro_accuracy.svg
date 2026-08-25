@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620">
+<rect width="100%" height="100%" fill="white"/>
+<text x="550.0" y="35" font-size="22" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Macro-Phase Accuracy Across Completed Qwen Head Ablations</text>
+<line x1="90" y1="510.0" x2="1070" y2="510.0" stroke="#e5e7eb"/>
+<text x="78" y="515.0" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">0%</text>
+<line x1="90" y1="458.2" x2="1070" y2="458.2" stroke="#e5e7eb"/>
+<text x="78" y="463.2352941176471" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">10%</text>
+<line x1="90" y1="406.5" x2="1070" y2="406.5" stroke="#e5e7eb"/>
+<text x="78" y="411.47058823529414" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">20%</text>
+<line x1="90" y1="354.7" x2="1070" y2="354.7" stroke="#e5e7eb"/>
+<text x="78" y="359.70588235294116" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">30%</text>
+<line x1="90" y1="302.9" x2="1070" y2="302.9" stroke="#e5e7eb"/>
+<text x="78" y="307.94117647058823" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">40%</text>
+<line x1="90" y1="251.2" x2="1070" y2="251.2" stroke="#e5e7eb"/>
+<text x="78" y="256.1764705882353" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">50%</text>
+<line x1="90" y1="199.4" x2="1070" y2="199.4" stroke="#e5e7eb"/>
+<text x="78" y="204.41176470588232" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">60%</text>
+<line x1="90" y1="147.6" x2="1070" y2="147.6" stroke="#e5e7eb"/>
+<text x="78" y="152.64705882352945" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">70%</text>
+<line x1="90" y1="95.9" x2="1070" y2="95.9" stroke="#e5e7eb"/>
+<text x="78" y="100.88235294117646" font-size="12" font-weight="normal" text-anchor="end" fill="#4b5563" font-family="Arial, sans-serif">80%</text>
+<line x1="90" y1="70" x2="90" y2="510" stroke="#111827"/>
+<line x1="90" y1="510" x2="1070" y2="510" stroke="#111827"/>
+<text x="25" y="290.0" font-size="14" font-weight="700" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">Macro accuracy</text>
+<text x="212.5" y="545" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">q4_d2</text>
+<rect x="140.5" y="115.2" width="42" height="394.8" fill="#2E6FBB" rx="3"/>
+<text x="161.5" y="109.21615875265769" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">76.3%</text>
+<rect x="188.5" y="135.6" width="42" height="374.4" fill="#7A4FB3" rx="3"/>
+<text x="209.5" y="129.5894164894874" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">72.3%</text>
+<rect x="236.5" y="300.4" width="42" height="209.6" fill="#D05A28" rx="3"/>
+<text x="257.5" y="294.44649184975196" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">40.5%</text>
+<text x="457.5" y="545" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">q8_d2</text>
+<rect x="385.5" y="115.2" width="42" height="394.8" fill="#2E6FBB" rx="3"/>
+<text x="406.5" y="109.21615875265769" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">76.3%</text>
+<rect x="433.5" y="117.3" width="42" height="392.7" fill="#7A4FB3" rx="3"/>
+<text x="454.5" y="111.29506260335461" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">75.9%</text>
+<rect x="481.5" y="127.9" width="42" height="382.1" fill="#D05A28" rx="3"/>
+<text x="502.5" y="121.8974722419087" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">73.8%</text>
+<text x="702.5" y="545" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">q8_d2
+phase-balanced</text>
+<rect x="630.5" y="108.6" width="42" height="401.4" fill="#2E6FBB" rx="3"/>
+<text x="651.5" y="102.56366643042759" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">77.6%</text>
+<rect x="678.5" y="117.3" width="42" height="392.7" fill="#7A4FB3" rx="3"/>
+<text x="699.5" y="111.29506260335461" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">75.9%</text>
+<rect x="726.5" y="127.9" width="42" height="382.1" fill="#D05A28" rx="3"/>
+<text x="747.5" y="121.8974722419087" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">73.8%</text>
+<text x="947.5" y="545" font-size="13" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">q8_d3</text>
+<rect x="875.5" y="115.2" width="42" height="394.8" fill="#2E6FBB" rx="3"/>
+<text x="896.5" y="109.21615875265769" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">76.3%</text>
+<rect x="923.5" y="117.3" width="42" height="392.7" fill="#7A4FB3" rx="3"/>
+<text x="944.5" y="111.29506260335461" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">75.9%</text>
+<rect x="971.5" y="129.1" width="42" height="380.9" fill="#D05A28" rx="3"/>
+<text x="992.5" y="123.14481455232692" font-size="11" font-weight="normal" text-anchor="middle" fill="#1f2937" font-family="Arial, sans-serif">73.6%</text>
+<rect x="90" y="582" width="16" height="16" fill="#2E6FBB" rx="2"/>
+<text x="112" y="595" font-size="13" font-weight="normal" text-anchor="start" fill="#1f2937" font-family="Arial, sans-serif">Classical</text>
+<rect x="245" y="582" width="16" height="16" fill="#7A4FB3" rx="2"/>
+<text x="267" y="595" font-size="13" font-weight="normal" text-anchor="start" fill="#1f2937" font-family="Arial, sans-serif">Classical twin</text>
+<rect x="400" y="582" width="16" height="16" fill="#D05A28" rx="2"/>
+<text x="422" y="595" font-size="13" font-weight="normal" text-anchor="start" fill="#1f2937" font-family="Arial, sans-serif">Quantum</text>
+</svg>

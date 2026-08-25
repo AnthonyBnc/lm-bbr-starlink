@@ -1,0 +1,5 @@
+torch
+transformers
+peft
+qiskit>=1.0
+qiskit-machine-learning>=0.9

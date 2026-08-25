@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 import os
 from datetime import datetime
 
-from plm_special.utils.utils import process_batch
+from plm_special.utils.utils import process_bbr_batch
 
 
 
@@ -120,7 +120,9 @@ class Tester:
         return logs, test_losses
 
     def test_step(self, batch,epoch,step):
-        states, actions, returns, timesteps, labels = process_batch(batch, device=self.device)
+        states, actions, returns, timesteps, labels, phases = process_bbr_batch(
+            batch, device=self.device
+        )
         actions_pred1 = self.model(states, actions, returns, timesteps)
         actions_pred = actions_pred1.permute(0, 2, 1)
         loss = self.loss_fn(actions_pred, labels) 

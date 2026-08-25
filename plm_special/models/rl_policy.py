@@ -5,6 +5,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from collections import deque
+
+from plm_special.classical_head import ClassicalBottleneckActionHead
+from plm_special.quantum_head import QuantumActionHead
+from utils.bbr import ACTION_LEVELS, mask_action_logits, validate_phase
     
 
 INF = 1e5
@@ -25,9 +29,17 @@ class OfflineRLPolicy(nn.Module):
             residual = False, 
             conv_size = 4,  
             which_layer = -1,  # for early stopping: specify which layer to stop
+            head_type = "classical",
+            quantum_config = None,
             **kwargs
     ):
         super().__init__()
+
+        if action_levels != ACTION_LEVELS:
+            raise ValueError(
+                f"OfflineRLPolicy requires exactly {ACTION_LEVELS} BBR actions; "
+                f"got {action_levels}"
+            )
         
         if device_out is None:
             device_out = device
@@ -57,8 +69,39 @@ class OfflineRLPolicy(nn.Module):
 
         self.embed_ln = nn.LayerNorm(plm_embed_size).to(device)
         # =========== multimodal encoder (end) ===========
-    
-        self.action_head = nn.Linear(plm_embed_size, action_levels).to(device)  # the so-called L4S head in our paper
+
+        self.head_type = head_type
+        self.quantum_config = None
+        if head_type == "classical":
+            self.action_head = nn.Linear(plm_embed_size, action_levels).to(device)
+        elif head_type == "classical_twin":
+            config = quantum_config or {}
+            self.action_head = ClassicalBottleneckActionHead(
+                plm_embed_size,
+                action_levels,
+                bottleneck_dim=int(config.get("n_qubits", 4)),
+                input_layernorm=bool(config.get("input_layernorm", False)),
+                temperature=float(config.get("temperature", 1.0)),
+            ).to(device)
+        elif head_type == "quantum":
+            config = quantum_config or {}
+            self.action_head = QuantumActionHead(
+                plm_embed_size,
+                action_levels,
+                n_qubits=int(config.get("n_qubits", 4)),
+                depth=int(config.get("depth", 2)),
+                ansatz=config.get("ansatz", "trainable_ry_layers"),
+                input_layernorm=bool(config.get("input_layernorm", False)),
+                temperature=float(config.get("temperature", 1.0)),
+                angle_scale=config.get("angle_scale", "pi"),
+            ).to(device)
+            self.quantum_config = self.action_head.manifest_config()
+        else:
+            raise ValueError(
+                "Unknown head_type {!r}; expected classical, classical_twin, or quantum".format(
+                    head_type
+                )
+            )
 
         print("rl_policy: action_levels",action_levels)
 
@@ -77,6 +120,9 @@ class OfflineRLPolicy(nn.Module):
             self.embed_state1, self.embed_state2, self.embed_state3, self.embed_state4, self.embed_state5,
             self.embed_state6,self.embed_state7,self.embed_state8, self.embed_state9, self.action_head
         ])
+
+    def _action_head_input_dtype(self):
+        return next(self.action_head.parameters()).dtype
 
     def forward(self, states, actions, returns, timesteps, attention_mask=None):
         """
@@ -116,16 +162,21 @@ class OfflineRLPolicy(nn.Module):
         # this makes the sequence look like (R_1, s_1-1, s_1-2, ..., s_1-n, a_1, R_2, s_2-1, ..., s_2-m, a_2, ...)
         # which works nice in an autoregressive sense since states predict actions
         stacked_inputs = []
-        action_embed_positions = np.zeros(returns_embeddings.shape[1])  # record the positions of action embeddings
+        action_embed_positions = []  # record the positions of action embeddings
         for i in range(returns_embeddings.shape[1]):
             stacked_input = torch.cat((returns_embeddings[0, i:i + 1], states_embeddings1[0, i:i + 1], states_embeddings2[0, i:i + 1], 
                                        states_embeddings3[0, i:i + 1], states_embeddings4[0, i:i + 1], states_embeddings5[0, i:i + 1], 
                                        states_embeddings6[0, i:i + 1], states_embeddings7[0, i:i + 1], states_embeddings8[0, i:i + 1],
                                        states_embeddings9[0, i:i + 1], action_embeddings[0, i:i + 1]), dim=0)
             stacked_inputs.append(stacked_input)
-            action_embed_positions[i] = (i + 1) * (2 + 9) # 1 return + 9 states + 1 action = 11 tokens
+            action_embed_positions.append((i + 1) * (2 + 9))
         stacked_inputs = torch.cat(stacked_inputs, dim=0).unsqueeze(0)
-        stacked_inputs = stacked_inputs[:, -self.plm_embed_size:, :]  # truncate sequence length (should not exceed plm embed size)
+        max_context = getattr(self.plm.config, 'max_position_embeddings', None)
+        if max_context is not None and stacked_inputs.shape[1] > max_context:
+            raise ValueError(
+                f"Structured sequence has {stacked_inputs.shape[1]} tokens, "
+                f"exceeding model context length {max_context}"
+            )
         stacked_inputs_ln = self.embed_ln(stacked_inputs)  # layer normalization
         
         # Step 4: feed stacked embeddings into the plm
@@ -135,8 +186,9 @@ class OfflineRLPolicy(nn.Module):
             attention_mask = torch.ones((stacked_inputs_ln.shape[0], stacked_inputs_ln.shape[1]), dtype=torch.long, device=self.device)
 
         # we feed in the input embeddings (not word indices as in NLP) to the model
+        plm_dtype = next(self.plm.parameters()).dtype
         transformer_outputs = self.plm(
-            inputs_embeds=stacked_inputs_ln,
+            inputs_embeds=stacked_inputs_ln.to(dtype=plm_dtype),
             attention_mask=attention_mask,
             output_hidden_states=True,
         )
@@ -165,7 +217,11 @@ class OfflineRLPolicy(nn.Module):
         # Step 5: predict actions
         # we need to locate the logits corresponding to the state embeddings
         # simply using `action_embed_positions[i] - 2` will do.
+        action_embed_positions = torch.as_tensor(
+            action_embed_positions, dtype=torch.long, device=logits.device
+        )
         logits_used = logits[:, action_embed_positions - 2]
+        logits_used = logits_used.to(dtype=self._action_head_input_dtype())
         action_pred = self.action_head(logits_used)
 
         return action_pred
@@ -175,10 +231,12 @@ class OfflineRLPolicy(nn.Module):
         self.returns_dq = deque([torch.zeros((1, 0, self.plm_embed_size), device=self.device)], maxlen=self.max_length)
         self.actions_dq = deque([torch.zeros((1, 0, self.plm_embed_size), device=self.device)], maxlen=self.max_length)
 
-    def sample(self, state, target_return, timestep, **kwargs):
+    def sample(self, state, target_return, timestep, phase=None, **kwargs):
         """
         Sample action function, used for evaluation/testing.
         """
+        phase = validate_phase(phase)
+
         # Step 1: stack previous state, action, return features in the dequeue
         prev_stacked_inputs = []
         for i in range(len(self.states_dq)):
@@ -235,7 +293,9 @@ class OfflineRLPolicy(nn.Module):
 
         # Step 6: predict the bitrate for next chunk
         logits_used = logits[:, -1:]
+        logits_used = logits_used.to(dtype=self._action_head_input_dtype())
         action_pred = self.action_head(logits_used)
+        action_pred = mask_action_logits(action_pred, phase)
         action_pred1 = action_pred.reshape(-1)
         bitrate, _ = self._sample(action_pred1)
 

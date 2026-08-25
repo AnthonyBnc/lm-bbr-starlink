@@ -23,27 +23,12 @@ from plm_special.models.low_rank import peft_model
 from plm_special.utils.utils import set_random_seed
 from plm_special.utils.plm_utils import load_plm
 from plm_special.utils.console_logger import ConsoleLogger
+from utils.exp_pool import ExperiencePool as SharedExperiencePool
 
 global exp_pool_path
 
-class ExperiencePool:
-    """
-    Experience pool for collecting trajectories.
-    """
-    def __init__(self):
-        self.states = []
-        self.actions = []
-        self.rewards = []
-        self.dones = []
-
-    def add(self, state, action, reward, done):
-        self.states.append(state)  # sometime state is also called obs (observation)
-        self.actions.append(action)
-        self.rewards.append(reward)
-        self.dones.append(done)
-
-    def __len__(self):
-        return len(self.states)
+class ExperiencePool(SharedExperiencePool):
+    """Compatibility name for experience pools pickled from this runner."""
 
 
 

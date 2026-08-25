@@ -1,6 +1,32 @@
 import numpy as np
 from torch.utils.data import Dataset
 
+from utils.bbr import validate_phase_action
+
+
+def episode_window_starts(dones, max_length, sample_step):
+    """Return window starts that never cross an episode boundary."""
+    if max_length < 1:
+        raise ValueError("max_length must be at least 1")
+    if sample_step < 1:
+        raise ValueError("sample_step must be at least 1")
+    if not dones:
+        return []
+    if not dones[-1]:
+        raise ValueError("The final experience must end an episode")
+
+    starts = []
+    episode_start = 0
+    for index, done in enumerate(dones):
+        if not done:
+            continue
+        episode_end = index + 1
+        final_start = episode_end - max_length
+        if final_start >= episode_start:
+            starts.extend(range(episode_start, final_start + 1, sample_step))
+        episode_start = episode_end
+    return starts
+
 
 def discount_returns(rewards, gamma, scale):
     """
@@ -90,6 +116,7 @@ class ExperienceDataset(Dataset):
 
         self.exp_dataset_info = {}
 
+        self._validate_exp_pool()
         self._normalize_rewards()
         self._compute_returns()
         self.exp_dataset_info.update({
@@ -97,7 +124,13 @@ class ExperienceDataset(Dataset):
             'min_action': min(self.actions)
         })
 
-        self.dataset_indices = list(range(0, self.exp_pool_size - max_length + 1, min(sample_step, max_length)))
+        self.dataset_indices = episode_window_starts(
+            self.dones,
+            max_length=max_length,
+            sample_step=min(sample_step, max_length),
+        )
+        if not self.dataset_indices:
+            raise ValueError("No complete sequence windows fit within the experience-pool episodes")
     
     def sample_batch(self, batch_size=1, batch_indices=None):
         """
@@ -106,14 +139,15 @@ class ExperienceDataset(Dataset):
         """
         if batch_indices is None:
             batch_indices = np.random.choice(len(self.dataset_indices), size=batch_size)
-        batch_states, batch_actions, batch_returns, batch_timesteps = [], [], [], []
+        batch_states, batch_actions, batch_returns, batch_timesteps, batch_phases = [], [], [], [], []
         for i in range(batch_size):
-            states, actions, returns, timesteps = self[batch_indices[i]]
+            states, actions, returns, timesteps, phases = self[batch_indices[i]]
             batch_states.append(states)
             batch_actions.append(actions)
             batch_returns.append(returns)
             batch_timesteps.append(timesteps)
-        return batch_states, batch_actions, batch_returns, batch_timesteps
+            batch_phases.append(phases)
+        return batch_states, batch_actions, batch_returns, batch_timesteps, batch_phases
     
     @property
     def states(self):
@@ -126,6 +160,10 @@ class ExperienceDataset(Dataset):
     @property
     def dones(self):
         return self.exp_pool.dones
+
+    @property
+    def phases(self):
+        return self.exp_pool.phases
     
     def __len__(self):
         return len(self.dataset_indices)
@@ -133,7 +171,43 @@ class ExperienceDataset(Dataset):
     def __getitem__(self, index):
         start = self.dataset_indices[index]
         end = start + self.max_length
-        return self.states[start:end], self.actions[start:end], self.returns[start:end], self.timesteps[start:end]
+        return (
+            self.states[start:end],
+            self.actions[start:end],
+            self.returns[start:end],
+            self.timesteps[start:end],
+            self.phases[start:end],
+        )
+
+    def _validate_exp_pool(self):
+        phases = getattr(self.exp_pool, 'phases', None)
+        if phases is None:
+            raise ValueError(
+                "Experience pool has no BBR phase metadata. Regenerate it with the "
+                "paper-defined phase detector before training or evaluation."
+            )
+
+        field_lengths = {
+            'states': len(self.exp_pool.states),
+            'actions': len(self.exp_pool.actions),
+            'rewards': len(self.exp_pool.rewards),
+            'dones': len(self.exp_pool.dones),
+            'phases': len(phases),
+        }
+        if len(set(field_lengths.values())) != 1:
+            raise ValueError("Experience pool fields have different lengths: {}".format(field_lengths))
+        if self.exp_pool_size == 0:
+            raise ValueError("Experience pool is empty")
+
+        for sample_index, (phase, action) in enumerate(zip(phases, self.exp_pool.actions)):
+            try:
+                validate_phase_action(phase, action)
+            except (TypeError, ValueError) as exc:
+                raise ValueError(
+                    "Invalid phase/action pair at experience index {}: {}".format(
+                        sample_index, exc
+                    )
+                ) from exc
 
     def _normalize_rewards(self):
         min_reward, max_reward = min(self.exp_pool.rewards), max(self.exp_pool.rewards)
@@ -224,4 +298,3 @@ class ExperienceDataset(Dataset):
     #     print(f"[DEBUG]   min_timestep={self.exp_dataset_info['min_timestep']}")
     #     print(f"[DEBUG]   max_timestep={self.exp_dataset_info['max_timestep']}")
     #     print("[DEBUG] _compute_returns complete\n")
-
