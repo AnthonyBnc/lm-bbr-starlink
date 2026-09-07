@@ -1,0 +1,254 @@
+{
+  "held_out_location": "Tokyo",
+  "method": "SHA256-ranked trace holdout within each location x stream stratum",
+  "parent_pool": "data/processed/slm_bbr_w10_eq2_3_dev_full/experience_pool.pkl",
+  "parent_pool_sha256": "17f106040faf24e9c9cc526797b46cae967b787fdd932d827de7db25e1086527",
+  "seed": 100003,
+  "split_version": "dev-trace-stratified-80-20-seed-100003-v1-exploratory",
+  "status": "exploratory_pending_supervisor_approval",
+  "strata": [
+    {
+      "location": "London",
+      "stream": "downlink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-competitive-logs/London/bbr_London__REV_run5.json",
+        "downlink-competitive-logs/London/bbr_London__REV_run9.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "London",
+      "stream": "downlink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run4.json",
+        "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run9.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "London",
+      "stream": "uplink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-competitive-logs/London/bbr_London__FWD_run1.json",
+        "uplink-competitive-logs/London/bbr_London__FWD_run7.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "London",
+      "stream": "uplink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-sequential-logs/London/bbr_London__FWD_run1.json",
+        "uplink-sequential-logs/London/bbr_London__FWD_run5.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Mumbai",
+      "stream": "downlink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run4.json",
+        "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run5.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Mumbai",
+      "stream": "downlink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run4.json",
+        "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run5.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Mumbai",
+      "stream": "uplink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run2.json",
+        "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run9.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Mumbai",
+      "stream": "uplink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run1.json",
+        "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run7.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Ohio",
+      "stream": "downlink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run3.json",
+        "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run7.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Ohio",
+      "stream": "downlink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run8.json",
+        "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run9.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Ohio",
+      "stream": "uplink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run10.json",
+        "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run3.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Ohio",
+      "stream": "uplink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run3.json",
+        "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run6.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "SaoPaulo",
+      "stream": "downlink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run1.json",
+        "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run10.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "SaoPaulo",
+      "stream": "downlink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run2.json",
+        "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run4.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "SaoPaulo",
+      "stream": "uplink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run2.json",
+        "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run8.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "SaoPaulo",
+      "stream": "uplink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run4.json",
+        "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run5.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Sydney",
+      "stream": "downlink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run10.json",
+        "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run4.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Sydney",
+      "stream": "downlink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run2.json",
+        "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run9.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Sydney",
+      "stream": "uplink-competitive-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run1.json",
+        "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run10.json"
+      ],
+      "validation_traces": 2
+    },
+    {
+      "location": "Sydney",
+      "stream": "uplink-sequential-logs",
+      "train_traces": 8,
+      "validation_paths": [
+        "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run3.json",
+        "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run9.json"
+      ],
+      "validation_traces": 2
+    }
+  ],
+  "train": {
+    "actions": {
+      "0": 2579,
+      "10": 875,
+      "5": 42100,
+      "6": 708,
+      "7": 607,
+      "8": 643,
+      "9": 553
+    },
+    "phases": {
+      "BW_CRUISE": 42100,
+      "BW_DOWN": 2579,
+      "BW_UP": 3386
+    },
+    "samples": 48065,
+    "traces": 160
+  },
+  "train_pool_sha256": "dae037d4f34c428747763cedb4f2ae9cf1e047b3bceb042638325e188af2a937",
+  "train_samples": 48065,
+  "train_traces": 160,
+  "validation": {
+    "actions": {
+      "0": 713,
+      "10": 172,
+      "5": 10476,
+      "6": 229,
+      "7": 141,
+      "8": 178,
+      "9": 110
+    },
+    "phases": {
+      "BW_CRUISE": 10476,
+      "BW_DOWN": 713,
+      "BW_UP": 830
+    },
+    "samples": 12019,
+    "traces": 40
+  },
+  "validation_pool_sha256": "6d53da7aa0a5c0c994977eb5eb2349fb5f3b2e66c17d1b3f8d55cafdf856d060",
+  "validation_samples": 12019,
+  "validation_traces": 40,
+  "validation_traces_per_stratum": 2
+}

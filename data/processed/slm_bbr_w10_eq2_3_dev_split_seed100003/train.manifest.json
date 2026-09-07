@@ -1,0 +1,1157 @@
+{
+  "config": {
+    "aggressive_probe_weight": 0.1,
+    "cruise_samples_after_down": 6,
+    "half_window": 10,
+    "loss_floor": 0.001,
+    "phase_threshold_scale": 0.7,
+    "probe_down_reduction": 0.5,
+    "probe_growth": 1.5,
+    "probe_sharpness": 5.0,
+    "retransmission_weight": 0.5
+  },
+  "dataset_version": "dev-trace-stratified-80-20-seed-100003-v1-exploratory-train",
+  "experience_pool_sha256": "dae037d4f34c428747763cedb4f2ae9cf1e047b3bceb042638325e188af2a937",
+  "held_out_location": "Tokyo",
+  "label_rule": "Equations 2-3 nearest phase-safe gain; Equation 16 reward for selected action",
+  "location_flags": {
+    "London": 2,
+    "Mumbai": 3,
+    "Ohio": 0,
+    "SaoPaulo": 1,
+    "Sydney": 4
+  },
+  "paper": "arXiv:2607.07142v1",
+  "parent_dataset_version": "slm-bbr-paper-w10-eq2-3-labels-v1-exploratory",
+  "samples": 48065,
+  "source_files": [
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run1.json",
+      "sha256": "f47d2f2d129676da7b0c3859da453ea478015328a8744e0c5a90d5b860acc640",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run10.json",
+      "sha256": "2dda01ff27e6b4dc17726249e06c30fd3665c329014dfe5277102554e049c01c",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run2.json",
+      "sha256": "6fa583b18febe62deb57b29c5eac8c600336d17169dae423f7391168b78cd98a",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run3.json",
+      "sha256": "d7dc6a7d9d0d65577d8f782cc4f345170116a056d45428eaba32f5e24c73097b",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run4.json",
+      "sha256": "d245061ff7faacf7bd9248b1d0c564928722c9f91358332282da215195e26197",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run6.json",
+      "sha256": "0ef2d8c8cb84b4d20ec7d825cd4988ba410e1072497b9aa137169b3046ab96e4",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run7.json",
+      "sha256": "217dc5dfd78885236c6f45641a73c30699cf2635dbefeafbe6d0f92b9ac60745",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/London/bbr_London__REV_run8.json",
+      "sha256": "d7dd585f0249e8812e1af0d30147dd5a1c0d8f3ea65e3d33f499a1f8d7e4804f",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run1.json",
+      "sha256": "51933c501813b2a666408424b5795b65e1b2d9d8c76f5bffe0603d4670544357",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run10.json",
+      "sha256": "8a3d744bc89557effd053707dbc72eb8dfb2ddfe2014db745821867fbf8554e5",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run2.json",
+      "sha256": "ffdf25cb9884e8748226f51a2b5a8d27e9b0991ec67d8b8234f810c1a3b198e5",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run3.json",
+      "sha256": "b712175db67e8a2263fb01ff2f83a2496731cfbece44b7a7589bcb276e306672",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run6.json",
+      "sha256": "51a469613a939da84906652042e2986b10b16427d98b0c6499d1507197e8bd70",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run7.json",
+      "sha256": "788bd480b86cbff205a30beccd8afd73a47dbc208e7df01faa589cd993c1c127",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run8.json",
+      "sha256": "496a6dc4b02c4bc4d9124d19f74e3f69e0bb398758fa9a7f90015f9b532f4d5e",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Mumbai/bbr_Mumbai__REV_run9.json",
+      "sha256": "738623efe6470d496fa34aa2259802213ceef440478756ad46bf8b59a4f77cf0",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run1.json",
+      "sha256": "53e85922fafb0c1859c075626a1ba3f6bb319f6bb6f4221be6872bceed9d66db",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run10.json",
+      "sha256": "80aac5e1f14a635aea5309ed980c80322b911b87d9e291cdd4ccb3a0dad2a7e7",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run2.json",
+      "sha256": "beffd0c872824fa3ddb2f62923ab272f196925acd68eafbc3dc6be17032dc77b",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run4.json",
+      "sha256": "197c71ca85dbf6c4652d0c1e19f48700e8e2dcde34afaf5ddf7fce53eff63ef9",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run5.json",
+      "sha256": "2308ebc409b558e32ced2b16cea3dcd989b3cebe2774de6217d82cecb4a3b919",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run6.json",
+      "sha256": "3aa9f40fb556c2bf2646af2c65752fbb2dad3ea114bde58b2d258c57a541fdd9",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run8.json",
+      "sha256": "8c828417d120835b14bd6be455dd2dea9101714faebb0fcdcaf7117856750c7d",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Ohio/bbr_Ohio__REV_run9.json",
+      "sha256": "5da5e4eb917619c3c367b1e8ed8e93310a741d03641e17de6505c17b5e6b7137",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run2.json",
+      "sha256": "9f8e5fa168f142f746a5ffe7434ae22bbd4291f518869104bf7ab8e5165da58d",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run3.json",
+      "sha256": "637c658a9fed936da3d4a44f47b38329fa96155fb5c00672c5c353f68eae8fd1",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run4.json",
+      "sha256": "09e14cbd299899b150dcd5dcc6cfa81c3c1758795e95d4728b5ff6b7406669e3",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run5.json",
+      "sha256": "d4a1cebb3f213b4e3f380d78d6e63dc596d0dac236813dd95609188065f80e93",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run6.json",
+      "sha256": "faf1502558c0878aa3558c38638093348cca01b3b37ab80e72c65c4ea735ab6d",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run7.json",
+      "sha256": "3a2eec79ce85512e116e85852090390465bd010bf9f8885e1e19f7fde9a375a2",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run8.json",
+      "sha256": "f1bf6f1a7173f86cda6170186a11f2e455002b82d2adda0906c6a0170f617e2b",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/SaoPaulo/bbr_SaoPaulo__REV_run9.json",
+      "sha256": "38c337108ef03098ede18ed30992877634ffad80ccd7bb255c92c12ce8ef63cb",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run1.json",
+      "sha256": "b5aad924ebc692268860fe7bfcd417e3d79fde9864152647fad62d41658db65c",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run2.json",
+      "sha256": "5de1ab2913327b9eb7ddc9e5868c596a28515bab7efb807cdca7959e90c8143f",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run3.json",
+      "sha256": "becd458481cc860bee1b4f884a20b8568380124fed4565e3e0a726ba9b11df36",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run5.json",
+      "sha256": "112347b64584f3196dea7a1e84e96ed95eca46cc66a2d3e95bb3b3a165c55de0",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run6.json",
+      "sha256": "7cccfcff5b9a4c8330c53d119b1677d69774f8418cce1b8d32f07462d2b16a63",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run7.json",
+      "sha256": "ed164af8f85daa5297e3928b15c49f2b5bc78668a966d6fe0aa3c177249d17a0",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run8.json",
+      "sha256": "bff4a8a88e67849321eace20d29d621679412951499136db54ecf0e2d3e9c0dc",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Sydney/bbr_Sydney__REV_run9.json",
+      "sha256": "4dc5eafea334d08b79e6b5fca02dafa28ef7cbbcf6de76803c389f8c81daceeb",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run1.json",
+      "sha256": "d3599c4ec78e4fb5da0ec58a8c13305adb9e747a6d43442afbfa9c7aea6f6d3a",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run10.json",
+      "sha256": "09f2bf50013e8277bc8c039c02c11edffff077abf6e5428174d281cb7e72da39",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run2.json",
+      "sha256": "d6b2d82d8a8accd0624d2e53992c1d5225c74358f3408df6b6a25b82811eeb05",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run3.json",
+      "sha256": "bbbe2e24a0d6935da3b226b950e7bdd963870e9522c99f8739b266e6ffca776f",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run5.json",
+      "sha256": "422fc4f87ee4935149969b6c7181c3c77adf2125c59251262f79232eec3ec1b5",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run6.json",
+      "sha256": "504ea3d5f4c211029bffda06000e420cc0a422279d66898c6d6f0ba79d0d2a7b",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run7.json",
+      "sha256": "768d75e11564fc16a4fd578f5d463b7c0aa6062fa8a65476fe5882ca51caaeaf",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/London/iperf3-downlink-sequential-logs/bbr_London__REV_run8.json",
+      "sha256": "3d28810be7a906f891148b200e18e1879597e8fe5477f6823f776f8801c3b621",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run1.json",
+      "sha256": "1e17fa2d0477c51d31696224544c367a64a22d91104f9a7d702d4ea57aea56a2",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run10.json",
+      "sha256": "9edffbcb693a242eb399bece6c019dbe42b77e7aafdb4815d0f53c862ece308d",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run2.json",
+      "sha256": "31f6d5949ec787b53a07027294e1f37427d71926b103303e38137bfe547c986a",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run3.json",
+      "sha256": "645724b1dbd9ca6dc6777df4eee3a341e31095cea76e227beab49d9e24008e8b",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run6.json",
+      "sha256": "ce1b8ab828d4d0bb4f748b98b82bccfe4547e597d64fba9f1609a01f0c9559f9",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run7.json",
+      "sha256": "23183ff989ddf77958b6d9c1fe0114a6e347e5dccfe055a50544787e405c5f4c",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run8.json",
+      "sha256": "b7da7d4e57b4d33fecffe016b2d2d5a91ef368cd6e9f9e810fbf14c2dc9b7994",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Mumbai/iperf3-downlink-sequential-logs/bbr_Mumbai__REV_run9.json",
+      "sha256": "2affa21f6ade6d154ae3bcf20420fc7a194dced0fbb67b119109e3c6f9e00c79",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run1.json",
+      "sha256": "c7a094227c4b7fb58b42387c874fd1f95308478c935dc42249788cb65196ed8e",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run10.json",
+      "sha256": "ac01700ca9ec077c4ce54218290cfe663e9136aa1ef043dca1df56a02fe7ad12",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run2.json",
+      "sha256": "10d02526f7c02650a78ccb77ab1f5e8f5a8e75a7400b32a4e01b969622f8e547",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run3.json",
+      "sha256": "52bedb3d2d51a500a39c1ca898197e5baaa7dcca9dd49817533e7bbcac399b21",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run4.json",
+      "sha256": "61deb4d45efc83c5883877ee6651e0ba3bf55695350a7f27271f600c2e85be9f",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run5.json",
+      "sha256": "90814fcca89b337c588aa55a484ae14942fa0346f2f4493309dd4d78be6f8349",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run6.json",
+      "sha256": "21c7184548feb87ef5375db5cb0302269b3d1ad1aadbfab4cc9e5e10de24d76a",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Ohio/iperf3-downlink-sequential-logs/bbr_Ohio__REV_run7.json",
+      "sha256": "0e67a245ad6e1309753f86147fff54d6b450fd2ccd32faf87a3defedec5c5494",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run1.json",
+      "sha256": "6d8a107cd56a2ba28d0a21fdfcf1db8945f88ab8a9735cb6bb27eef50cfa8c49",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run10.json",
+      "sha256": "ffbaa1fda1682ea4910f8012fda53bd6d0d2edaf00d9cec5e26be1a8521640a8",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run3.json",
+      "sha256": "b5b38fce11427c8bf8dbe7ae8762828b320d3c66ecc763230bb1bcef0b636683",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run5.json",
+      "sha256": "1059a85678789ea47b9deb0ef92a8303c38c986f28a2fe1970bc04652ae94b72",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run6.json",
+      "sha256": "5bfa0ee192faee273b68279af60aa3490209d10cc75822605ccd62b8ef52240c",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run7.json",
+      "sha256": "863706d48c797004958331af667c56c2e47a257f39c9b944195537c7ff69894c",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run8.json",
+      "sha256": "efdae6948ffe6f95fd1fdcfacde543eab8a1ab7c4848d4bb46cd54c916e30129",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/SaoPaulo/iperf3-downlink-sequential-logs/bbr_SaoPaulo__REV_run9.json",
+      "sha256": "df52161b984d9ff40f0530c70fd61e899f94db749c53df07ba93c312aa2f11ce",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run1.json",
+      "sha256": "9ff44134c076b62a4988763568ba7aceb361de3bae63762785a3f3a99747f6f6",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run10.json",
+      "sha256": "98593ddf2c654001408f70dc399308fb7d4d6f7e2b205ee9eeda4ef721d88865",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run3.json",
+      "sha256": "6be31ed63055bc8a802a74ffda238bc169d725e836c3af810b825cda1294c189",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run4.json",
+      "sha256": "709e2345b6aa801b7ac0e47188d211ed074ef31659356561e2a00fe7d0d0e75e",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run5.json",
+      "sha256": "d983fb00f61a242c93205b8e504536b82ebddf01ced27d1539b3126bea1e0b6f",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run6.json",
+      "sha256": "3c78d790c3d36796eedf8934018e76ef38bfc66e0f864376a0e4bfb252aaf736",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run7.json",
+      "sha256": "d36a0a817b122efad93308ca39bf66b9af61a87daa3ad7f4bd9206caf34f329a",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Sydney/iperf3-downlink-sequential-logs/bbr_Sydney__REV_run8.json",
+      "sha256": "01b2c7c14766f56230118cc29af3f16a1df492f359012a7da61abfd61663f6ab",
+      "trailing_diagnostic_bytes": 396
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run10.json",
+      "sha256": "75c5eb1f2c864e0850dd19cb901e84a2d5d69096043639a79c0646f3aaaa1ba0",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run2.json",
+      "sha256": "5170e07308ac8e4caa8ce859a75fb30e319e284e81a55ad06cfbf1a75af96136",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run3.json",
+      "sha256": "cbaf4ad4240840a1bf1067834ad1f8ec5dc5d0676d987335de19aeb431697e63",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run4.json",
+      "sha256": "45b2f4af980b895f13b1d9989b8ffd6a1d0d1f308735a0c8670ab38f2b05644e",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run5.json",
+      "sha256": "eec5f1d5abd3203555f76891bbc759b95c04f4d793ad2bb01d16163fc7e82f1c",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run6.json",
+      "sha256": "339c893aa85eaa240bf823f24ec83f4cbf17a7eb1b700915315c06d3e3c9084c",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run8.json",
+      "sha256": "d16bcae498e745069ab0800f7ef9b34b544de13a10782f54887bef0d9e6e1276",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/London/bbr_London__FWD_run9.json",
+      "sha256": "c8e99b60faeac160b90c993b71173fb86fa32ca8001b527168acf6bbf55077d8",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run1.json",
+      "sha256": "5e7f43ab63b14e07f9f816eded219d191b1431a103569ecde4b68e9d2bf5bfd0",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run10.json",
+      "sha256": "f11ee7790c5f054871defd13d01cdcd9e35cf159ab9fe7ca597558b0596f30b4",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run3.json",
+      "sha256": "f13b7742a1cfd64944fec0f1363574b9f569b9006d49785ad29c49982d0fcdbc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run4.json",
+      "sha256": "c846811707b0b7f02b9662d70874f894906ca40909ffd919b430a49b298ad9f3",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run5.json",
+      "sha256": "7e5f607b0270fea740d80b7089f461267d5bfd35a85ea6635f51df5d104af72e",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run6.json",
+      "sha256": "a15aa99a526b070b3c9c17ac8b85bf4960076bd3f1751f05bb5cb55492762e76",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run7.json",
+      "sha256": "a7206bf3ea2227d49003e99ff5ad1852c3edfce18bfba963aef44e53faae50b1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Mumbai/bbr_Mumbai__FWD_run8.json",
+      "sha256": "fce8a7310ffcbce9aaea1b90d1e0fdcb3c2dcb49bc75a689321408b18e6017c1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run1.json",
+      "sha256": "53513532ed1e2128d4ea3935ec5dd3c4ca14f39402b041431fccedd0b413d3de",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run2.json",
+      "sha256": "c568c323f3e8e304b9b5df8c9a0317bc73b9a5376bae93b79acb506475deb9f1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run4.json",
+      "sha256": "b71c3fdf13c3cf9223e8d92753f37f3ba04402a3bd6a1069ba29503d542d634b",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run5.json",
+      "sha256": "be24590a3c7dd1ef54b0677a4ab5e573c7f035132a561a667bfb169ec02b43ff",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run6.json",
+      "sha256": "e1b1815e2b7a914a19ba2b46cb0cceb4d05d72ba6f4d3552c353fc6173da6f54",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run7.json",
+      "sha256": "7aa60c314bc66b0251005624e29e70be330c266b9dcccfe2af0049587b03c3d8",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run8.json",
+      "sha256": "a86eb3a427118b939d99bc0cc9ae17045320c8d21b54c8b92c9ca776d38bdac3",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Ohio/bbr_Ohio__FWD_run9.json",
+      "sha256": "cd58665ea763a5194aa5f99a5c598ec1bc6105abec1a8416da075ac3e81448b4",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run1.json",
+      "sha256": "e69a6a9434d71e0435315d95f67ade609b9f6c72c24a5d88ceab6e224ef96f4e",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run10.json",
+      "sha256": "3582e60047dfa7f6eb2dff506aa94ea96c67a1dae7e246cbab925a21dee9f7bc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run3.json",
+      "sha256": "0d20143a9119fd2cfe0bb6846e4fdbe36abd669627890e112a18ee0389358d39",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run4.json",
+      "sha256": "f3241d93d3552b70fc530cf8d97a5dd9df843e16604a679d82955241d3cec8b5",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run5.json",
+      "sha256": "a0274886133ef7a71457701d2f620f6f2472bd77e91f2ee6497168e32ae2e45d",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run6.json",
+      "sha256": "812b40c1bc65fc2f9e87bdc0e3a28b48bb4ce9b59a349b15492b50d68495f282",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run7.json",
+      "sha256": "b0944e6265cda1ebab1fb95271df42e653c140c1c80e9f045e1dcfc2fe1d3fe2",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/SaoPaulo/bbr_SaoPaulo__FWD_run9.json",
+      "sha256": "cc5846f659c747fbcbd72b4ba4a7fc25fac9607eef3a957a04b8101a8b96ffac",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run2.json",
+      "sha256": "d1b426ca2674d4a4c376fa10d5c9d135936fdde5d89509695570195565dd986f",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run3.json",
+      "sha256": "97fa6e3afb747d9084c7649279b5669a792b5b1ebfd3fd76d8150204e29be73b",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run4.json",
+      "sha256": "a78d7cdcb9632ae34246019362ad0f119942be85b17abfa5cafb6277c946e9d7",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run5.json",
+      "sha256": "65470d5ab792511b817c1733699e318571f1e81bbd7b6241329fdaefc828c066",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run6.json",
+      "sha256": "42904b5ffc71568a4922f808b529696dbb0f2b42bf95adf3f4d2dddefbded7c0",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run7.json",
+      "sha256": "9d0abeaeedc39ddf2b57f4c38ad84bdc9f449da05d119096d066a7a4b9939a77",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run8.json",
+      "sha256": "b4185d5c7573f199304dacf0e3ebcd5ccdc95c279ff64f9f98b21dcb1fee3a3c",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Sydney/bbr_Sydney__FWD_run9.json",
+      "sha256": "a35a4c6265dd0f754258327d56d7906304ba191ff2bef64250f6de7225fca242",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run10.json",
+      "sha256": "f542b153b380c336a1867b8e21167543931cf8aeb873d5ef24153c40fb12f975",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run2.json",
+      "sha256": "c0a10d3c5b51d942311714cfa83585f16a38cf4d1328b416f85643444a8501c1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run3.json",
+      "sha256": "756d78a493fb394d8ebda13f6e60dac2bf239bb4339100dc8664d2348e901fd1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run4.json",
+      "sha256": "199fc2bd8d2414117922a86d8fe4156c98a3c76835661510b1cd512324cbc809",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run6.json",
+      "sha256": "fb2f2c173eb755d1a8b42054312f606f396557272925e70deaf16f9251271cb1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run7.json",
+      "sha256": "3ba739b61312e2b370a1a2d15a1104cc3847be56608be345102a09846c218b53",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run8.json",
+      "sha256": "ca39026e47eb683d1a6c2f77d6fbd4ea54f91cc6b7e4aa55dfb67411ca38f2c1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/London/bbr_London__FWD_run9.json",
+      "sha256": "9c3f2149670cc0f316a26eefb79093ea5f12db23df345a438e43bf24d446ab65",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run10.json",
+      "sha256": "b3718b8b494b405086548525a5847d5f16e0709b967cf9b44f3b0aa844d63fba",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run2.json",
+      "sha256": "f1c538c958dd66cdfb059b4f2002cb1e688c6bf1ae4606ce0a6dcafe671cff21",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run3.json",
+      "sha256": "b914652b1e48735ed90f30e998860fc50406a14b96023fe6a183a61800ba640f",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run4.json",
+      "sha256": "b8df784f13cdbcfbddfa76ea173cf8920bd0c4cc26f556e5a4199504e47b6728",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run5.json",
+      "sha256": "9498d776cfa4788df178de084df0e08454e01b600e1f1cb6edad95eb062f89b5",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run6.json",
+      "sha256": "450fbf9358641f8cfa95bdb587d154597d57099d88f84d76a4fdbe9a788051a7",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run8.json",
+      "sha256": "00b2f8de31fbb52ba8b746e20827b3c36137d1ba2f40397b2dca13fe30cc7e43",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Mumbai/bbr_Mumbai__FWD_run9.json",
+      "sha256": "9990e911a0f44baf841ca3b51de8d0b9b7355284bbbe1e4ead8a1a99d254ffd9",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run1.json",
+      "sha256": "395c713e909a06699fdf63171ae26c4e26c863b8098e699cddea16245bf335a8",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run10.json",
+      "sha256": "82859692e4e3d471e7cf23955d8915c34cb7c88437a0779ae2a74695922f5aec",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run2.json",
+      "sha256": "22176d8967d10370fbe10cfa26d1bc58251b8c10d85ccd2c2d17da66aeafb27c",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run4.json",
+      "sha256": "25b435405231124b673855c9b68c334e3649b55c39e087e273772ef2127c68bc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run5.json",
+      "sha256": "64211ddb093ceca1f60d475b5ac4509f0e6abc1f7173a226aa3db4a993f49d80",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run7.json",
+      "sha256": "66b15004bda8445c6b35baa56263176b9894399e337411733cb8a467d1c24e95",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run8.json",
+      "sha256": "08ecb6e51ad5d3fb6ef05ac010afa827a95c84903e69538ff8f3df4da8058e67",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Ohio/bbr_Ohio__FWD_run9.json",
+      "sha256": "36dd935607b5f20b4d7059c5f564b26813f0959a8134693e928cf0a159b52216",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run1.json",
+      "sha256": "0e6bad55f325c980a617a0a8db8f9eb0a39ff4567805a96c08d30c0a9ce6fcdc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run10.json",
+      "sha256": "3ad162557e474c45ee3fad1b48d2741653c9e3074d7266bf720dc2c782f58b85",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run2.json",
+      "sha256": "b4af122da0cc6757a83240f5ff2bb047531307a80c279ba40bfa5fd7df3b10de",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run3.json",
+      "sha256": "992b9517e1cf4675912a103b3df9b7a25d9ab1a118eb53c290dae2dfadcd45fc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run6.json",
+      "sha256": "5c4aa1f651d902b171de3afe2c9452ab4e91c31f508bc1d74a1041417e1cc864",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run7.json",
+      "sha256": "faf73acd216f186f52a3840ee8b345facb16cdfae53cf2adec40a2bba11794cd",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run8.json",
+      "sha256": "d4a7abc2bac9510ba9a97ec421cea6f84be8a4257085e7074576b9b50941600d",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/SaoPaulo/bbr_SaoPaulo__FWD_run9.json",
+      "sha256": "15df0f6f2128c7898bb445d3f9be48a2b0eed29362f1d72654838f9a3dde2007",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run1.json",
+      "sha256": "b9dc494119242378c4d28bf44fafcc719ef9cf9a90ade312834506b46d66b199",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run10.json",
+      "sha256": "811de2bdf4e61348e5a9d892b6778591b32d4bfc8b570ff5b966402ec359daab",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run2.json",
+      "sha256": "f45a68e2506a9e2b74efbbbdbc5afdebb0f4dfbbfdd7418012408a464242425b",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run4.json",
+      "sha256": "06183f9f2eb8f30e4418c568640a2d8918015d83589dad6f253771eee0b3e989",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run5.json",
+      "sha256": "c691ffd29c45558e475eb28842b69a2849ad37047e22028f7d3f65498f4fb2bb",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run6.json",
+      "sha256": "c0fa9eeb55dbba6bd331216dedc45ff3d6a87e9ae8351985831f9fe8dc896d8d",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run7.json",
+      "sha256": "35fbc64298102f7792cb8d946a2629c73c2adbd15709e5414dfa2b53014efcd4",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Sydney/bbr_Sydney__FWD_run8.json",
+      "sha256": "8d631dcb85ecd7a169157417e674504d7bd9b16b2efbabdebefd750a6cbb0d0c",
+      "trailing_diagnostic_bytes": 1
+    }
+  ],
+  "split_role": "train",
+  "split_version": "dev-trace-stratified-80-20-seed-100003-v1-exploratory",
+  "stream_flags": {
+    "downlink-competitive-logs": 2,
+    "downlink-sequential-logs": 0,
+    "uplink-competitive-logs": 3,
+    "uplink-sequential-logs": 1
+  }
+}
