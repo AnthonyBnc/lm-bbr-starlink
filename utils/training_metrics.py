@@ -52,6 +52,12 @@ class BBRMetricAccumulator:
         self.phase_correct = Counter()
         self.label_distribution = Counter()
         self.prediction_distribution = Counter()
+        self.phase_label_distribution = {
+            phase: Counter() for phase in BBR_PHASES
+        }
+        self.phase_prediction_distribution = {
+            phase: Counter() for phase in BBR_PHASES
+        }
 
     def update(self, logits, labels, phases, loss_weighting=LOSS_WEIGHTING_NONE):
         masked_logits, loss = masked_cross_entropy(
@@ -76,23 +82,32 @@ class BBRMetricAccumulator:
             self.phase_correct[phase] += int(label == prediction)
             self.label_distribution[label] += 1
             self.prediction_distribution[prediction] += 1
+            self.phase_label_distribution[phase][label] += 1
+            self.phase_prediction_distribution[phase][prediction] += 1
         return masked_logits, loss
 
     def compute(self):
         if not self.samples:
             raise ValueError("Cannot compute BBR metrics without samples")
+        per_phase_accuracy = {
+            phase: (
+                self.phase_correct[phase] / self.phase_samples[phase]
+                if self.phase_samples[phase]
+                else None
+            )
+            for phase in BBR_PHASES
+        }
+        present_phase_accuracies = [
+            value for value in per_phase_accuracy.values() if value is not None
+        ]
         return {
             "loss": self.loss_sum / self.samples,
             "accuracy": self.correct / self.samples,
+            "macro_phase_accuracy": (
+                sum(present_phase_accuracies) / len(present_phase_accuracies)
+            ),
             "samples": self.samples,
-            "per_phase_accuracy": {
-                phase: (
-                    self.phase_correct[phase] / self.phase_samples[phase]
-                    if self.phase_samples[phase]
-                    else None
-                )
-                for phase in BBR_PHASES
-            },
+            "per_phase_accuracy": per_phase_accuracy,
             "per_phase_samples": {
                 phase: self.phase_samples[phase] for phase in BBR_PHASES
             },
@@ -104,4 +119,68 @@ class BBRMetricAccumulator:
                 str(action): self.prediction_distribution[action]
                 for action in range(ACTION_LEVELS)
             },
+            "per_phase_label_distribution": {
+                phase: {
+                    str(action): self.phase_label_distribution[phase][action]
+                    for action in range(ACTION_LEVELS)
+                }
+                for phase in BBR_PHASES
+            },
+            "per_phase_prediction_distribution": {
+                phase: {
+                    str(action): self.phase_prediction_distribution[phase][action]
+                    for action in range(ACTION_LEVELS)
+                }
+                for phase in BBR_PHASES
+            },
         }
+
+
+def evaluate_validation_criteria(
+    metrics,
+    overall_accuracy=None,
+    up_accuracy=None,
+    macro_phase_accuracy=None,
+    max_up_prediction_share=None,
+):
+    """Evaluate declared reporting thresholds without using them for optimization."""
+    from utils.bbr import BW_UP
+
+    observed_up_accuracy = metrics["per_phase_accuracy"][BW_UP]
+    up_predictions = metrics.get("per_phase_prediction_distribution", {}).get(
+        BW_UP, {}
+    )
+    up_prediction_total = sum(up_predictions.values())
+    observed_max_up_share = (
+        max(up_predictions.values()) / up_prediction_total
+        if up_prediction_total
+        else None
+    )
+    declared = {
+        "overall_accuracy": overall_accuracy,
+        "up_accuracy": up_accuracy,
+        "macro_phase_accuracy": macro_phase_accuracy,
+        "max_up_prediction_share": max_up_prediction_share,
+    }
+    observed = {
+        "overall_accuracy": metrics["accuracy"],
+        "up_accuracy": observed_up_accuracy,
+        "macro_phase_accuracy": metrics["macro_phase_accuracy"],
+        "max_up_prediction_share": observed_max_up_share,
+    }
+    checks = {}
+    for name, threshold in declared.items():
+        if threshold is None:
+            continue
+        value = observed[name]
+        checks[name] = (
+            value <= threshold
+            if name == "max_up_prediction_share"
+            else value >= threshold
+        )
+    return {
+        "declared": declared,
+        "observed": observed,
+        "checks": checks,
+        "all_declared_criteria_pass": all(checks.values()) if checks else None,
+    }
