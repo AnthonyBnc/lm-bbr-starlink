@@ -10,9 +10,11 @@ from utils.bbr import BW_CRUISE, BW_DOWN, BW_UP, action_index_to_gain, validate_
 from utils.starlink_preprocessing import (
     PaperPreprocessingConfig,
     build_experience_pool,
+    build_held_out_experience_pool,
     build_paper_labels,
     detect_bbr_phases,
     infer_trace_identity,
+    infer_held_out_trace_identity,
     parse_iperf3_intervals,
 )
 
@@ -108,6 +110,35 @@ class StarlinkPreprocessingTests(unittest.TestCase):
             tokyo_path = raw_root / "downlink-sequential-logs" / "Tokyo" / "missing.json"
             with self.assertRaisesRegex(ValueError, "Tokyo is held out"):
                 infer_trace_identity(tokyo_path, raw_root)
+
+    def test_held_out_identity_accepts_only_tokyo(self):
+        with tempfile.TemporaryDirectory() as directory:
+            raw_root = Path(directory)
+            tokyo_path = raw_root / "downlink-sequential-logs" / "Tokyo" / "missing.json"
+            relative, location, stream = infer_held_out_trace_identity(tokyo_path, raw_root)
+            self.assertEqual(location, "Tokyo")
+            self.assertEqual(stream, "downlink-sequential-logs")
+            self.assertIn("Tokyo", relative.parts)
+            ohio_path = raw_root / "downlink-sequential-logs" / "Ohio" / "missing.json"
+            with self.assertRaisesRegex(ValueError, "Tokyo only"):
+                infer_held_out_trace_identity(ohio_path, raw_root)
+
+    def test_held_out_pool_requires_non_aliasing_explicit_location_flag(self):
+        with tempfile.TemporaryDirectory() as directory:
+            raw_root = Path(directory)
+            path = raw_root / "downlink-sequential-logs" / "Tokyo" / "bbr_Tokyo__REV_run1.json"
+            path.parent.mkdir(parents=True)
+            intervals = [
+                {"streams": [dict(_row(index, 10.0), sender=True)]}
+                for index in range(25)
+            ]
+            path.write_text(json.dumps({"intervals": intervals}), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "must not alias"):
+                build_held_out_experience_pool([path], raw_root, 4)
+            pool = build_held_out_experience_pool([path], raw_root, 5)
+        self.assertEqual(pool.metadata["split_role"], "held_out_test")
+        self.assertEqual(pool.metadata["location_flags"], {"Tokyo": 5})
+        self.assertTrue(all(state[0] == 5 for state in pool.states))
 
     def test_pool_has_unique_ids_and_nine_state_fields(self):
         with tempfile.TemporaryDirectory() as directory:

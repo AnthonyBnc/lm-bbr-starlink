@@ -21,6 +21,56 @@ class Config:
         os.path.join(_home_dir, 'models', 'lm-bbr-starlink'),
     )
     modern_model_registry = {
+        'gemma_3_270m': {
+            'plm_type': 'gemma3',
+            'plm_size': None,
+            'hf_id': 'google/gemma-3-270m',
+            'local_dir': 'gemma-3-270m',
+            'revision': '9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1',
+            'release_date': '2025-08-14',
+            'loader_status': 'registered_pending_smoke',
+            'preferred_dtype': 'bfloat16',
+        },
+        'granite_4_0_350m': {
+            'plm_type': None,
+            'plm_size': None,
+            'hf_id': 'ibm-granite/granite-4.0-350m',
+            'local_dir': 'granite-4.0-350m',
+            'revision': 'bd8a1497065c0d6ba1ef19af6b0d2b14bacf71c2',
+            'release_date': '2025-10-28',
+            'loader_status': 'registered_pending_smoke',
+            'preferred_dtype': 'bfloat16',
+        },
+        'pleias_rag_350m': {
+            'plm_type': None,
+            'plm_size': None,
+            'hf_id': 'PleIAs/Pleias-RAG-350M',
+            'local_dir': 'Pleias-RAG-350M',
+            'revision': 'db001b29a33532583d14979c3c38ef04b6d59352',
+            'release_date': '2025-04-07',
+            'loader_status': 'registered_pending_smoke',
+            'preferred_dtype': 'bfloat16',
+        },
+        'lfm2_5_350m': {
+            'plm_type': None,
+            'plm_size': None,
+            'hf_id': 'LiquidAI/LFM2.5-350M',
+            'local_dir': 'LFM2.5-350M',
+            'revision': '9e6c6ccf47cd318696e137d381a7ded8fe4df09f',
+            'release_date': '2026-03-31',
+            'loader_status': 'registered_pending_smoke',
+            'preferred_dtype': 'float16',
+        },
+        'granite_4_0_h_350m': {
+            'plm_type': None,
+            'plm_size': None,
+            'hf_id': 'ibm-granite/granite-4.0-h-350m',
+            'local_dir': 'granite-4.0-h-350m',
+            'revision': '3b17b717b8f2f5d305b0a92c1491e239aeda19c8',
+            'release_date': '2025-10-28',
+            'loader_status': 'registered_pending_smoke',
+            'preferred_dtype': 'bfloat16',
+        },
         'qwen3_5_4b_base': {
             'plm_type': 'qwen3',
             'plm_size': 'base',
@@ -81,11 +131,11 @@ class Config:
         'status': 'exploratory_pending_training_policy_approval',
     }
     quantum_defaults = {
-        'parent_model_key': 'qwen3_5_4b_base',
-        'n_qubits': 4,
+        'parent_model_key': 'lfm2_5_350m',
+        'n_qubits': 8,
         'depth': 2,
-        'encoding': 'bounded_ry_angle_encoding',
-        'ansatz': 'trainable_ry_layers',
+        'encoding': 'bounded_ry_angle_encoding_reuploaded_each_layer',
+        'ansatz': 'data_reuploading_ry',
         'entanglement': 'cnot_ring',
         'measurement': 'per_qubit_pauli_z_expectation',
         'framework': 'qiskit',
@@ -93,9 +143,34 @@ class Config:
         'simulator': 'qiskit_statevector_estimator',
         'default_precision': 0.0,
         'shots': None,
-        'status': 'qiskit_backend_proposed_pending_parent_freeze',
+        'status': 'frozen_for_under400m_follow_on_adr_0017',
     }
     modern_lora_registry = {
+        'gemma_3_270m': {
+            'target_modules': ['q_proj', 'v_proj'],
+            'expected_adapter_modules': 36,
+            'notes': 'Attention Q/V projections across all 18 Gemma 3 text-transformer layers.',
+        },
+        'granite_4_0_350m': {
+            'target_modules': ['q_proj', 'v_proj'],
+            'expected_adapter_modules': 56,
+            'notes': 'Attention Q/V projections across all 28 Granite transformer layers.',
+        },
+        'pleias_rag_350m': {
+            'target_modules': ['q_proj', 'v_proj'],
+            'expected_adapter_modules': 52,
+            'notes': 'Attention Q/V projections across all 26 Llama-architecture layers.',
+        },
+        'lfm2_5_350m': {
+            'target_modules': ['q_proj', 'v_proj', 'in_proj', 'out_proj'],
+            'expected_adapter_modules': 38,
+            'notes': 'Attention Q/V/output plus hybrid convolution input/output projections.',
+        },
+        'granite_4_0_h_350m': {
+            'target_modules': ['q_proj', 'v_proj', 'in_proj', 'out_proj'],
+            'expected_adapter_modules': 64,
+            'notes': 'Attention Q/V plus hybrid Mamba input/output projections.',
+        },
         'qwen3_5_4b_base': {
             'target_modules': r'.*language_model\.layers\.\d+\.(?:self_attn\.(?:q_proj|v_proj)|linear_attn\.(?:in_proj_qkv|out_proj))',
             'expected_adapter_modules': 64,

@@ -19,7 +19,8 @@ from utils.bbr import ACTION_LEVELS
 
 ANSATZ_TRAINABLE_RY = "trainable_ry_layers"
 ANSATZ_TRAINABLE_RY_RZ = "trainable_ry_rz_layers"
-SUPPORTED_ANSATZES = (ANSATZ_TRAINABLE_RY, ANSATZ_TRAINABLE_RY_RZ)
+ANSATZ_DATA_REUPLOADING_RY = "data_reuploading_ry"
+SUPPORTED_ANSATZES = (ANSATZ_TRAINABLE_RY, ANSATZ_TRAINABLE_RY_RZ, ANSATZ_DATA_REUPLOADING_RY)
 ANGLE_SCALE_PI = "pi"
 ANGLE_SCALE_HALF_PI = "half_pi"
 SUPPORTED_ANGLE_SCALES = (ANGLE_SCALE_PI, ANGLE_SCALE_HALF_PI)
@@ -99,6 +100,7 @@ class QuantumActionHead(nn.Module):
         per_qubit_weights = {
             ANSATZ_TRAINABLE_RY: 1,
             ANSATZ_TRAINABLE_RY_RZ: 2,
+            ANSATZ_DATA_REUPLOADING_RY: 1,
         }[self.ansatz]
         return self.depth * self.n_qubits * per_qubit_weights
 
@@ -107,10 +109,20 @@ class QuantumActionHead(nn.Module):
         weight_params = ParameterVector("theta", self.weight_count)
         circuit = QuantumCircuit(self.n_qubits)
 
-        for qubit in range(self.n_qubits):
-            circuit.ry(input_params[qubit], qubit)
+        reuploading = self.ansatz == ANSATZ_DATA_REUPLOADING_RY
+        if not reuploading:
+            for qubit in range(self.n_qubits):
+                circuit.ry(input_params[qubit], qubit)
         cursor = 0
         for layer in range(self.depth):
+            if reuploading:
+                # Re-encode the same classical features before every
+                # variational layer instead of once up front. This is the
+                # standard data-re-uploading construction (Perez-Salinas
+                # et al., 2020): repeated encode/vary blocks raise circuit
+                # expressivity without adding qubits or trainable weights.
+                for qubit in range(self.n_qubits):
+                    circuit.ry(input_params[qubit], qubit)
             for qubit in range(self.n_qubits):
                 circuit.ry(weight_params[cursor], qubit)
                 cursor += 1
@@ -172,7 +184,11 @@ class QuantumActionHead(nn.Module):
             "qiskit_machine_learning_version": qiskit_machine_learning.__version__,
             "n_qubits": self.n_qubits,
             "depth": self.depth,
-            "encoding": "bounded_ry_angle_encoding",
+            "encoding": (
+                "bounded_ry_angle_encoding_reuploaded_each_layer"
+                if self.ansatz == ANSATZ_DATA_REUPLOADING_RY
+                else "bounded_ry_angle_encoding"
+            ),
             "input_layernorm": self.input_layernorm,
             "temperature": self.temperature,
             "angle_scale": self.angle_scale_name,

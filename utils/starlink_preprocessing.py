@@ -331,14 +331,35 @@ def infer_trace_identity(path, raw_root):
     return relative_path, location, stream_name
 
 
-def build_experience_pool(trace_paths, raw_root, config=PaperPreprocessingConfig()):
+def infer_held_out_trace_identity(path, raw_root):
+    """Validate one Tokyo trace without weakening the development-data guard."""
+    path = Path(path).resolve()
+    raw_root = Path(raw_root).resolve()
+    try:
+        relative_path = path.relative_to(raw_root)
+    except ValueError as exc:
+        raise ValueError("Trace is outside raw data root: {}".format(path)) from exc
+    parts = relative_path.parts
+    if len(parts) < 3:
+        raise ValueError("Unexpected Starlink trace path: {}".format(relative_path))
+    stream_name, location = parts[0], parts[1]
+    if location != HELD_OUT_LOCATION:
+        raise ValueError(
+            "Held-out preprocessing accepts Tokyo only, got {}".format(location)
+        )
+    if stream_name not in STREAM_FLAGS:
+        raise ValueError("Unknown stream group: {}".format(stream_name))
+    return relative_path, location, stream_name
+
+
+def _build_pool(trace_paths, raw_root, identity_resolver, location_flags, split_role, config):
     trace_paths = tuple(trace_paths)
     if not trace_paths:
-        raise ValueError("At least one development trace is required")
+        raise ValueError("At least one {} trace is required".format(split_role))
     pool = ExperiencePool()
     source_files = []
     for trace_path in sorted(Path(path) for path in trace_paths):
-        relative_path, location, stream_name = infer_trace_identity(trace_path, raw_root)
+        relative_path, location, stream_name = identity_resolver(trace_path, raw_root)
         rows, leading_text, trailing_text = parse_iperf3_intervals(trace_path)
         phases, labels, rewards = build_paper_labels(rows, config)
         source_files.append(
@@ -355,7 +376,7 @@ def build_experience_pool(trace_paths, raw_root, config=PaperPreprocessingConfig
         ):
             state = np.asarray(
                 [
-                    LOCATION_FLAGS[location],
+                    location_flags[location],
                     STREAM_FLAGS[stream_name],
                     row["end"],
                     row["bits_per_second"],
@@ -385,12 +406,50 @@ def build_experience_pool(trace_paths, raw_root, config=PaperPreprocessingConfig
         "paper": "arXiv:2607.07142v1",
         "label_rule": "Equations 2-3 nearest phase-safe gain; Equation 16 reward for selected action",
         "config": asdict(config),
-        "location_flags": LOCATION_FLAGS,
+        "location_flags": location_flags,
         "stream_flags": STREAM_FLAGS,
         "held_out_location": HELD_OUT_LOCATION,
+        "split_role": split_role,
         "source_files": source_files,
     }
     return pool
+
+
+def build_experience_pool(trace_paths, raw_root, config=PaperPreprocessingConfig()):
+    return _build_pool(
+        trace_paths,
+        raw_root,
+        infer_trace_identity,
+        LOCATION_FLAGS,
+        "development",
+        config,
+    )
+
+
+def build_held_out_experience_pool(
+    trace_paths,
+    raw_root,
+    tokyo_location_flag,
+    config=PaperPreprocessingConfig(),
+):
+    """Build the final Tokyo pool through an explicit held-out-only entry point.
+
+    The flag has no default because the paper/released code do not resolve the
+    unseen-location encoding unambiguously. It must be frozen in the evaluation
+    protocol before the final held-out run.
+    """
+    if isinstance(tokyo_location_flag, bool) or not isinstance(tokyo_location_flag, int):
+        raise TypeError("tokyo_location_flag must be an explicitly chosen integer")
+    if tokyo_location_flag in LOCATION_FLAGS.values():
+        raise ValueError("Tokyo location flag must not alias a development location")
+    return _build_pool(
+        trace_paths,
+        raw_root,
+        infer_held_out_trace_identity,
+        {HELD_OUT_LOCATION: tokyo_location_flag},
+        "held_out_test",
+        config,
+    )
 
 
 def write_experience_pool(pool, output_path):
