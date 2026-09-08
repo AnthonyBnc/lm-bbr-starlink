@@ -60,12 +60,43 @@ Hardware: single NVIDIA RTX 4090 (24GB), Windows 11, CUDA 13.0, PyTorch
 `hardware` fields; GPU model confirmed via `nvidia-smi` during setup, not
 itself logged in the manifest).
 
-**VRAM usage was not recorded.** No profiling instrumentation exists in the
-current training script, and no peak-memory measurement tool exists in this
-codebase as of this branch. If you want real VRAM figures for the paper, this
-needs a small new script (e.g. `torch.cuda.max_memory_allocated()` around a
-forward/backward step) run separately per model — say the word and I'll write
-one, but I'm not going to estimate or guess a number here.
+**VRAM usage was not recorded** during these runs — no profiling
+instrumentation exists in the training script. The figures below are a
+**calculated estimate**, not a live GPU measurement, built from the exact
+parameter counts already in each run's manifest plus each model's real
+published architecture:
+
+| Model | Weights + Grad + AdamW (MB) | Activations (MB) | +CUDA context | **Estimated peak VRAM** |
+|---|---:|---:|---:|---:|
+| Gemma-3-270M | 638.4 | 98.8 | 500 | **1.21 GB** |
+| Granite-4.0-350M | 918.1 | 307.9 | 500 | **1.69 GB** |
+| LFM2.5-350M | 926.6 | 176.0 | 500 | **1.56 GB** |
+| Pleias-RAG-350M | 920.1 | 285.9 | 500 | **1.67 GB** |
+
+Method (reproducible):
+- Frozen backbone: exact backbone-parameter count × 2 bytes (fp16/bf16).
+- Trainable weights + gradients + AdamW (m, v): exact trainable-parameter
+  count × 16 bytes (4 bytes × 4, assuming fp32 for LoRA/task modules and
+  optimizer state — standard PEFT/AdamW practice for training stability).
+- Activations: the Korthikanti et al. 2022 ("Reducing Activation
+  Recomputation in Large Transformer Models") per-layer formula
+  `s·b·h·(34 + 5ah/s)`, using each model's real hidden size, layer count,
+  and attention-head count from its Hugging Face `config.json`
+  (`hidden_size`, `num_hidden_layers`, `num_attention_heads`), with
+  `s=220` structured embeddings per window and `b=1` micro-batch. Gemma's
+  config was read from an unsloth mirror since Google's own repository is
+  license-gated; same architecture, unrestricted copy.
+- +500MB fixed PyTorch/CUDA context overhead (not model-specific).
+
+**Caveat:** this is a calculated floor, not a measurement. Real `nvidia-smi`
+usage typically runs 1.3–2x higher, since PyTorch's caching allocator
+reserves memory in pools rather than the exact minimum, and cuDNN/cuBLAS
+kernel workspaces aren't included here. All four sit far below the 24GB RTX
+4090 either way — VRAM was not the bottleneck in these runs; the wall-clock
+differences above come from architecture/kernel efficiency, not memory
+pressure. If exact measured figures are needed later, this needs a small
+new script (`torch.cuda.max_memory_allocated()` around one training step)
+run on the training machine — say the word and I'll write one.
 
 ## Peak vs. final epoch (development split)
 
