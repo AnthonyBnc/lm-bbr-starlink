@@ -1,0 +1,118 @@
+{
+  "checkpoint": "checkpoint",
+  "checkpoint_reload": "PASS",
+  "completed_at": "2026-09-07T19:25:12.028350+00:00",
+  "completed_epochs": 100,
+  "dtype": "bfloat16",
+  "gradient_accumulation_steps": 32,
+  "head_type": "classical",
+  "learning_rate": 0.0001,
+  "lora_config": {
+    "alpha": 32,
+    "dropout": 0.05,
+    "rank": 128
+  },
+  "metrics": "metrics.json",
+  "model_key": "pleias_rag_350m",
+  "model_revision": "db001b29a33532583d14979c3c38ef04b6d59352",
+  "sample_step": 20,
+  "seed": 100003,
+  "sequence_length": 20,
+  "split_manifest_sha256": "a6c5a4c910b894d7dca334cbc7a652f1c468f98c8ba4157a5a21154cab66a109",
+  "status": "training_completed",
+  "target_epochs": 100,
+  "train_pool_sha256": "dae037d4f34c428747763cedb4f2ae9cf1e047b3bceb042638325e188af2a937",
+  "training_loss_weighting": "none",
+  "training_sampling": {
+    "down_penalty": null,
+    "location_action_window_quotas": null,
+    "replacement_windows": null,
+    "seed": 100003,
+    "selected_distribution": {
+      "action_positions": {
+        "0": 2579,
+        "1": 0,
+        "10": 875,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 42035,
+        "6": 708,
+        "7": 607,
+        "8": 643,
+        "9": 553
+      },
+      "dataset_indices_sha256": "fd9dec696d2773cc8cef630a9645a8df49bcbf5cf4f1d840ec561ddceeed3df4",
+      "phase_positions": {
+        "BW_CRUISE": 42035,
+        "BW_DOWN": 2579,
+        "BW_UP": 3386
+      },
+      "repeated_windows": 0,
+      "unique_windows": 2400,
+      "windows": 2400
+    },
+    "selected_location_windows": {
+      "London": 480,
+      "Mumbai": 480,
+      "Ohio": 480,
+      "SaoPaulo": 480,
+      "Sydney": 480
+    },
+    "source_distribution": {
+      "action_positions": {
+        "0": 2579,
+        "1": 0,
+        "10": 875,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 42035,
+        "6": 708,
+        "7": 607,
+        "8": 643,
+        "9": 553
+      },
+      "dataset_indices_sha256": "fd9dec696d2773cc8cef630a9645a8df49bcbf5cf4f1d840ec561ddceeed3df4",
+      "phase_positions": {
+        "BW_CRUISE": 42035,
+        "BW_DOWN": 2579,
+        "BW_UP": 3386
+      },
+      "repeated_windows": 0,
+      "unique_windows": 2400,
+      "windows": 2400
+    },
+    "source_location_windows": {
+      "London": 480,
+      "Mumbai": 480,
+      "Ohio": 480,
+      "SaoPaulo": 480,
+      "Sydney": 480
+    },
+    "strategy": "original",
+    "target_windows": 2400,
+    "up_action_window_quotas": null,
+    "up_density_power": null,
+    "with_replacement": false
+  },
+  "validation_criteria": {
+    "all_declared_criteria_pass": null,
+    "checks": {},
+    "declared": {
+      "macro_phase_accuracy": null,
+      "max_up_prediction_share": null,
+      "overall_accuracy": null,
+      "up_accuracy": null
+    },
+    "observed": {
+      "macro_phase_accuracy": 0.791566265060241,
+      "max_up_prediction_share": 0.2927710843373494,
+      "overall_accuracy": 0.95675,
+      "up_accuracy": 0.3746987951807229
+    }
+  },
+  "validation_pool_sha256": "6d53da7aa0a5c0c994977eb5eb2349fb5f3b2e66c17d1b3f8d55cafdf856d060",
+  "warmup_steps": 0,
+  "weight_decay": 0.0001
+}
