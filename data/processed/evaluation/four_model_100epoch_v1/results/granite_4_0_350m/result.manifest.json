@@ -1,0 +1,170 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "6bcb59a497d51b3dd05f64aa24c2ec74492ab7c43ac44c6ab0aebe51651576ea",
+    "adapter/adapter_model.safetensors": "9ce886f2e48c5e6121fff197cff3864399e6566f5bc9e21444ffa41f953e5fe2",
+    "task_modules.pt": "8c8d8b125e53a514d52fa2de94eedaa94289c3d766d201d5a4b55f6be6ad4faf",
+    "training_state.json": "6a28478e692efe12d02fe9f1e0cccef268d434e2b4059962eca983f90e190d1c"
+  },
+  "inference_only": true,
+  "metrics": {
+    "accuracy": 0.9606666666666667,
+    "label_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 407,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 136,
+      "7": 140,
+      "8": 96,
+      "9": 168
+    },
+    "latency": {
+      "mean_milliseconds_per_action": 1.285636823217408,
+      "timed_batches": 595,
+      "warmup_batches_excluded": 5
+    },
+    "loss": 0.42330225051517406,
+    "macro_phase_accuracy": 0.833861316437874,
+    "paper_surrogate_by_stream_group": {
+      "downlink-competitive-logs": {
+        "mean_retransmissions": 3.8022106327055094,
+        "mean_throughput": 9410031.286187498,
+        "samples": 3000
+      },
+      "downlink-sequential-logs": {
+        "mean_retransmissions": 40.463939460614746,
+        "mean_throughput": 228985646.93592,
+        "samples": 3000
+      },
+      "uplink-competitive-logs": {
+        "mean_retransmissions": 1.608503757235948,
+        "mean_throughput": 10748013.3846875,
+        "samples": 3000
+      },
+      "uplink-sequential-logs": {
+        "mean_retransmissions": 11.165607786448469,
+        "mean_throughput": 45558982.302710004,
+        "samples": 3000
+      }
+    },
+    "per_phase_accuracy": {
+      "BW_CRUISE": 1.0,
+      "BW_DOWN": 1.0,
+      "BW_UP": 0.5015839493136219
+    },
+    "per_phase_label_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 407,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 136,
+        "7": 140,
+        "8": 96,
+        "9": 168
+      }
+    },
+    "per_phase_prediction_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 603,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 123,
+        "7": 86,
+        "8": 50,
+        "9": 85
+      }
+    },
+    "per_phase_samples": {
+      "BW_CRUISE": 10419,
+      "BW_DOWN": 634,
+      "BW_UP": 947
+    },
+    "prediction_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 603,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 123,
+      "7": 86,
+      "8": 50,
+      "9": 85
+    },
+    "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+    "samples": 12000
+  },
+  "model_id": "ibm-granite/granite-4.0-350m",
+  "model_key": "granite_4_0_350m",
+  "model_revision": "bd8a1497065c0d6ba1ef19af6b0d2b14bacf71c2",
+  "phase_mask_applied_before_loss_and_argmax": true,
+  "predictions": "data/processed/evaluation/four_model_100epoch_v1/results/granite_4_0_350m/predictions.csv",
+  "sample_step": 20,
+  "sequence_length": 20,
+  "status": "held_out_tokyo_evaluation_completed",
+  "tokyo_pool_sha256": "800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b"
+}

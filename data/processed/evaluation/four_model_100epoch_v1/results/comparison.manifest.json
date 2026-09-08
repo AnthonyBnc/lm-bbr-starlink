@@ -1,0 +1,62 @@
+{
+  "held_out_location": "Tokyo",
+  "models": [
+    {
+      "accuracy": 0.9606666666666667,
+      "loss": 0.42330225051517406,
+      "macro_phase_accuracy": 0.833861316437874,
+      "mean_milliseconds_per_action": 1.285636823217408,
+      "model_key": "granite_4_0_350m",
+      "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0"
+    },
+    {
+      "accuracy": 0.9588333333333333,
+      "loss": 0.31795380839457826,
+      "macro_phase_accuracy": 0.8261175642379444,
+      "mean_milliseconds_per_action": 1.2471291848200083,
+      "model_key": "pleias_rag_350m",
+      "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0"
+    },
+    {
+      "accuracy": 0.9593333333333334,
+      "loss": 0.513120581405184,
+      "macro_phase_accuracy": 0.8282294966561071,
+      "mean_milliseconds_per_action": 1.1735494787405645,
+      "model_key": "lfm2_5_350m",
+      "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0"
+    },
+    {
+      "accuracy": 0.9601666666666666,
+      "loss": 0.4156052410118758,
+      "macro_phase_accuracy": 0.8317493840197114,
+      "mean_milliseconds_per_action": 1.2877553439613025,
+      "model_key": "gemma_3_270m",
+      "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0"
+    }
+  ],
+  "paper_model_comparison_status": "published_reference_only",
+  "paper_models": [
+    {
+      "model_key": "gpt2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "t5",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "gpt_neo",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "smollm2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    }
+  ],
+  "shared_sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+  "status": "modern_tokyo_comparison_completed"
+}

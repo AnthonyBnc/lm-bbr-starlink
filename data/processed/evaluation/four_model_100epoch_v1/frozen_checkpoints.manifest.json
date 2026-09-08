@@ -1,0 +1,115 @@
+{
+  "checkpoint_selection_rule": "final_epoch_16_fixed_before_tokyo",
+  "comparison_claim": "The four new models are evaluated directly on the frozen Tokyo pool. The four paper models use published aggregate/figure values and are a contextual reference, not a same-sample or same-runtime rerun.",
+  "frozen_at": "2026-09-08T01:54:24.711721+00:00",
+  "held_out_location": "Tokyo",
+  "modern_models": [
+    {
+      "checkpoint": "data/processed/lora_training/four_model_100epoch_v1/granite_4_0_350m_classical/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "6bcb59a497d51b3dd05f64aa24c2ec74492ab7c43ac44c6ab0aebe51651576ea",
+        "adapter/adapter_model.safetensors": "9ce886f2e48c5e6121fff197cff3864399e6566f5bc9e21444ffa41f953e5fe2",
+        "task_modules.pt": "8c8d8b125e53a514d52fa2de94eedaa94289c3d766d201d5a4b55f6be6ad4faf",
+        "training_state.json": "6a28478e692efe12d02fe9f1e0cccef268d434e2b4059962eca983f90e190d1c"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 100,
+      "model_id": "ibm-granite/granite-4.0-350m",
+      "model_key": "granite_4_0_350m",
+      "model_revision": "bd8a1497065c0d6ba1ef19af6b0d2b14bacf71c2",
+      "run_dir": "data/processed/lora_training/four_model_100epoch_v1/granite_4_0_350m_classical",
+      "run_manifest": "data/processed/lora_training/four_model_100epoch_v1/granite_4_0_350m_classical/run.manifest.json",
+      "run_manifest_sha256": "a02239a2653537df8d6a177869e158adbd44f090c467bd76d3a53a87b7db447c",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/four_model_100epoch_v1/pleias_rag_350m_classical/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "b8c5d32ba6f2cd78bb21fde59f8a892fcffde769a6b71c96db992111754f256d",
+        "adapter/adapter_model.safetensors": "bcf5c51720f9d70cfbaccc35610a96661d00c81c135f52304b62ade30ac29c12",
+        "task_modules.pt": "fd7764addbd0591324b472baf42d592e9876d26be412282edc63407921c5f0da",
+        "training_state.json": "912cfeecde708bdf519ce8b66c001e7b2d4a4822ca23aab822b56504c361c00b"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 100,
+      "model_id": "PleIAs/Pleias-RAG-350M",
+      "model_key": "pleias_rag_350m",
+      "model_revision": "db001b29a33532583d14979c3c38ef04b6d59352",
+      "run_dir": "data/processed/lora_training/four_model_100epoch_v1/pleias_rag_350m_classical",
+      "run_manifest": "data/processed/lora_training/four_model_100epoch_v1/pleias_rag_350m_classical/run.manifest.json",
+      "run_manifest_sha256": "81bca1550011ec9a5ec8796e3fc05d6aa7f903ab97e8702a8256bec5e1152f99",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/four_model_100epoch_v1/lfm2_5_350m_classical/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "0cb0a8a60e67e5dea48c3b653d3f33c3ca12c748e05c51cfcd743a751197524b",
+        "adapter/adapter_model.safetensors": "b73fa87ba9cb6d5bb902a442c10abb365ce5c8043fd6d2edbd832883b1ab5ad4",
+        "task_modules.pt": "8f675c4a8fbda75c66dd37213e392cfb01836aa254295f9e2a092b9084ca7bb6",
+        "training_state.json": "4370e5f4596c1a01dc2967c4b71c3ef076a938c7dfcff6224d4121865ed8a96f"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 100,
+      "model_id": "LiquidAI/LFM2.5-350M",
+      "model_key": "lfm2_5_350m",
+      "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+      "run_dir": "data/processed/lora_training/four_model_100epoch_v1/lfm2_5_350m_classical",
+      "run_manifest": "data/processed/lora_training/four_model_100epoch_v1/lfm2_5_350m_classical/run.manifest.json",
+      "run_manifest_sha256": "9bd1e9767741ad4f06e668f1e689d62e16a32d79b736f9ebd8fcf876c7d92eb5",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/four_model_100epoch_v1/gemma_3_270m_classical/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "ebf8e3b8966c3a5c598c9606ec2765b9c25c0cec583913d1dd8fcd14ef4d9297",
+        "adapter/adapter_model.safetensors": "a7602d7c0719d0025713d779606b0f93dec2c9fd4c4d1d53a25e58738286164d",
+        "task_modules.pt": "7385d0cbd6c92b7b3ef94fa27b5f4629902fd0a69e4c6ed455eba541836924b3",
+        "training_state.json": "1399a81777d1e877e5ba4a31f83cf34afe8ffbed23849e654f30dd10f866288c"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 100,
+      "model_id": "google/gemma-3-270m",
+      "model_key": "gemma_3_270m",
+      "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+      "run_dir": "data/processed/lora_training/four_model_100epoch_v1/gemma_3_270m_classical",
+      "run_manifest": "data/processed/lora_training/four_model_100epoch_v1/gemma_3_270m_classical/run.manifest.json",
+      "run_manifest_sha256": "a024ca4884743564979993a64652ff2f42a90583af25c3fb231f5a67e725c693",
+      "seed": 100003
+    }
+  ],
+  "paper_models": [
+    {
+      "model_key": "gpt2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "t5",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "gpt_neo",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "smollm2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    }
+  ],
+  "schema_version": 1,
+  "status": "modern_checkpoints_frozen",
+  "tokyo_location_flag": 5,
+  "tokyo_location_flag_status": "user_approved_2026-09-03",
+  "tokyo_opened": true,
+  "tokyo_opened_at": "2026-09-03T03:55:03.739706+00:00",
+  "tokyo_pool": "data/processed/evaluation/tokyo_8model_comparison_v1/tokyo.pkl",
+  "tokyo_pool_manifest": "data/processed/evaluation/tokyo_8model_comparison_v1/tokyo.manifest.json",
+  "tokyo_pool_sha256": "800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b"
+}

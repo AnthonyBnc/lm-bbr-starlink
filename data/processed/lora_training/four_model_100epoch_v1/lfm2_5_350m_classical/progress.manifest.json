@@ -4,6 +4,13 @@
   "completed_at": "2026-09-07T15:34:01.035576+00:00",
   "completed_epochs": 100,
   "dtype": "float16",
+  "frozen_checkpoint_sha256": {
+    "adapter/adapter_config.json": "0cb0a8a60e67e5dea48c3b653d3f33c3ca12c748e05c51cfcd743a751197524b",
+    "adapter/adapter_model.safetensors": "b73fa87ba9cb6d5bb902a442c10abb365ce5c8043fd6d2edbd832883b1ab5ad4",
+    "task_modules.pt": "8f675c4a8fbda75c66dd37213e392cfb01836aa254295f9e2a092b9084ca7bb6",
+    "training_state.json": "4370e5f4596c1a01dc2967c4b71c3ef076a938c7dfcff6224d4121865ed8a96f"
+  },
+  "frozen_for_held_out_evaluation": true,
   "gradient_accumulation_steps": 32,
   "head_type": "classical",
   "learning_rate": 0.0001,
