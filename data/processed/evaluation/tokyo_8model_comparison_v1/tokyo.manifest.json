@@ -1,0 +1,319 @@
+{
+  "config": {
+    "aggressive_probe_weight": 0.1,
+    "cruise_samples_after_down": 6,
+    "half_window": 10,
+    "loss_floor": 0.001,
+    "phase_threshold_scale": 0.7,
+    "probe_down_reduction": 0.5,
+    "probe_growth": 1.5,
+    "probe_sharpness": 5.0,
+    "retransmission_weight": 0.5
+  },
+  "dataset_version": "slm-bbr-paper-w10-eq2-3-labels-v1-exploratory",
+  "evaluation_protocol": "tokyo_8model_comparison_v1",
+  "experience_pool_sha256": "800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b",
+  "frozen_checkpoint_manifest": "data/processed/evaluation/tokyo_8model_comparison_v1/frozen_checkpoints.manifest.json",
+  "frozen_checkpoint_manifest_sha256_before_gate": "3203c6cd77ec2f593ec5e4c345ac23a4a72aa2958f182aded118eddc3b4c9bbc",
+  "held_out_location": "Tokyo",
+  "label_rule": "Equations 2-3 nearest phase-safe gain; Equation 16 reward for selected action",
+  "location_flags": {
+    "Tokyo": 5
+  },
+  "opened_at": "2026-09-03T03:55:03.739706+00:00",
+  "paper": "arXiv:2607.07142v1",
+  "sample_step": 20,
+  "samples": 12024,
+  "selection_rule": "primary bbr_ flow only; all 10 runs; four stream groups",
+  "sequence_length": 20,
+  "source_files": [
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run1.json",
+      "sha256": "197f0e7850faf599144a9bde4e40e1b9d41c98234e530e6128a0a822e3dc5098",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run10.json",
+      "sha256": "e4eb84c715d670bdaf48f313ad6de8a29590e1831c8ad793fa5be16c8efd0dbf",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run2.json",
+      "sha256": "b64b88e7cb820e002b8c8affb483bc9cd8306f2386d56105c10bfa8445fba520",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run3.json",
+      "sha256": "f3088ba07ffa685e429dd521953fea84485325405a7b3bde5889db5362d1e301",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run4.json",
+      "sha256": "8ecb3daf79af6fb471747f164e73b68cd82eea95b2e93afcc247a2cdbbe2dbb3",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run5.json",
+      "sha256": "2c61ad8c0804c2ae79b02422ea7e27c3361c0837a6d5d6a56ae9ac517f68654a",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run6.json",
+      "sha256": "584a126e62dfd96d016446b3edc4b39d35e5cb4dc605b8c531076fdc317b74df",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run7.json",
+      "sha256": "143fc3541d6d7e597e49873395f7d601a5fd228bb094076f71b137298487cbf7",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run8.json",
+      "sha256": "56f350d3791060dae08d6d7c25fb1d7d81bddc78ea757ce339d791eedc6abfb7",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 305,
+      "leading_diagnostic_bytes": 47,
+      "path": "downlink-competitive-logs/Tokyo/bbr_Tokyo__REV_run9.json",
+      "sha256": "b498e4fc2d5d8c74c006be4eb52d9128ae1b40a004ada4d03189a74fb0057f49",
+      "trailing_diagnostic_bytes": 55
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run1.json",
+      "sha256": "4f5e5aeee893d1ece977596e5204614d28e3821fbc00cc464d09a16643402c5f",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run10.json",
+      "sha256": "9b1c4111c7483bb49159ac6ca7901b0cb6c70c1f8e08e9b81d251b15f436c0b9",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run2.json",
+      "sha256": "839491603fb3786644248c847d46709ed0014a7fb25208f84ea289730c1ef0ab",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run3.json",
+      "sha256": "a4734656c36a74ab0a740f8c5e087761704b21fa52eb631089db43a1a918eeab",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run4.json",
+      "sha256": "860e7ff19bffe4dc0f95afd0d6fc5a97c4389fdc3528da5484b018bfec155b07",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run5.json",
+      "sha256": "65278f21a7e3dd8327cdb2f21ab38827653be9b4cb6bacaa3ad9573c7824a683",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run6.json",
+      "sha256": "ab99cc5dfef79549d6f95f6ea2c3ae5c3eb43f5985ca89ffc7caea0982a6cb5c",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run7.json",
+      "sha256": "79ea40ec909f138749f3a6eb2982ff97aae50ee62ea8c829688e59fe7f73822a",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run8.json",
+      "sha256": "18f151e4d7f2729351290b8aaa0fc92d2907cefd43872054fe38229f2dbd30d7",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 301,
+      "leading_diagnostic_bytes": 0,
+      "path": "downlink-sequential-logs/Tokyo/iperf3-downlink-sequential-logs/bbr_Tokyo__REV_run9.json",
+      "sha256": "754d609b6e549891957f2d890a0dce9ff1c078fbb3b2030f2f042fc481b2cfe8",
+      "trailing_diagnostic_bytes": 397
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run1.json",
+      "sha256": "fc7201411cd9b163e3f7f3832bfd1ecacc8ec33cda94492d2e7782bcabb22cfc",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run10.json",
+      "sha256": "3b22154e0d166be9c3607d3016493afefb8f24a8a81c3c887536903b0e342421",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run2.json",
+      "sha256": "ff979c4539de98b411f576e766e85c027517ab73c248a23356fb2b675c800536",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run3.json",
+      "sha256": "2b0d8f20c2bdcf4684f96886b51211e3b2b8760f1e0b3db27405ad551498bab2",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run4.json",
+      "sha256": "1f5255dc1c9f9fce7e2fd80dfc5b81d4bf7b4d94ae91738b1ecaac99a184e722",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run5.json",
+      "sha256": "74285cea3bc3ca2ff55b8a771d16d9d0cd7c5ca8dd531061f1c2e6a8016d3d1a",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run6.json",
+      "sha256": "b2174ae89fce72e3bcb4ea771ef868009f14b16b73bf3e6e23da571f5d043704",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run7.json",
+      "sha256": "f5097dd113f987d7735852a05b3d60e2bd2a4d91086ebd0b5916a8fb6789e2f2",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run8.json",
+      "sha256": "b4c717ba148d4defd671c80da00f2670b13a8b25078b9b0a8419b01ae93ce5d0",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-competitive-logs/Tokyo/bbr_Tokyo__FWD_run9.json",
+      "sha256": "96783b75c7f7bd4fa9744e6d9b276b4d80feec019a18b6f53bc3ad02f24bd007",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run1.json",
+      "sha256": "1c3a3703522cd30a97f6560e5b42899e5637a272b3a756a3649dff98bdc3e695",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run10.json",
+      "sha256": "ae3e5528c6cf87845206ad9f0fa2994f8eee7dbde75fc9cb4c43e7a6cb40a7bd",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run2.json",
+      "sha256": "86342f7d25734bb1b45c2327b5a9a0816cbd9413fc6c634309396356c0849558",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run3.json",
+      "sha256": "9bc6641f6322733bfc78c899d5112642627baf66401d1c8c45623e80181771f1",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run4.json",
+      "sha256": "2708e8377457912e5060f473f0aa57641449cf513cd94f583582b396b1a2b618",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run5.json",
+      "sha256": "8bb444f9aa3b4a01e1988029b751923557ad3734a4727707c780f2a4df894963",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run6.json",
+      "sha256": "1f1d198065d5216603120cd0beb01f3ffbaef0db769852937e4e506bd1dc4e9d",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run7.json",
+      "sha256": "d46cf95bb52e445e278bb7759f912a3808460378bdfad7fd0953e3b8dfe1b548",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run8.json",
+      "sha256": "b6b1f854f7aa376dc2ea7615916b9e50bbc250ad907f165c31ada116295cacc3",
+      "trailing_diagnostic_bytes": 1
+    },
+    {
+      "intervals": 300,
+      "leading_diagnostic_bytes": 0,
+      "path": "uplink-sequential-logs/Tokyo/bbr_Tokyo__FWD_run9.json",
+      "sha256": "09a1a668a861b98a590c4d8ce477457e31ab27fe96e627a5a196ec80b77d2b51",
+      "trailing_diagnostic_bytes": 1
+    }
+  ],
+  "split_role": "held_out_test",
+  "stream_flags": {
+    "downlink-competitive-logs": 2,
+    "downlink-sequential-logs": 0,
+    "uplink-competitive-logs": 3,
+    "uplink-sequential-logs": 1
+  },
+  "windows": 600
+}
