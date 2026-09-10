@@ -1,0 +1,8 @@
+{
+  "best_validation_loss": 0.11745589606091537,
+  "completed_epochs": 32,
+  "data_order_resume_policy": "deterministic_reseed_seed_plus_completed_epochs",
+  "non_improving_epochs": 0,
+  "resumed_from_epoch": 11,
+  "target_epochs": 100
+}
