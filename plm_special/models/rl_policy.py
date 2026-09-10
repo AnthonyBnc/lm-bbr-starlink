@@ -94,6 +94,7 @@ class OfflineRLPolicy(nn.Module):
                 input_layernorm=bool(config.get("input_layernorm", False)),
                 temperature=float(config.get("temperature", 1.0)),
                 angle_scale=config.get("angle_scale", "pi"),
+                backend=config.get("backend", "qiskit"),
             ).to(device)
             self.quantum_config = self.action_head.manifest_config()
         else:

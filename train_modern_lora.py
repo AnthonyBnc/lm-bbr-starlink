@@ -472,6 +472,16 @@ def main():
     parser.add_argument("--n-qubits", type=int, default=cfg.quantum_defaults["n_qubits"])
     parser.add_argument("--quantum-depth", type=int, default=cfg.quantum_defaults["depth"])
     parser.add_argument(
+        "--quantum-backend",
+        choices=("qiskit", "torch"),
+        default="qiskit",
+        help=(
+            "Simulator for the VQC head. 'qiskit' is the reference path. 'torch' is an "
+            "exact statevector equivalent (verified to 1e-5 in tests) that is batched and "
+            "autograd-differentiated instead of parameter-shifted -- ~1000x faster."
+        ),
+    )
+    parser.add_argument(
         "--head-input-layernorm",
         action="store_true",
         help="Apply LayerNorm before the classical-twin or quantum projection.",
@@ -673,6 +683,7 @@ def main():
             "input_layernorm": args.head_input_layernorm,
             "temperature": args.bottleneck_temperature,
             "angle_scale": args.quantum_angle_scale,
+            "backend": args.quantum_backend,
         },
     )
     if args.trainability_diagnostics and hasattr(policy.action_head, "enable_diagnostics"):

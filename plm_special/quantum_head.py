@@ -25,6 +25,146 @@ ANGLE_SCALE_PI = "pi"
 ANGLE_SCALE_HALF_PI = "half_pi"
 SUPPORTED_ANGLE_SCALES = (ANGLE_SCALE_PI, ANGLE_SCALE_HALF_PI)
 
+BACKEND_QISKIT = "qiskit"
+BACKEND_TORCH = "torch"
+SUPPORTED_BACKENDS = (BACKEND_QISKIT, BACKEND_TORCH)
+
+
+class TorchStatevectorQNN(nn.Module):
+    """Exact statevector simulation of the same VQC, in native torch ops.
+
+    Numerically equivalent to the Qiskit `EstimatorQNN` path (which uses
+    `StatevectorEstimator` at `default_precision=0.0`, i.e. exact, shot-free
+    simulation), but differentiated by autograd instead of Qiskit's
+    parameter-shift rule. Parameter-shift costs 2 extra circuit evaluations per
+    circuit parameter per sample and Qiskit evaluates samples one at a time, so
+    the Qiskit path is ~200ms/sample and single-core-bound; this one is batched
+    and runs on whatever device the angles are on.
+
+    The state is carried as separate real/imaginary tensors rather than a
+    complex dtype so the head still runs on MPS, where complex support is
+    incomplete.
+
+    Mirrors `TorchConnector`'s interface: a `weight` parameter, `(batch,
+    n_qubits)` angles in, `(batch, n_qubits)` Pauli-Z expectations out.
+    """
+
+    def __init__(self, n_qubits, depth, ansatz, weight_count):
+        super().__init__()
+        self.n_qubits = n_qubits
+        self.depth = depth
+        self.ansatz = ansatz
+        self.weight = nn.Parameter(torch.zeros(weight_count))
+        # Qiskit's TorchConnector stores the circuit weights under two keys,
+        # `weight` and `_weights`, holding the same tensor. Mirroring that on
+        # save, and tolerating it on load, keeps checkpoints interchangeable
+        # between the two backends under strict=True -- so a run started on one
+        # backend can be resumed on the other without a conversion step.
+        self._register_state_dict_hook(self._emit_qiskit_alias)
+
+        dim = 2 ** n_qubits
+        index = torch.arange(dim)
+        # Qiskit is little-endian: qubit q is bit q of the basis-state index.
+        for qubit in range(n_qubits):
+            self.register_buffer(
+                "z_sign_{}".format(qubit),
+                1.0 - 2.0 * ((index >> qubit) & 1).float(),
+                persistent=False,
+            )
+        if n_qubits > 1:
+            for control in range(n_qubits):
+                target = (control + 1) % n_qubits
+                # CNOT permutes basis states: out[i] = in[i with bit `target`
+                # flipped when bit `control` is set]. Self-inverse, so the same
+                # index serves as gather map.
+                self.register_buffer(
+                    "cx_perm_{}".format(control),
+                    index ^ (((index >> control) & 1) << target),
+                    persistent=False,
+                )
+
+    @staticmethod
+    def _emit_qiskit_alias(module, state_dict, prefix, local_metadata):
+        state_dict[prefix + "_weights"] = state_dict[prefix + "weight"]
+        return state_dict
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict, *args):
+        alias = prefix + "_weights"
+        if alias in state_dict:
+            if prefix + "weight" not in state_dict:
+                state_dict[prefix + "weight"] = state_dict[alias]
+            state_dict = {key: value for key, value in state_dict.items() if key != alias}
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict, *args)
+
+    def _apply_ry(self, real, imag, angles, qubit):
+        batch = real.shape[0]
+        shape = (batch, 2 ** (self.n_qubits - qubit - 1), 2, 2 ** qubit)
+        real, imag = real.reshape(shape), imag.reshape(shape)
+        half = angles.reshape(-1, 1, 1) / 2
+        cos, sin = torch.cos(half), torch.sin(half)
+        r0, r1 = real[:, :, 0, :], real[:, :, 1, :]
+        i0, i1 = imag[:, :, 0, :], imag[:, :, 1, :]
+        out_real = torch.stack([cos * r0 - sin * r1, sin * r0 + cos * r1], dim=2)
+        out_imag = torch.stack([cos * i0 - sin * i1, sin * i0 + cos * i1], dim=2)
+        flat = (real.shape[0], 2 ** self.n_qubits)
+        return out_real.reshape(flat), out_imag.reshape(flat)
+
+    def _apply_rz(self, real, imag, angles, qubit):
+        batch = real.shape[0]
+        shape = (batch, 2 ** (self.n_qubits - qubit - 1), 2, 2 ** qubit)
+        real, imag = real.reshape(shape), imag.reshape(shape)
+        half = angles.reshape(-1, 1, 1) / 2
+        cos, sin = torch.cos(half), torch.sin(half)
+        r0, r1 = real[:, :, 0, :], real[:, :, 1, :]
+        i0, i1 = imag[:, :, 0, :], imag[:, :, 1, :]
+        # branch 0 multiplied by exp(-i a/2), branch 1 by exp(+i a/2)
+        out_real = torch.stack([r0 * cos + i0 * sin, r1 * cos - i1 * sin], dim=2)
+        out_imag = torch.stack([i0 * cos - r0 * sin, i1 * cos + r1 * sin], dim=2)
+        flat = (real.shape[0], 2 ** self.n_qubits)
+        return out_real.reshape(flat), out_imag.reshape(flat)
+
+    def _apply_cx_ring(self, real, imag):
+        for control in range(self.n_qubits):
+            perm = getattr(self, "cx_perm_{}".format(control))
+            real, imag = real[:, perm], imag[:, perm]
+        return real, imag
+
+    def forward(self, angles):
+        batch = angles.shape[0]
+        real = torch.zeros(batch, 2 ** self.n_qubits, dtype=angles.dtype, device=angles.device)
+        real[:, 0] = 1.0
+        imag = torch.zeros_like(real)
+
+        reuploading = self.ansatz == ANSATZ_DATA_REUPLOADING_RY
+        if not reuploading:
+            for qubit in range(self.n_qubits):
+                real, imag = self._apply_ry(real, imag, angles[:, qubit], qubit)
+
+        cursor = 0
+        for _ in range(self.depth):
+            if reuploading:
+                for qubit in range(self.n_qubits):
+                    real, imag = self._apply_ry(real, imag, angles[:, qubit], qubit)
+            for qubit in range(self.n_qubits):
+                weight = self.weight[cursor].expand(batch)
+                real, imag = self._apply_ry(real, imag, weight, qubit)
+                cursor += 1
+                if self.ansatz == ANSATZ_TRAINABLE_RY_RZ:
+                    weight = self.weight[cursor].expand(batch)
+                    real, imag = self._apply_rz(real, imag, weight, qubit)
+                    cursor += 1
+            if self.n_qubits > 1:
+                real, imag = self._apply_cx_ring(real, imag)
+
+        probabilities = real * real + imag * imag
+        return torch.stack(
+            [
+                (probabilities * getattr(self, "z_sign_{}".format(qubit))).sum(dim=1)
+                for qubit in range(self.n_qubits)
+            ],
+            dim=1,
+        )
+
 
 class QuantumActionHead(nn.Module):
     """Hybrid Qiskit/PyTorch head for 11-action BBR prediction.
@@ -51,6 +191,7 @@ class QuantumActionHead(nn.Module):
         input_layernorm=False,
         temperature=1.0,
         angle_scale=ANGLE_SCALE_PI,
+        backend=BACKEND_QISKIT,
     ):
         super().__init__()
         if action_levels != ACTION_LEVELS:
@@ -73,6 +214,10 @@ class QuantumActionHead(nn.Module):
                     angle_scale, SUPPORTED_ANGLE_SCALES
                 )
             )
+        if backend not in SUPPORTED_BACKENDS:
+            raise ValueError(
+                "Unknown backend {!r}; expected one of {}".format(backend, SUPPORTED_BACKENDS)
+            )
 
         self.input_dim = input_dim
         self.action_levels = action_levels
@@ -83,15 +228,25 @@ class QuantumActionHead(nn.Module):
         self.temperature = float(temperature)
         self.angle_scale_name = angle_scale
         self.angle_scale = math.pi if angle_scale == ANGLE_SCALE_PI else math.pi / 2.0
+        self.backend = backend
         self.weight_count = self._weight_count()
 
         self.input_norm = nn.LayerNorm(input_dim) if self.input_layernorm else nn.Identity()
         self.angle_projection = nn.Linear(input_dim, n_qubits)
-        self.qnn = self._build_qiskit_qnn()
-        self.quantum_layer = TorchConnector(
-            self.qnn,
-            initial_weights=np.zeros(self.weight_count, dtype=np.float32),
-        )
+        if backend == BACKEND_TORCH:
+            self.qnn = None
+            self.quantum_layer = TorchStatevectorQNN(
+                n_qubits=n_qubits,
+                depth=depth,
+                ansatz=ansatz,
+                weight_count=self.weight_count,
+            )
+        else:
+            self.qnn = self._build_qiskit_qnn()
+            self.quantum_layer = TorchConnector(
+                self.qnn,
+                initial_weights=np.zeros(self.weight_count, dtype=np.float32),
+            )
         self.output_projection = nn.Linear(n_qubits, action_levels)
         self.diagnostics_enabled = False
         self.last_diagnostics = None
@@ -156,9 +311,12 @@ class QuantumActionHead(nn.Module):
         bounded = torch.tanh(projected / self.temperature)
         angles = self.angle_scale * bounded
 
-        # Qiskit's TorchConnector runs on CPU tensors. The device transfers
-        # remain in the autograd graph, so gradients still flow back to the LM.
-        expectations = self.quantum_layer(angles.to("cpu", dtype=torch.float32))
+        if self.backend == BACKEND_TORCH:
+            expectations = self.quantum_layer(angles)
+        else:
+            # Qiskit's TorchConnector runs on CPU tensors. The device transfers
+            # remain in the autograd graph, so gradients still flow back to the LM.
+            expectations = self.quantum_layer(angles.to("cpu", dtype=torch.float32))
         expectations = expectations.to(device=hidden.device, dtype=hidden.dtype)
         logits = self.output_projection(expectations)
         if self.diagnostics_enabled:
@@ -196,8 +354,20 @@ class QuantumActionHead(nn.Module):
             "trainable_circuit_parameters": self.weight_count,
             "entanglement": "cnot_ring",
             "measurement": "per_qubit_pauli_z_expectation",
-            "estimator": "qiskit.primitives.StatevectorEstimator",
-            "simulator": "qiskit_statevector_estimator",
+            "backend": self.backend,
+            "gradient_method": (
+                "autograd" if self.backend == BACKEND_TORCH else "qiskit_parameter_shift"
+            ),
+            "estimator": (
+                "torch_exact_statevector"
+                if self.backend == BACKEND_TORCH
+                else "qiskit.primitives.StatevectorEstimator"
+            ),
+            "simulator": (
+                "torch_statevector"
+                if self.backend == BACKEND_TORCH
+                else "qiskit_statevector_estimator"
+            ),
             "default_precision": 0.0,
             "shots": None,
         }
