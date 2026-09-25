@@ -8,39 +8,21 @@ except ModuleNotFoundError:
     pass
 
 
-def _to_device(tensor, device):
-    """Copy a CPU tensor to ``device`` (values identical to ``tensor.to(device)``).
-
-    For CUDA the copy goes through pinned memory with ``non_blocking=True``: a
-    plain pageable host-to-device copy makes the CPU wait until every queued GPU
-    kernel has finished, which serialises CPU and GPU work at batch size 1.
-    """
-    device = torch.device(device)
-    if device.type == "cuda":
-        return tensor.pin_memory().to(device, non_blocking=True)
-    return tensor.to(device)
-
-
-def _process_tensors_cpu(batch):
-    """Build and validate the batch tensors on the CPU (no GPU synchronisation)."""
+def _process_tensors(batch, device):
     states, actions, returns, timesteps = batch
 
-    states = torch.cat(states, dim=0).unsqueeze(0).float()
-    actions = torch.as_tensor(actions, dtype=torch.float32).reshape(1, -1)
+    states = torch.cat(states, dim=0).unsqueeze(0).float().to(device)
+    actions = torch.as_tensor(actions, dtype=torch.float32, device=device).reshape(1, -1)
     labels = actions.long()
     if torch.any(actions != labels) or torch.any(labels < 0) or torch.any(labels >= ACTION_LEVELS):
         raise ValueError(
             f"Action labels must be integer indices in [0, {ACTION_LEVELS - 1}]"
         )
     actions = ((actions + 1) / ACTION_LEVELS).unsqueeze(2)
-    returns = torch.as_tensor(returns, dtype=torch.float32).reshape(1, -1, 1)
-    timesteps = torch.as_tensor(timesteps, dtype=torch.int32).unsqueeze(0)
+    returns = torch.as_tensor(returns, dtype=torch.float32, device=device).reshape(1, -1, 1)
+    timesteps = torch.as_tensor(timesteps, dtype=torch.int32, device=device).unsqueeze(0)
 
     return states, actions, returns, timesteps, labels
-
-
-def _process_tensors(batch, device):
-    return tuple(_to_device(tensor, device) for tensor in _process_tensors_cpu(batch))
 
 
 def process_batch(batch, device='cpu'):
@@ -58,8 +40,7 @@ def process_bbr_batch(batch, device='cpu'):
         )
 
     states, actions, returns, timesteps, collated_phases = batch
-    cpu_tensors = _process_tensors_cpu((states, actions, returns, timesteps))
-    tensors = tuple(_to_device(tensor, device) for tensor in cpu_tensors)
+    tensors = _process_tensors((states, actions, returns, timesteps), device)
     phases = []
     for item in collated_phases:
         if isinstance(item, str):
@@ -69,7 +50,7 @@ def process_bbr_batch(batch, device='cpu'):
         else:
             raise ValueError("Unsupported collated BBR phase value: {!r}".format(item))
 
-    labels = cpu_tensors[-1].reshape(-1).tolist()  # CPU copy: no GPU synchronisation
+    labels = tensors[-1].reshape(-1).tolist()
     if len(phases) != len(labels):
         raise ValueError(
             "BBR phase count {} does not match action count {}".format(

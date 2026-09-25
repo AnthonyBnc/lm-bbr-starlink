@@ -162,18 +162,16 @@ class OfflineRLPolicy(nn.Module):
         # Step 3: stack returns, states, actions embeddings.
         # this makes the sequence look like (R_1, s_1-1, s_1-2, ..., s_1-n, a_1, R_2, s_2-1, ..., s_2-m, a_2, ...)
         # which works nice in an autoregressive sense since states predict actions
-        # One stack + reshape builds exactly the same (1, seq_len * 11, embed)
-        # tensor as concatenating the 11 blocks timestep by timestep (batch is 1),
-        # with 2 kernels instead of ~240.
-        seq_len = returns_embeddings.shape[1]
-        block = 2 + 9
-        stacked_inputs = torch.stack(
-            (returns_embeddings, states_embeddings1, states_embeddings2,
-             states_embeddings3, states_embeddings4, states_embeddings5,
-             states_embeddings6, states_embeddings7, states_embeddings8,
-             states_embeddings9, action_embeddings),
-            dim=2,
-        ).reshape(1, seq_len * block, -1)
+        stacked_inputs = []
+        action_embed_positions = []  # record the positions of action embeddings
+        for i in range(returns_embeddings.shape[1]):
+            stacked_input = torch.cat((returns_embeddings[0, i:i + 1], states_embeddings1[0, i:i + 1], states_embeddings2[0, i:i + 1], 
+                                       states_embeddings3[0, i:i + 1], states_embeddings4[0, i:i + 1], states_embeddings5[0, i:i + 1], 
+                                       states_embeddings6[0, i:i + 1], states_embeddings7[0, i:i + 1], states_embeddings8[0, i:i + 1],
+                                       states_embeddings9[0, i:i + 1], action_embeddings[0, i:i + 1]), dim=0)
+            stacked_inputs.append(stacked_input)
+            action_embed_positions.append((i + 1) * (2 + 9))
+        stacked_inputs = torch.cat(stacked_inputs, dim=0).unsqueeze(0)
         max_context = getattr(self.plm.config, 'max_position_embeddings', None)
         if max_context is not None and stacked_inputs.shape[1] > max_context:
             raise ValueError(
@@ -220,11 +218,10 @@ class OfflineRLPolicy(nn.Module):
         # Step 5: predict actions
         # we need to locate the logits corresponding to the state embeddings
         # simply using `action_embed_positions[i] - 2` will do.
-        # Positions (i + 1) * 11 - 2 = 9, 20, 31, ...: a strided slice selects the
-        # same hidden states as the old index tensor without a host-to-device copy.
-        logits_used = logits[:, block - 2::block].contiguous()
-        if logits_used.shape[1] != seq_len:
-            raise RuntimeError("Unexpected backbone output length for action positions")
+        action_embed_positions = torch.as_tensor(
+            action_embed_positions, dtype=torch.long, device=logits.device
+        )
+        logits_used = logits[:, action_embed_positions - 2]
         logits_used = logits_used.to(dtype=self._action_head_input_dtype())
         action_pred = self.action_head(logits_used)
 

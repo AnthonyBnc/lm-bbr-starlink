@@ -100,26 +100,6 @@ def mask_action_values(values, phase, invalid_value=float("-inf")):
     return tuple(value if is_valid else invalid_value for value, is_valid in zip(values, mask))
 
 
-_INVALID_ACTION_MASK_CACHE = {}
-
-
-def _invalid_action_mask(phase, device):
-    """Cached boolean tensor marking the infeasible actions of ``phase``.
-
-    Building the mask with ``torch.tensor(..., device=cuda)`` on every call is a
-    host-to-device copy that stalls the CPU until the GPU queue is empty; the
-    mask only depends on (phase, device), so it is created once and reused.
-    """
-    key = (phase, str(device))
-    mask = _INVALID_ACTION_MASK_CACHE.get(key)
-    if mask is None:
-        import torch
-
-        mask = ~torch.tensor(phase_action_mask(phase), dtype=torch.bool, device=device)
-        _INVALID_ACTION_MASK_CACHE[key] = mask
-    return mask
-
-
 def mask_action_logits(logits, phase, invalid_value=float("-inf")):
     """Return PyTorch logits with invalid actions masked on the final axis.
 
@@ -141,7 +121,8 @@ def mask_action_logits(logits, phase, invalid_value=float("-inf")):
             )
         )
 
-    return logits.masked_fill(_invalid_action_mask(phase, logits.device), invalid_value)
+    mask = torch.tensor(phase_action_mask(phase), dtype=torch.bool, device=logits.device)
+    return logits.masked_fill(~mask, invalid_value)
 
 
 def mask_sequence_logits(logits, phases, invalid_value=float("-inf")):
@@ -165,9 +146,10 @@ def mask_sequence_logits(logits, phases, invalid_value=float("-inf")):
                 len(phases), logits.shape[1]
             )
         )
-    # One masked_fill over the whole sequence; values are identical to masking
-    # each position separately and stacking the results.
-    invalid = torch.stack(
-        [_invalid_action_mask(phase, logits.device) for phase in phases], dim=0
+    return torch.stack(
+        [
+            mask_action_logits(logits[:, position, :], phase, invalid_value)
+            for position, phase in enumerate(phases)
+        ],
+        dim=1,
     )
-    return logits.masked_fill(invalid.unsqueeze(0), invalid_value)

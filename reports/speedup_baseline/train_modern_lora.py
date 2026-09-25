@@ -272,11 +272,6 @@ def run_epoch(
     head_diagnostic_values = {}
     if training:
         optimizer.zero_grad(set_to_none=True)
-    # Non-finite losses are accumulated on the device and checked before every
-    # optimizer step and at the end of the epoch, instead of after every window
-    # (a per-window check stalls the CPU until the GPU has finished).
-    nonfinite_loss = None
-    nonfinite_since_step = None
 
     for step, batch in enumerate(loader):
         if max_steps and step >= max_steps:
@@ -289,23 +284,13 @@ def run_epoch(
             if logits.shape[-1] != ACTION_LEVELS:
                 raise RuntimeError("Policy did not produce 11 action logits")
             _, loss = metrics.update(logits, labels, phases, loss_weighting=loss_weighting)
-            step_nonfinite = ~torch.isfinite(loss.detach())
-            if nonfinite_loss is None:
-                nonfinite_loss, nonfinite_since_step = step_nonfinite, step
-            else:
-                nonfinite_loss = nonfinite_loss | step_nonfinite
+            if not torch.isfinite(loss):
+                raise RuntimeError("Non-finite loss at step {}".format(step))
             if training:
                 (loss / grad_accum_steps).backward()
                 should_step = (step + 1) % grad_accum_steps == 0
                 is_last = step + 1 == len(loader) or (max_steps and step + 1 == max_steps)
                 if should_step or is_last:
-                    if bool(nonfinite_loss):
-                        raise RuntimeError(
-                            "Non-finite loss between steps {} and {}".format(
-                                nonfinite_since_step, step
-                            )
-                        )
-                    nonfinite_loss = None
                     if trainability_diagnostics:
                         for name, parameter in model.action_head.named_parameters():
                             if parameter.grad is None:
@@ -328,12 +313,6 @@ def run_epoch(
         if training and (step == 0 or (step + 1) % 25 == 0):
             print("train step {} loss {:.6f}".format(step + 1, float(loss.detach().cpu())))
 
-    if nonfinite_loss is not None and bool(nonfinite_loss):
-        raise RuntimeError(
-            "Non-finite loss between steps {} and the end of the epoch".format(
-                nonfinite_since_step
-            )
-        )
     result = metrics.compute()
     result["batches"] = min(len(loader), max_steps) if max_steps else len(loader)
     result["optimizer_steps"] = optimizer_steps

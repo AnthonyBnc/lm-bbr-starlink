@@ -58,9 +58,6 @@ class BBRMetricAccumulator:
         self.phase_prediction_distribution = {
             phase: Counter() for phase in BBR_PHASES
         }
-        # Per-step results kept on the device and copied to the CPU in one go by
-        # compute(); reading them every step would stall the CPU on the GPU.
-        self._pending = []
 
     def update(self, logits, labels, phases, loss_weighting=LOSS_WEIGHTING_NONE):
         masked_logits, loss = masked_cross_entropy(
@@ -71,45 +68,25 @@ class BBRMetricAccumulator:
         loss_sum = F.cross_entropy(flat_logits, flat_labels, reduction="sum")
         predictions = flat_logits.argmax(dim=-1)
         repeated_phases = tuple(phases) * logits.shape[0]
-        self._pending.append(
-            (
-                repeated_phases,
-                flat_labels.detach(),
-                predictions.detach(),
-                loss_sum.detach(),
-                flat_labels.numel(),
-            )
-        )
+        for phase, label, prediction in zip(
+            repeated_phases,
+            flat_labels.detach().cpu().tolist(),
+            predictions.detach().cpu().tolist(),
+        ):
+            validate_phase_action(phase, label)
+            validate_phase_action(phase, prediction)
+            self.samples += 1
+            self.loss_sum += float(loss_sum.detach().cpu()) / flat_labels.numel()
+            self.correct += int(label == prediction)
+            self.phase_samples[phase] += 1
+            self.phase_correct[phase] += int(label == prediction)
+            self.label_distribution[label] += 1
+            self.prediction_distribution[prediction] += 1
+            self.phase_label_distribution[phase][label] += 1
+            self.phase_prediction_distribution[phase][prediction] += 1
         return masked_logits, loss
 
-    def _flush(self):
-        """Fold the pending per-step results in; same arithmetic as before."""
-        if not self._pending:
-            return
-        pending, self._pending = self._pending, []
-        all_labels = torch.cat([item[1] for item in pending]).cpu().tolist()
-        all_predictions = torch.cat([item[2] for item in pending]).cpu().tolist()
-        loss_values = torch.stack([item[3] for item in pending]).cpu().tolist()
-        offset = 0
-        for (repeated_phases, _, _, _, count), loss_value in zip(pending, loss_values):
-            labels = all_labels[offset:offset + count]
-            predictions = all_predictions[offset:offset + count]
-            offset += count
-            for phase, label, prediction in zip(repeated_phases, labels, predictions):
-                validate_phase_action(phase, label)
-                validate_phase_action(phase, prediction)
-                self.samples += 1
-                self.loss_sum += loss_value / count
-                self.correct += int(label == prediction)
-                self.phase_samples[phase] += 1
-                self.phase_correct[phase] += int(label == prediction)
-                self.label_distribution[label] += 1
-                self.prediction_distribution[prediction] += 1
-                self.phase_label_distribution[phase][label] += 1
-                self.phase_prediction_distribution[phase][prediction] += 1
-
     def compute(self):
-        self._flush()
         if not self.samples:
             raise ValueError("Cannot compute BBR metrics without samples")
         per_phase_accuracy = {
