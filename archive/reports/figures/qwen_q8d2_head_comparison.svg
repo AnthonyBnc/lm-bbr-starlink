@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540">
+  <rect width="900" height="540" fill="#ffffff"/>
+
+  <line x1="92" y1="448" x2="862" y2="448" stroke="#111827" stroke-width="1.5"/>
+  <line x1="92" y1="62" x2="92" y2="448" stroke="#111827" stroke-width="1.5"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#374151">
+    <line x1="92" y1="448" x2="862" y2="448" stroke="#d1d5db"/>
+    <text x="78" y="453" text-anchor="end">0</text>
+
+    <line x1="92" y1="337.7" x2="862" y2="337.7" stroke="#e5e7eb"/>
+    <text x="78" y="342.7" text-anchor="end">10</text>
+
+    <line x1="92" y1="227.4" x2="862" y2="227.4" stroke="#e5e7eb"/>
+    <text x="78" y="232.4" text-anchor="end">20</text>
+
+    <line x1="92" y1="117.1" x2="862" y2="117.1" stroke="#e5e7eb"/>
+    <text x="78" y="122.1" text-anchor="end">30</text>
+  </g>
+
+  <text x="25" y="255" transform="rotate(-90 25 255)"
+        font-family="Arial, Helvetica, sans-serif" font-size="16"
+        font-weight="700" text-anchor="middle" fill="#111827">
+    BW_UP accuracy (%)
+  </text>
+
+  <rect x="160" y="130.4" width="120" height="317.6" rx="4" fill="#2563eb"/>
+  <rect x="390" y="143.7" width="120" height="304.3" rx="4" fill="#7c3aed"/>
+  <rect x="620" y="211.4" width="120" height="236.6" rx="4" fill="#d97706"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15"
+     font-weight="700" text-anchor="middle" fill="#111827">
+    <text x="220" y="118">28.80%</text>
+    <text x="450" y="131.3">27.59%</text>
+    <text x="680" y="199">21.45%</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14"
+     text-anchor="middle" fill="#111827">
+    <text x="220" y="478">Direct</text>
+    <text x="220" y="497">classical</text>
+
+    <text x="450" y="478">Classical</text>
+    <text x="450" y="497">twin</text>
+
+    <text x="680" y="478">Quantum</text>
+    <text x="680" y="497">q8/d2</text>
+  </g>
+</svg>

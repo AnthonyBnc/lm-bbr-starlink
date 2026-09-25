@@ -50,3 +50,15 @@ correct the measured saturation condition, but saturation was not the sole
 cause of UP collapse. The pi/2 variant is not advanced. Quantum LN/T4/pi and
 its classical-twin LN/T4 control may proceed only to a 200-step development
 gate before any full training decision.
+
+The 200-step gate subsequently completed. Quantum LN/T4/pi maintained 0%
+measured validation saturation and finite circuit gradients, but predicted
+action 10 for all 208 validation UP positions. Its 40.865% UP accuracy exactly
+matched the `85/208` action-10 label frequency. Classical-twin LN/T4 predicted
+action 6 for every UP position and reached `35/208`, or 16.827%. The twin's
+validation saturation also rose to 50.269% as projection weights grew.
+
+The full-training gate is therefore rejected. Neither normalized head showed
+UP-class discrimination after 200 steps. The next approved diagnostic is
+checkpoint-based representation separability analysis; no additional epochs,
+depth, sampling, or Tokyo evaluation should be used to bypass this gate.

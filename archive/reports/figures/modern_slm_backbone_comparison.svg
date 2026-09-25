@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="540" viewBox="0 0 980 540">
+  <rect width="980" height="540" fill="#ffffff"/>
+
+  <!-- Plot area: y-axis spans 0 to 45% so the differences remain visible
+       without truncating the bars above zero. -->
+  <line x1="92" y1="448" x2="942" y2="448" stroke="#111827" stroke-width="1.5"/>
+  <line x1="92" y1="62" x2="92" y2="448" stroke="#111827" stroke-width="1.5"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#374151">
+    <line x1="92" y1="448" x2="942" y2="448" stroke="#d1d5db"/>
+    <text x="78" y="453" text-anchor="end">0</text>
+
+    <line x1="92" y1="362.2" x2="942" y2="362.2" stroke="#e5e7eb"/>
+    <text x="78" y="367.2" text-anchor="end">10</text>
+
+    <line x1="92" y1="276.4" x2="942" y2="276.4" stroke="#e5e7eb"/>
+    <text x="78" y="281.4" text-anchor="end">20</text>
+
+    <line x1="92" y1="190.7" x2="942" y2="190.7" stroke="#e5e7eb"/>
+    <text x="78" y="195.7" text-anchor="end">30</text>
+
+    <line x1="92" y1="104.9" x2="942" y2="104.9" stroke="#e5e7eb"/>
+    <text x="78" y="109.9" text-anchor="end">40</text>
+  </g>
+
+  <text x="25" y="255" transform="rotate(-90 25 255)"
+        font-family="Arial, Helvetica, sans-serif" font-size="16"
+        font-weight="700" text-anchor="middle" fill="#111827">
+    BW_UP accuracy (%)
+  </text>
+
+  <!-- Qwen is highlighted because it is carried forward as the exploratory
+       GPT-family parent; all other bars use the same neutral comparison colour. -->
+  <rect x="150" y="118.3" width="104" height="329.7" rx="4" fill="#1d4ed8"/>
+  <rect x="362" y="131.7" width="104" height="316.3" rx="4" fill="#64748b"/>
+  <rect x="574" y="155.5" width="104" height="292.5" rx="4" fill="#64748b"/>
+  <rect x="786" y="185.5" width="104" height="262.5" rx="4" fill="#64748b"/>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="15"
+     font-weight="700" text-anchor="middle" fill="#111827">
+    <text x="202" y="106">38.43%</text>
+    <text x="414" y="119.4">36.87%</text>
+    <text x="626" y="143.2">34.10%</text>
+    <text x="838" y="173.2">30.60%</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14"
+     text-anchor="middle" fill="#111827">
+    <text x="202" y="478">Qwen3.5</text>
+    <text x="202" y="497">4B Base</text>
+
+    <text x="414" y="478">LFM2.5</text>
+    <text x="414" y="497">2.6B</text>
+
+    <text x="626" y="478">Gemma 3</text>
+    <text x="626" y="497">4B PT</text>
+
+    <text x="838" y="478">Llama 3.2</text>
+    <text x="838" y="497">3B</text>
+  </g>
+</svg>

@@ -1,5 +1,19 @@
 # Next Steps
 
+> Current routing (2026-09-03): use `CONTEXT.md` for authoritative status and
+> `LARGE_MODEL_TRAINING.md` for all large-backbone/Quantum-GPT operations. This
+> file preserves the completed Qwen head-diagnostic trail. The Tokyo pool has
+> now been generated, but no Tokyo information may be used to choose the
+> Quantum-GPT parent, head, hyperparameters, or retry policy.
+
+The immediate sequence is: run the frozen four-model Tokyo inference; report it
+separately from the paper's published-reference rows; complete the non-Tokyo
+representation-separability analysis; freeze the Qwen3.5-4B-Base
+`gpt_classical`/`gpt_classical_twin`/`gpt_quantum` protocol; then train on the
+five development locations. The historical “Tokyo remains unused” statements
+below describe the state when each diagnostic was run, not the current pool
+creation status.
+
 The previous 1,500-window quantum-only plan is superseded by tutor feedback.
 Do not run `run_quantum_up_focus.py` for the next comparison.
 
@@ -168,3 +182,44 @@ classical-twin LN/T4 control. Do not launch a full 2,400-step run yet. First
 confirm whether 200 steps produce UP prediction diversity while saturation
 remains low. If collapse remains, diagnose UP-class separability at the head
 input/bottleneck instead of adding more epochs or circuit depth.
+
+Run both gate configurations sequentially with one command:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -u run_trainability_gate200.py \
+  --execute 2>&1 | tee data/processed/lora_training/trainability_gate200_ln_t4_terminal.log
+```
+
+If interrupted, add `--resume-completed` to skip a fully audited first run.
+
+### Gate200 outcome
+
+Both 200-step runs completed with checkpoint reload and Tokyo isolation PASS on
+the same 200 validation windows. The slice contained 208 UP positions.
+
+| Head | Validation UP | UP predictions | Interpretation |
+|---|---:|---|---|
+| Classical twin LN/T4 | 16.83% | all 208 action 6 | action-6 collapse |
+| Quantum LN/T4/pi | 40.87% | all 208 action 10 | action-10 majority collapse |
+
+Quantum's 40.87% is exactly `85 / 208`, the frequency of action-10 labels in
+this validation slice. It therefore does not demonstrate discrimination among
+UP actions. Classical-twin similarly matches the frequency of action 6 by
+predicting it everywhere. Quantum validation saturation remained 0% and its
+mean circuit-gradient norm was finite at 0.03109, confirming that removing
+saturation and training longer are not sufficient. Classical-twin validation
+saturation rose to approximately 50.27%, showing that fixed temperature can be
+partly overcome by growing projection weights during optimization.
+
+Do not launch full training. The next implementation task is UP-class
+separability analysis on the unchanged development validation data. Measure
+class centroids and simple probe/nearest-centroid performance at:
+
+1. Qwen action-position hidden states before the head;
+2. projected eight-dimensional features before `tanh`;
+3. bounded classical bottleneck or quantum expectation values;
+4. final UP logits.
+
+This analysis should locate where action information disappears. It must use
+the saved gate200 checkpoints, preserve masks and sample IDs, and keep Tokyo
+unused.

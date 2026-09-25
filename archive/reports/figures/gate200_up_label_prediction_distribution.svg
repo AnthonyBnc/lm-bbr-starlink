@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Gate200 UP label and prediction distribution">
+<rect width="1200" height="560" fill="#FFFFFF"/>
+<rect x="75" y="60" width="500" height="390" fill="none" stroke="#767676"/>
+<line x1="75" y1="450.0" x2="575" y2="450.0" stroke="#E2E3E5"/>
+<text x="65" y="454.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">0</text>
+<line x1="75" y1="361.3636363636364" x2="575" y2="361.3636363636364" stroke="#E2E3E5"/>
+<text x="65" y="365.3636363636364" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">50</text>
+<line x1="75" y1="272.72727272727275" x2="575" y2="272.72727272727275" stroke="#E2E3E5"/>
+<text x="65" y="276.72727272727275" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">100</text>
+<line x1="75" y1="184.09090909090907" x2="575" y2="184.09090909090907" stroke="#E2E3E5"/>
+<text x="65" y="188.09090909090907" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">150</text>
+<line x1="75" y1="95.45454545454544" x2="575" y2="95.45454545454544" stroke="#E2E3E5"/>
+<text x="65" y="99.45454545454544" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">200</text>
+<text x="325" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#252525">Classical twin LN/T4</text>
+<rect x="98.0" y="387.95454545454544" width="24" height="62.04545454545455" fill="#177E89"/>
+<text x="110.0" y="380.95454545454544" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">35</text>
+<rect x="128.0" y="81.27272727272725" width="24" height="368.72727272727275" fill="#E17C05"/>
+<text x="140.0" y="74.27272727272725" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">208</text>
+<text x="125.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="125.0" dy="0">A6</tspan><tspan x="125.0" dy="13">1.05</tspan></text>
+<rect x="198.0" y="366.6818181818182" width="24" height="83.31818181818181" fill="#177E89"/>
+<text x="210.0" y="359.6818181818182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">47</text>
+<rect x="228.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="225.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="225.0" dy="0">A7</tspan><tspan x="225.0" dy="13">1.10</tspan></text>
+<rect x="298.0" y="405.6818181818182" width="24" height="44.31818181818182" fill="#177E89"/>
+<text x="310.0" y="398.6818181818182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">25</text>
+<rect x="328.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="325.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="325.0" dy="0">A8</tspan><tspan x="325.0" dy="13">1.15</tspan></text>
+<rect x="398.0" y="421.6363636363636" width="24" height="28.363636363636363" fill="#177E89"/>
+<text x="410.0" y="414.6363636363636" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">16</text>
+<rect x="428.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="425.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="425.0" dy="0">A9</tspan><tspan x="425.0" dy="13">1.20</tspan></text>
+<rect x="498.0" y="299.3181818181818" width="24" height="150.6818181818182" fill="#177E89"/>
+<text x="510.0" y="292.3181818181818" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">85</text>
+<rect x="528.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="525.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="525.0" dy="0">A10</tspan><tspan x="525.0" dy="13">1.25</tspan></text>
+<rect x="650" y="60" width="500" height="390" fill="none" stroke="#767676"/>
+<line x1="650" y1="450.0" x2="1150" y2="450.0" stroke="#E2E3E5"/>
+<text x="640" y="454.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">0</text>
+<line x1="650" y1="361.3636363636364" x2="1150" y2="361.3636363636364" stroke="#E2E3E5"/>
+<text x="640" y="365.3636363636364" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">50</text>
+<line x1="650" y1="272.72727272727275" x2="1150" y2="272.72727272727275" stroke="#E2E3E5"/>
+<text x="640" y="276.72727272727275" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">100</text>
+<line x1="650" y1="184.09090909090907" x2="1150" y2="184.09090909090907" stroke="#E2E3E5"/>
+<text x="640" y="188.09090909090907" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">150</text>
+<line x1="650" y1="95.45454545454544" x2="1150" y2="95.45454545454544" stroke="#E2E3E5"/>
+<text x="640" y="99.45454545454544" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">200</text>
+<text x="900" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#252525">Quantum LN/T4/pi</text>
+<rect x="673.0" y="387.95454545454544" width="24" height="62.04545454545455" fill="#177E89"/>
+<text x="685.0" y="380.95454545454544" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">35</text>
+<rect x="703.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="700.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="700.0" dy="0">A6</tspan><tspan x="700.0" dy="13">1.05</tspan></text>
+<rect x="773.0" y="366.6818181818182" width="24" height="83.31818181818181" fill="#177E89"/>
+<text x="785.0" y="359.6818181818182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">47</text>
+<rect x="803.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="800.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="800.0" dy="0">A7</tspan><tspan x="800.0" dy="13">1.10</tspan></text>
+<rect x="873.0" y="405.6818181818182" width="24" height="44.31818181818182" fill="#177E89"/>
+<text x="885.0" y="398.6818181818182" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">25</text>
+<rect x="903.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="900.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="900.0" dy="0">A8</tspan><tspan x="900.0" dy="13">1.15</tspan></text>
+<rect x="973.0" y="421.6363636363636" width="24" height="28.363636363636363" fill="#177E89"/>
+<text x="985.0" y="414.6363636363636" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">16</text>
+<rect x="1003.0" y="450.0" width="24" height="0.0" fill="#E17C05"/>
+<text x="1000.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="1000.0" dy="0">A9</tspan><tspan x="1000.0" dy="13">1.20</tspan></text>
+<rect x="1073.0" y="299.3181818181818" width="24" height="150.6818181818182" fill="#177E89"/>
+<text x="1085.0" y="292.3181818181818" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">85</text>
+<rect x="1103.0" y="81.27272727272725" width="24" height="368.72727272727275" fill="#E17C05"/>
+<text x="1115.0" y="74.27272727272725" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525">208</text>
+<text x="1100.0" y="475" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#252525"><tspan x="1100.0" dy="0">A10</tspan><tspan x="1100.0" dy="13">1.25</tspan></text>
+<rect x="450" y="510" width="14" height="14" fill="#177E89"/>
+<text x="470" y="522" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">True labels</text>
+<rect x="555" y="510" width="14" height="14" fill="#E17C05"/>
+<text x="575" y="522" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">Predictions</text>
+<text x="15" y="550" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="normal" fill="#767676">Development-only: seed 100003, first 200 validation windows, Tokyo unused.</text>
+</svg>

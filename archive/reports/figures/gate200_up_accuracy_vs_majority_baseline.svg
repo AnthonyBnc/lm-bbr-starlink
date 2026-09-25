@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="Gate200 UP accuracy versus majority baseline">
+<rect width="900" height="560" fill="#FFFFFF"/>
+<text x="450" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold" fill="#252525">Apparent quantum UP gain equals the majority-class baseline</text>
+<rect x="100" y="90" width="700" height="350" fill="none" stroke="#767676"/>
+<line x1="100" y1="440.0" x2="800" y2="440.0" stroke="#E2E3E5"/>
+<text x="90" y="444.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">0</text>
+<line x1="100" y1="381.6666666666667" x2="800" y2="381.6666666666667" stroke="#E2E3E5"/>
+<text x="90" y="385.6666666666667" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">10</text>
+<line x1="100" y1="323.3333333333333" x2="800" y2="323.3333333333333" stroke="#E2E3E5"/>
+<text x="90" y="327.3333333333333" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">20</text>
+<line x1="100" y1="265.0" x2="800" y2="265.0" stroke="#E2E3E5"/>
+<text x="90" y="269.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">30</text>
+<line x1="100" y1="206.66666666666666" x2="800" y2="206.66666666666666" stroke="#E2E3E5"/>
+<text x="90" y="210.66666666666666" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">40</text>
+<line x1="100" y1="148.33333333333331" x2="800" y2="148.33333333333331" stroke="#E2E3E5"/>
+<text x="90" y="152.33333333333331" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">50</text>
+<line x1="100" y1="90.0" x2="800" y2="90.0" stroke="#E2E3E5"/>
+<text x="90" y="94.0" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="normal" fill="#767676">60</text>
+<rect x="251.0" y="341.84294871794873" width="50" height="98.15705128205128" fill="#177E89"/>
+<text x="276.0" y="333.84294871794873" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525">16.83%</text>
+<rect x="319.0" y="201.61858974358975" width="50" height="238.38141025641025" fill="#C44536"/>
+<text x="344.0" y="193.61858974358975" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525">40.87%</text>
+<text x="310.0" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525"><tspan x="310.0" dy="0">Classical twin</tspan><tspan x="310.0" dy="14">LN/T4</tspan></text>
+<text x="310.0" y="515" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">UP actions predicted: 1/5</text>
+<rect x="531.0" y="201.61858974358975" width="50" height="238.38141025641025" fill="#177E89"/>
+<text x="556.0" y="193.61858974358975" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525">40.87%</text>
+<rect x="599.0" y="201.61858974358975" width="50" height="238.38141025641025" fill="#C44536"/>
+<text x="624.0" y="193.61858974358975" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525">40.87%</text>
+<text x="590.0" y="470" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#252525"><tspan x="590.0" dy="0">Quantum</tspan><tspan x="590.0" dy="14">LN/T4/pi</tspan></text>
+<text x="590.0" y="515" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">UP actions predicted: 1/5</text>
+<rect x="280" y="535" width="14" height="14" fill="#177E89"/>
+<text x="300" y="547" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">Observed UP accuracy</text>
+<rect x="480" y="535" width="14" height="14" fill="#C44536"/>
+<text x="500" y="547" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#252525">Majority baseline</text>
+</svg>
