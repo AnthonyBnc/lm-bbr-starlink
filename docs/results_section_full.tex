@@ -1,0 +1,115 @@
+% =====================================================================
+% Section IV. RESULTS  --  full replacement, epoch-100 consistent
+% Drop this in place of the current Section IV (Evaluation Scope through
+% the end of the Primary Comparison subsection). Numbers verified against
+% data/processed/evaluation/four_model_100epoch_v1/results/*/result.manifest.json
+% (tokyo_pool_sha256 = 800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b,
+% identical across all five models) and
+% data/processed/lora_training/four_model_100epoch_v1/{lfm2_5_350m_classical,lfm2_5_350m_quantum}/metrics.json.
+% =====================================================================
+
+\section{Results}
+
+\subsection{Evaluation Scope}
+
+Two groups of results follow, matching the split established in Section~III-F. The first is the four-candidate under-400M backbone modernization survey (Table~\ref{tab:backbone-survey}), reported alongside the source paper's own published GPT-2/T5/GPT-Neo/SmolLM2 numbers as contextual reference only; no same-sample statistical test is made across the two groups, since the legacy four were not retrained under our protocol, on different hardware (2$\times$ NVIDIA RTX~6000 in the source paper versus a single NVIDIA RTX~4090 in this repository), and under a different epoch budget (150 versus 100). The second is the primary comparison (Section~IV-B), which isolates the task head on a single frozen backbone, \texttt{LFM2.5-350M}, comparing \texttt{gpt\_classical} against \texttt{gpt\_quantum} under otherwise identical conditions; this is the paper's central, controlled claim.
+
+Every model in both groups --- the four backbone-survey candidates and both task-head variants --- is evaluated from its own independently frozen, checkpoint-reload-verified epoch-100 checkpoint, trained under the identical protocol described in Section~III (LoRA rank~128, $\alpha=32$, dropout~0.05, AdamW, learning rate $10^{-4}$, gradient clipping at~0.25, batch size~1 with gradient accumulation over 32 sequences, sequence length~20, sample step~20, seed~100003). All values below use this seed, one run per model, with Tokyo read only after every model was frozen, on the shared 12{,}000-sample Tokyo pool (\texttt{tokyo\_pool\_sha256}~\texttt{800f1a44\ldots d012f27b}).
+
+\begin{table}[!t]
+\caption{Held-out Tokyo evaluation of the four under-400M backbone candidates, epoch-100 final checkpoint (contextual; played no role in backbone selection, Section~III-F).}
+\label{tab:backbone-survey}
+\centering
+\begin{tabular}{lrrrr}
+\hline
+Backbone & Accuracy & Macro & BW\_UP & Loss \\
+\hline
+Granite-4.0-350M   & \textbf{0.9607} & \textbf{0.8339} & \textbf{0.5016} & 0.4233 \\
+Gemma-3-270M       & 0.9602 & 0.8317 & 0.4952 & 0.4156 \\
+LFM2.5-350M        & 0.9593 & 0.8282 & 0.4847 & 0.5131 \\
+Pleias-RAG-350M    & 0.9588 & 0.8261 & 0.4784 & \textbf{0.3180} \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:backbone-survey} reports the same four candidates as Table~II, now on held-out Tokyo, each from its own frozen epoch-100 checkpoint. The development-split ranking does not carry over: Granite-4.0-350M and Gemma-3-270M both outperform the development-selected \texttt{LFM2.5-350M} on every metric in this table, and \texttt{LFM2.5-350M} records the highest (worst) loss of the four. This is a materially larger gap than a marginal reshuffle --- at the full 100-epoch training budget, the backbone chosen by development-only validation is Tokyo's weakest performer on three of four metrics. Section~III-F's selection procedure remains methodologically sound, since Tokyo was correctly withheld from that decision; the result is reported here as a limitation of development-only backbone selection under extended training, consistent with Section~VI, rather than smoothed over as a small ranking difference. All four candidates predict all seven of the labels observed in their respective feasible action sets on Tokyo (Section~V), a point of contrast with \texttt{gpt\_quantum} below.
+
+\subsection{Primary Comparison: Classical versus Quantum Action Head}
+
+\begin{table}[!t]
+\caption{Primary comparison: \texttt{gpt\_classical} versus \texttt{gpt\_quantum} on held-out Tokyo, same \texttt{LFM2.5-350M} backbone, both read from their own frozen epoch-100 checkpoint.}
+\label{tab:primary-comparison}
+\centering
+\begin{tabular}{lrrr}
+\hline
+Metric & \texttt{gpt\_classical} & \texttt{gpt\_quantum} & $\Delta$ \\
+\hline
+Accuracy            & \textbf{0.9593} & 0.9550 & $-0.0043$ \\
+Macro-phase acc.     & \textbf{0.8282} & 0.8099 & $-0.0183$ \\
+BW\_DOWN acc.        & 1.0000 & 1.0000 & 0 \\
+BW\_CRUISE acc.      & 1.0000 & 1.0000 & 0 \\
+BW\_UP acc.          & \textbf{0.4847} & 0.4298 & $-0.0549$ \\
+Loss                 & 0.5131 & \textbf{0.1228} & $+0.3903$ \\
+Latency (ms/action)  & \textbf{1.1735} & 5.7395 & $+4.5660$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:primary-comparison} reports the controlled comparison defined in Section~III-F: \texttt{gpt\_classical} and \texttt{gpt\_quantum}, both attached to the frozen \texttt{LFM2.5-350M} backbone under identical data, labels, phase masks, LoRA configuration, and seed, each evaluated once on Tokyo from its own epoch-100 checkpoint. \texttt{gpt\_classical} outperforms \texttt{gpt\_quantum} on every accuracy metric, with the largest gap on BW\_UP accuracy (5.49~points) --- the only phase with more than one feasible action, and consequently the most informative phase for genuine action discrimination (Section~IV-A of the Methodology). Both variants remain at 100\% on BW\_DOWN and BW\_CRUISE, consistent with the label degeneracy noted in Section~III-C. The classical head is also 4.89$\times$ faster per action (1.174~ms vs.\ 5.740~ms), reflecting the added cost of statevector simulation in the quantum forward pass (Algorithm~2).
+
+Loss does not follow the same ordering as accuracy, and this requires an explicit caveat: \texttt{gpt\_classical}'s Tokyo loss (0.5131) is higher than \texttt{gpt\_quantum}'s (0.1228), even though \texttt{gpt\_classical} is more accurate on every phase-level metric. Section~IV-C traces this to two independent effects: \texttt{gpt\_classical} has been trained well past its own peak-validation epoch and shows a standard overfitting signature (training loss falls to near zero while validation loss rises), and \texttt{gpt\_quantum}'s low loss reflects high-confidence, constant-label predictions on the two phases that dominate the sample count, rather than superior discrimination (Section~V-B). Cross-entropy loss is therefore not used as a head-quality ranking in this comparison; accuracy, macro-phase accuracy, and prediction diversity remain the primary evidence, as stated in Section~III-J.
+
+\begin{table}[!t]
+\caption{Mean surrogate throughput and retransmissions by Tokyo stream group, \texttt{gpt\_classical} vs.\ \texttt{gpt\_quantum}, both at their frozen epoch-100 checkpoint (3{,}000 positions per group).}
+\label{tab:surrogate-throughput}
+\centering
+\begin{tabular}{lrrr}
+\hline
+Stream group & Throughput (Mbps) & Retx.\ (classical) & Retx.\ (quantum) \\
+\hline
+Downlink, sequential   & 228.99 & 49.94 & 125.92 \\
+Downlink, competitive  & 9.41   & 3.29  & 4.98 \\
+Uplink, sequential     & 45.56  & 10.88 & 14.68 \\
+Uplink, competitive    & 10.75  & 1.83  & 2.48 \\
+\hline
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:surrogate-throughput} reports the Eq.-(22--27)-style surrogate throughput and retransmission values used for reward computation (Section~III-F), aggregated by Tokyo stream group. Surrogate throughput is identical between the two variants within each group, since it is computed from the same observed network state; retransmissions differ because they depend on each variant's own predicted pacing-gain sequence. Retransmissions are consistently higher for \texttt{gpt\_quantum} across all four stream groups, most sharply on downlink-sequential traffic, where the gap is 2.52$\times$ (125.92 vs.\ 49.94) --- more than double, and wider than it would appear from either model's 16-epoch checkpoint, because \texttt{gpt\_classical}'s longer training reduces its own retransmissions on this stream group while \texttt{gpt\_quantum}'s predictions are unchanged (Section~IV-C). Two of the four groups (uplink, sequential and uplink, competitive) show a small increase in \texttt{gpt\_classical}'s retransmissions relative to its own earlier, less-trained checkpoint (10.88 vs.\ 10.25; 1.83 vs.\ 1.60); this is noted rather than omitted, since it is a real, if minor, counter-trend within an otherwise consistent result. This is directionally consistent with Table~\ref{tab:primary-comparison}'s lower \texttt{gpt\_quantum} BW\_UP accuracy: a controller that more often selects the wrong pacing gain during bandwidth-probing is expected to induce more surrogate retransmissions, independent of any difference in surrogate throughput.
+
+Taken together, these results provide no evidence of a quantum advantage for this controller under the current eight-qubit, depth-1 configuration (Section~III-H): \texttt{gpt\_quantum} is less accurate on every metric, slower, and induces more surrogate retransmissions than \texttt{gpt\_classical} on the same frozen backbone and held-out Tokyo split, and the gap on the discriminative BW\_UP phase is larger, not smaller, once both heads are compared at matching training budgets.
+
+\subsection{Training Dynamics: Peak-versus-Final Epoch and the Loss Reversal}
+
+The checkpoint rule used throughout this study freezes the \emph{final} completed epoch, fixed before training and not revisited after seeing results. Table~\ref{tab:peak-vs-final} shows how far each backbone's epoch-100 development-split accuracy sits from its own best epoch during training.
+
+\begin{table}[!t]
+\caption{Development-split peak vs.\ final-epoch validation accuracy (checkpoint rule: final completed epoch, pre-registered).}
+\label{tab:peak-vs-final}
+\centering
+\begin{tabular}{lrrrr}
+\hline
+Model & Best epoch & Best val.\ acc. & Epoch-100 val.\ acc. & Regression \\
+\hline
+Gemma-3-270M      & 41 & 0.9583 & 0.9573 & $-0.09$~pt \\
+Granite-4.0-350M  & 11 & 0.9599 & 0.9557 & $-0.42$~pt \\
+LFM2.5-350M       & 15 & 0.9615 & 0.9578 & $-0.37$~pt \\
+Pleias-RAG-350M   & 13 & 0.9585 & 0.9567 & $-0.18$~pt \\
+\texttt{gpt\_quantum} & 1 & 0.9452 & 0.9452 & $0.00$~pt \\
+\hline
+\end{tabular}
+\end{table}
+
+For \texttt{gpt\_classical} (\texttt{LFM2.5-350M}) specifically, the accuracy regression above understates what is happening underneath it. Its own training manifest shows training loss falling from 0.127 (epoch~1) to 0.0031 (epoch~100), with training accuracy reaching 99.88\%, while development-split \emph{validation} loss rises from 0.119 (epoch~1) to 0.460 (epoch~100) --- a standard overfitting curve, past its epoch-15 accuracy peak, that a checkpoint frozen on accuracy alone does not surface. This is the mechanism behind Table~\ref{tab:primary-comparison}'s elevated \texttt{gpt\_classical} Tokyo loss (0.5131): the model remains highly accurate but less well calibrated at epoch~100 than at its own peak.
+
+\texttt{gpt\_quantum} shows the opposite pattern for an unrelated reason. Its Tokyo predictions --- and its development-split validation accuracy (0.945167) and BW\_UP accuracy (0.207229) --- are identical to six decimal places from epoch~1 through epoch~100 (Section~V-B); only its training loss continues to fall (0.183~$\to$~0.113) as it sharpens confidence on predictions that never change. Its validation loss falls in step (0.184~$\to$~0.111) for the same reason. Consequently, \texttt{gpt\_quantum}'s epoch-100 checkpoint should not be read as the product of 100~epochs of effective learning: the head converged to a constant per-phase predictor within the first epoch, and the remaining 99~epochs of training loss reduction reflect increasing confidence on that fixed output, not new discrimination. This is stated here as a scope note on Table~\ref{tab:primary-comparison} rather than as a limitation of the epoch-100 protocol itself, since the checkpoint is still a faithful, checkpoint-reload-verified snapshot of the pre-registered final epoch.
+
+Two provenance details support treating this checkpoint as reliable despite the backend change during training. \texttt{gpt\_quantum}'s epochs~1--11 were produced on Qiskit's \texttt{StatevectorEstimator} with parameter-shift gradients; epochs~12--100 continued on an exact torch statevector implementation of the identical circuit, differentiated by autograd. Both are exact, shot-free simulations of the same circuit and agree to $1\times10^{-5}$ in unit tests across ansatzes, depths, and the single-qubit no-entanglement case; the training-loss curve is continuous across the switch (step size 0.0022, against a median step of 0.0011 and a maximum of 0.0041 over epochs~5--30). The Tokyo evaluation independently rebuilt the head on the Qiskit path and loaded the torch-trained weights, so Table~\ref{tab:primary-comparison}'s \texttt{gpt\_quantum} row is itself a cross-backend consistency check, not merely a single-path result.
+
+% Figure placement note: the epoch-100 training curves referenced above and
+% the trainable-parameter/VRAM comparison are already generated in the repo
+% and should replace any "Figs. ??--??" placeholders:
+%   reports/figures/100epoch/100epoch_mean_loss_combined.pdf
+%   reports/figures/100epoch/100epoch_mean_accuracy_combined.pdf
+%   reports/figures/100epoch/100epoch_vram_combined.pdf
+%   reports/figures/100epoch/100epoch_trainable_parameters_combined.pdf
