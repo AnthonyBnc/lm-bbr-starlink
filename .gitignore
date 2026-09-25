@@ -24,3 +24,7 @@ checkpoints/
 *.ckpt
 data/processed/
 data/exp_pools/*.pkl
+
+# Large local artifacts (Colab bundles/zips) and local paper drafts
+output/
+Claude outputs/
