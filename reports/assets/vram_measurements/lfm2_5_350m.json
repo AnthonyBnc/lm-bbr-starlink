@@ -1,0 +1,32 @@
+{
+  "model_key": "lfm2_5_350m",
+  "head_type": "classical",
+  "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+  "device": "mps",
+  "dtype": "float16",
+  "rank": 128,
+  "sequence_length": 20,
+  "baseline_driver_allocated_bytes": 8880128,
+  "readings_bytes": [
+    [
+      "after_model_build",
+      1149714432
+    ],
+    [
+      "after_forward",
+      1370243072
+    ],
+    [
+      "after_backward",
+      1379762176
+    ],
+    [
+      "after_optimizer_step",
+      1404928000
+    ]
+  ],
+  "peak_driver_allocated_bytes": 1404928000,
+  "peak_driver_allocated_gb": 1.308441162109375,
+  "loss": 0.4690660834312439,
+  "note": "MPS driver_allocated_memory() -- unified memory, closest available analogue on Apple Silicon to the paper's dedicated-GPU VRAM reading, not claimed to be numerically comparable to NVIDIA VRAM."
+}

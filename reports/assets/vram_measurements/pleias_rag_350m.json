@@ -1,0 +1,32 @@
+{
+  "model_key": "pleias_rag_350m",
+  "head_type": "classical",
+  "model_revision": "db001b29a33532583d14979c3c38ef04b6d59352",
+  "device": "mps",
+  "dtype": "float16",
+  "rank": 128,
+  "sequence_length": 20,
+  "baseline_driver_allocated_bytes": 8880128,
+  "readings_bytes": [
+    [
+      "after_model_build",
+      1208434688
+    ],
+    [
+      "after_forward",
+      1512833024
+    ],
+    [
+      "after_backward",
+      1522319360
+    ],
+    [
+      "after_optimizer_step",
+      1547485184
+    ]
+  ],
+  "peak_driver_allocated_bytes": 1547485184,
+  "peak_driver_allocated_gb": 1.4412078857421875,
+  "loss": 0.3017705976963043,
+  "note": "MPS driver_allocated_memory() -- unified memory, closest available analogue on Apple Silicon to the paper's dedicated-GPU VRAM reading, not claimed to be numerically comparable to NVIDIA VRAM."
+}

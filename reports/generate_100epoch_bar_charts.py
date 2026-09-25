@@ -52,14 +52,10 @@ RUN_MANIFESTS_100EPOCH["gpt_quantum"] = _RUN_ROOT / "lfm2_5_350m_quantum/run.man
 OURS_COLOR = "#4C72B0"
 PAPER_COLOR = "#DD8452"
 
-plt.rcParams.update(
-    {
-        "font.size": 11,
-        "axes.grid": True,
-        "grid.alpha": 0.3,
-        "axes.edgecolor": "#444444",
-    }
-)
+# Font family + base sizes are set once, centrally, in
+# under400m_chart_common.py's plt.rcParams.update(...) block (imported
+# below) -- edit font/size there, not here, so both this script and
+# generate_100epoch_line_charts.py stay in sync.
 
 
 def _ours_rows():
@@ -102,7 +98,6 @@ def _bar_chart(values_key, ylabel, value_format, footnote, filename):
             xytext=(0, 4),
             textcoords="offset points",
             ha="center",
-            fontsize=9,
         )
     ax.set_ylabel(ylabel)
     ax.set_ylim(0, max(values) * 1.25)
@@ -111,10 +106,9 @@ def _bar_chart(values_key, ylabel, value_format, footnote, filename):
         plt.Rectangle((0, 0), 1, 1, color=OURS_COLOR, label="This work (5 models, 100 epochs)"),
         plt.Rectangle((0, 0), 1, 1, color=PAPER_COLOR, label="Published reference (paper, 150 epochs)"),
     ]
-    ax.legend(handles=legend_handles, loc="upper left", fontsize=9)
+    ax.legend(handles=legend_handles, loc="upper left")
 
-    fig.tight_layout(rect=(0, 0.10, 1, 1))
-    fig.text(0.5, 0.0, footnote, ha="center", fontsize=8, style="italic", color="#555555")
+    fig.tight_layout()
 
     FIG_DIR_100EPOCH.mkdir(parents=True, exist_ok=True)
     for ext in ("png", "svg", "pdf"):

@@ -1,0 +1,104 @@
+{
+  "comparison": "9-model trainable-LoRA%% / latency / VRAM comparison",
+  "note": "'this_work' rows are repository-measured (Tokyo-evaluated where listed). 'published_reference' rows are the source paper's own GPT-2/T5/GPT-Neo/SmolLM2 -- not retrained, different hardware (2x NVIDIA RTX 6000 vs this repository's Apple MPS), different epoch budget (150 vs 16). Do not compute deltas or statistical tests across the two groups.",
+  "this_work": [
+    {
+      "model_key": "granite_4_0_350m",
+      "display_name": "Granite-4.0-350M",
+      "role": "modern_baseline",
+      "backbone_parameters": 364307456,
+      "lora_trainable_parameters": 11927552,
+      "lora_trainable_parameter_percent": 3.27,
+      "inference_latency_ms_per_action": 5.221263936225779,
+      "mean_vram_usage_gb": 1.5,
+      "vram_note": "measured: peak MPS driver_allocated_memory() over one real training step (forward+backward+optimizer.step()), rank 128 LoRA, gradient checkpointing on, dtype float16 -- see reports/measure_vram_usage.py",
+      "source": "measured (this repository); see run.manifest.json / result.manifest.json"
+    },
+    {
+      "model_key": "pleias_rag_350m",
+      "display_name": "Pleias-RAG-350M",
+      "role": "modern_baseline",
+      "backbone_parameters": 365351936,
+      "lora_trainable_parameters": 11927552,
+      "lora_trainable_parameter_percent": 3.26,
+      "inference_latency_ms_per_action": 4.479133893585051,
+      "mean_vram_usage_gb": 1.44,
+      "vram_note": "measured: peak MPS driver_allocated_memory() over one real training step (forward+backward+optimizer.step()), rank 128 LoRA, gradient checkpointing on, dtype float16 -- see reports/measure_vram_usage.py",
+      "source": "measured (this repository); see run.manifest.json / result.manifest.json"
+    },
+    {
+      "model_key": "lfm2_5_350m",
+      "display_name": "LFM2.5-350M",
+      "role": "modern_baseline",
+      "backbone_parameters": 366673664,
+      "lora_trainable_parameters": 12189696,
+      "lora_trainable_parameter_percent": 3.32,
+      "inference_latency_ms_per_action": 3.597167661426268,
+      "mean_vram_usage_gb": 1.31,
+      "vram_note": "measured: peak MPS driver_allocated_memory() over one real training step (forward+backward+optimizer.step()), rank 128 LoRA, gradient checkpointing on, dtype float16 -- see reports/measure_vram_usage.py",
+      "source": "measured (this repository); see run.manifest.json / result.manifest.json"
+    },
+    {
+      "model_key": "gemma_3_270m",
+      "display_name": "Gemma-3-270M",
+      "role": "modern_baseline",
+      "backbone_parameters": 273996416,
+      "lora_trainable_parameters": 5898240,
+      "lora_trainable_parameter_percent": 2.15,
+      "inference_latency_ms_per_action": 2.663996371879837,
+      "mean_vram_usage_gb": 1.35,
+      "vram_note": "measured: peak MPS driver_allocated_memory() over one real training step (forward+backward+optimizer.step()), rank 128 LoRA, gradient checkpointing on, dtype float16 -- see reports/measure_vram_usage.py",
+      "source": "measured (this repository); see run.manifest.json / result.manifest.json"
+    },
+    {
+      "model_key": "gpt_quantum",
+      "display_name": "gpt_quantum (LFM2.5-350M+VQC)",
+      "role": "gpt_quantum",
+      "backbone_parameters": 366673664,
+      "lora_trainable_parameters": 12189696,
+      "lora_trainable_parameter_percent": 3.32,
+      "inference_latency_ms_per_action": 5.794028068096337,
+      "mean_vram_usage_gb": 1.31,
+      "vram_note": "measured: peak MPS driver_allocated_memory() over one real training step (forward+backward+optimizer.step()), rank 128 LoRA, gradient checkpointing on, dtype float16 -- see reports/measure_vram_usage.py",
+      "source": "measured (this repository); see run.manifest.json / result.manifest.json"
+    }
+  ],
+  "published_reference": [
+    {
+      "model_key": "gpt2",
+      "display_name": "GPT-2",
+      "parameters": 137000000,
+      "lora_trainable_parameter_percent": 9.44,
+      "inference_latency_ms_per_action": 4.42,
+      "mean_vram_usage_gb": 1.41,
+      "source": "published_reference: Table II / Figure 10 / Figure 8(b)"
+    },
+    {
+      "model_key": "t5",
+      "display_name": "T5",
+      "parameters": 237000000,
+      "lora_trainable_parameter_percent": 5.97,
+      "inference_latency_ms_per_action": 4.47,
+      "mean_vram_usage_gb": 1.89,
+      "source": "published_reference: Table II / Figure 10 / Figure 8(b)"
+    },
+    {
+      "model_key": "gpt_neo",
+      "display_name": "GPT-Neo",
+      "parameters": 132000000,
+      "lora_trainable_parameter_percent": 5.35,
+      "inference_latency_ms_per_action": 4.31,
+      "mean_vram_usage_gb": 1.54,
+      "source": "published_reference: Table II / Figure 10 / Figure 8(b)"
+    },
+    {
+      "model_key": "smollm2",
+      "display_name": "SmolLM2",
+      "parameters": 388000000,
+      "lora_trainable_parameter_percent": 6.76,
+      "inference_latency_ms_per_action": 4.8,
+      "mean_vram_usage_gb": 2.57,
+      "source": "published_reference: Table II / Figure 10 / Figure 8(b)"
+    }
+  ]
+}
