@@ -6,17 +6,25 @@
 
 This project extends the **Small Language Model-based Control for BBR over Low Earth Orbit Satellite Internet** framework.
 
-The research contribution is:
+**Scope was simplified on 2026-09-03** (user + tutor decision, to keep the
+study small and unambiguous): the research contribution is now exactly one
+comparison —
 
-1. integrate a trainable quantum component into a downloadable GPT-family model;
-2. compare the resulting **Quantum-GPT** controller against the same GPT without quantum; and
-3. compare both versions against more modern downloadable language models under the same BBR task, data, training protocol, and evaluation framework.
+1. attach a trainable Qiskit VQC action head to one fixed SLM (`LFM2.5-350M`);
+2. compare it (`gpt_quantum`) against the same SLM with its normal classical head (`gpt_classical`).
+
+Comparing against `classical_twin` (a parameter-matched classical bottleneck)
+and against modern downloadable LMs or the original paper's four SLMs is
+**out of scope** for this comparison. That broader multi-model work still
+exists (frozen, Tokyo-evaluated) and is preserved under `archive/` as
+historical context/justification for the backbone choice — it is not part of
+the current research question.
 
 The project does **not** redesign BBR, create a new channel-allocation problem, or replace the original task with generic classification.
 
 ### Primary research question
 
-> Can a quantum-enhanced GPT controller improve BBR pacing-gain prediction and unseen-location performance compared with the equivalent classical GPT and more modern language-model baselines?
+> Does attaching a Qiskit VQC action head to one SLM change its BBR pacing-gain prediction ability, compared with the same SLM's classical head?
 
 ### Primary hypothesis
 
@@ -36,14 +44,57 @@ When instructions conflict, follow this order:
 
 Core references:
 
-- `project_sources/07-2607.07142v1.pdf`: original SLM-BBR task, state encoder, LoRA training, constrained networking head, action space, split, and evaluation;
-- `project_sources/05-2607.07133v1.pdf`: BBR-v3/Starlink experimental motivation and network measurements;
-- `project_sources/01-TMC_Congestion_Control_Comparison_in_Starlink.pdf`: supporting BBR/Starlink comparison;
-- `project_sources/04-Quantum_Reinforcement_Learning_With_Classical_Policy_Deployment_for_Resource_Allocation_in_Multibeam_GEOLEO_Satellite_Networks.pdf`: background on trainable variational quantum circuits, not the definition of this project's networking task;
-- `project_sources/02-Distilling_Large_Language_Models_for_Network_Active_Queue_Management.pdf`: related language-model network control and efficient adaptation;
-- `project_sources/06-1-s2.0-S1389128624005036-main.pdf`: systems background for pluggable ML-based congestion control.
+- `upstream/main` commit `c0afba6521e62c09d4f558095fb83e577a1f7c80`: verified official SLM-BBR source-code snapshot cited by the paper;
+- `project_sources/2607.07142v1 copy.pdf`: original SLM-BBR task, State Encoder, Low-Rank Adaptation, constrained networking head, action space, split, and evaluation;
+- `project_sources/2607.07133v1 copy.pdf`: BBR-v3/Starlink experimental motivation and network measurements;
+- `project_sources/TMC_Congestion_Control_Comparison_in_Starlink copy.pdf`: supporting BBR/Starlink comparison;
+- `project_sources/Quantum_Reinforcement_Learning_With_Classical_Policy_Deployment_for_Resource_Allocation_in_Multibeam_GEOLEO_Satellite_Networks copy.pdf`: background on trainable variational quantum circuits, not the definition of this project's networking task;
+- `project_sources/Distilling_Large_Language_Models_for_Network_Active_Queue_Management copy.pdf`: related language-model network control and efficient adaptation;
+- `project_sources/1-s2.0-S1389128624005036-main copy.pdf`: systems background for pluggable ML-based congestion control.
 
 Do not cite the quantum resource-allocation paper as if it required quantum integration in the SLM-BBR paper. Quantum integration is the new contribution of this project.
+
+### 2.1 Canonical paper terminology and naming boundary
+
+Use the scientific names from the main paper in documentation, manifests,
+figures, tables, and new experiment descriptions. In particular:
+
+| Canonical paper term | Existing code alias allowed for compatibility |
+|---|---|
+| `Small Language Model (SLM)` | `PLM` only where an existing identifier or CLI requires it |
+| `State Encoder` | `state_encoder`, `EncoderNetwork` |
+| `Low-Rank Adaptation (LoRA)` | `low_rank`, `peft_model` |
+| `Offline RL Policy with Language Model Head` | `OfflineRLPolicy` |
+| `networking head` | `action_head` or `classical` only as existing code/config identifiers |
+| `ProbeBW_UP` | `BW_UP` |
+| `ProbeBW_DOWN` | `BW_DOWN` |
+| `ProbeBW_CRUISE` | `BW_CRUISE` |
+| `GPT-2`, `T5`, `GPT-Neo`, `SmolLM2` | machine-safe IDs may be added, but the displayed model names stay unchanged |
+
+An agent must not invent a replacement scientific name when starting a new
+direction. A new experiment ID may append a neutral qualifier for traceability,
+but it must retain the canonical method/model term and must not imply an
+unverified result. Existing public code identifiers must not be renamed merely
+for style; any identifier migration requires an explicit compatibility plan and
+human approval.
+
+The authority for a name is, in order: the main paper's displayed term, an
+existing public identifier in the verified upstream/current code, then an
+approved ADR. Agents must search these sources before adding a model role,
+method, head, metric, dataset, experiment, or figure name. Descriptive aliases
+such as “smart head”, “enhanced winner”, or a newly coined method acronym are
+prohibited unless the user explicitly approves the scientific naming change in
+an ADR. Neutral run-directory suffixes such as seed, rank, epoch, `smoke`,
+`pilot`, or `preflight` are allowed and do not become paper terminology.
+
+The words `exact`, `same as the paper`, and `paper reproduction` are controlled
+claims. They may be used only when the exact model/checkpoint revision, released
+preprocessing and Experience Pool, action constraints, State Encoder, LoRA
+configuration, sequence construction, mini-batch/effective-batch definition,
+optimizer and schedule, 150-epoch budget, gradient clipping, checkpoint rule,
+and evaluation split have all been verified and recorded. Otherwise describe
+the work factually as a partial reproduction or a modern-backbone extension;
+do not rename the underlying paper method.
 
 ## 3. Research invariants
 
@@ -106,6 +157,28 @@ All headline models must use the same:
 
 Model-specific token dimensions, tokenizer details, LoRA target modules, and memory-safe batch sizes may differ when required by architecture. Every difference must be declared in the experiment manifest; effective batch size and optimisation budget must remain comparable.
 
+### 3.6 Tokyo lifecycle and post-Tokyo decisions
+
+Tokyo is a one-way evaluation gate:
+
+```text
+freeze development protocol and checkpoints
+  -> generate/verify held-out Tokyo pool
+  -> inference only
+  -> report without tuning
+```
+
+Creating the Tokyo pool counts as opening its preprocessing data, even before
+model inference. After that point, Tokyo phase counts, labels, predictions,
+losses, network surrogates, or rankings must not influence model selection,
+Quantum-GPT parent selection, head design, hyperparameters, epoch choice, seed
+policy, or retry policy. A design chosen after inspecting Tokyo outcomes is an
+exploratory post-hoc study and cannot be presented as pristine held-out
+generalisation.
+
+The current approved location encoding is development flags 0-4 and Tokyo flag
+5. All evaluated models must use that same frozen representation.
+
 ## 4. System architecture
 
 ```mermaid
@@ -138,17 +211,21 @@ raw telemetry
 
 Preprocessing, dataset construction, action masking, and evaluation must be model-agnostic modules. A model implementation must not contain its own private version of these operations.
 
-### 4.2 Required model groups
+### 4.2 Required model groups (current simplified scope)
 
 | ID | Model | Purpose | Required for primary claim |
 |---|---|---|---|
-| `gpt_classical` | Selected GPT backbone + classical head | Isolates the GPT baseline | Yes |
-| `gpt_quantum` | Same GPT backbone + quantum component | Proposed model | Yes |
-| `gpt_classical_twin` | Same GPT + parameter-budget-matched classical bottleneck | Tests quantum vs small classical capacity | Yes |
-| `modern_<name>` | Newer downloadable/open-weight LM + classical head | Contemporary comparison | At least two |
-| `paper_<name>` | GPT-2, T5, GPT-Neo, SmolLM2 where reproducible | Connection to the original paper | Recommended |
+| `gpt_classical` | `LFM2.5-350M` + classical head | Isolates the SLM baseline | Yes |
+| `gpt_quantum` | Same `LFM2.5-350M` + quantum component | Proposed model | Yes |
 
-The classical and quantum GPT variants must use the **same checkpoint, hidden-state extraction point, input pipeline, train/evaluation split, and tuning policy**. Otherwise, the effect of quantum integration is confounded.
+The classical and quantum variants must use the **same checkpoint, hidden-state extraction point, input pipeline, train/evaluation split, and tuning policy**. Otherwise, the effect of quantum integration is confounded.
+
+`gpt_classical_twin` (parameter-budget-matched classical bottleneck),
+`modern_<name>` (other downloadable LM backbones), and `paper_<name>`
+(GPT-2/T5/GPT-Neo/SmolLM2) are **not required** for the current comparison —
+dropped on 2026-09-03 to keep the study to one question. Prior work in those
+groups is preserved under `archive/` and may inform discussion, but is not
+part of the primary claim.
 
 ### 4.3 Default quantum integration
 
@@ -224,17 +301,57 @@ The exact GPT checkpoint and modern baselines belong in `configs/models.yaml` an
 - quantum circuit evaluations and shot count, when applicable;
 - mean, standard deviation, and per-seed results over the same seed set.
 
-### 5.3 Required ablations
+### 5.3 Required comparison (current simplified scope)
 
 At minimum:
 
-1. selected GPT with its normal classical head;
-2. the classical bottleneck twin;
-3. Quantum-GPT with the default VQC;
-4. at least one qubit/depth sensitivity study, subject to compute budget;
-5. modern model baselines using the shared classical task head.
+1. `gpt_classical` — `LFM2.5-350M` with its normal classical head;
+2. `gpt_quantum` — the same `LFM2.5-350M` with the VQC head.
 
-Do not claim quantum advantage from a single seed, training accuracy alone, or comparison against a larger/smaller model without the same-GPT classical controls.
+The classical-bottleneck twin, a systematic qubit/depth sensitivity sweep, and
+modern-baseline comparisons are optional follow-on work, not required for
+this comparison (dropped 2026-09-03 to keep scope small). Because there is no
+`classical_twin` control here, do not claim the quantum head's effect is
+specifically "quantum" versus simply "a smaller bottleneck" — report the
+observed difference between `gpt_classical` and `gpt_quantum` as-is, and name
+this limitation explicitly in any write-up.
+
+Do not claim quantum advantage from a single seed or training accuracy alone.
+
+### 5.4 Published-reference rows
+
+The user elected to use the paper's GPT-2, T5, GPT-Neo, and SmolLM2 results
+directly rather than retrain those four models. These rows must be labelled
+`published_reference` and visually separated from repository-measured rows.
+They do not share this repository's sample-ID hash, epoch budget, hardware, or
+runtime environment. Do not compute same-sample deltas, statistical tests, or
+action-accuracy comparisons where the paper does not publish the underlying
+number. Figure-only throughput/retransmission values remain plot-only unless a
+separately documented digitization procedure reports them as estimates.
+
+### 5.5 Current experiment sequence (simplified scope)
+
+1. **Done.** Select `LFM2.5-350M` as the parent from four under-400M
+   candidates using development-only validation metrics (ADR-0017).
+2. **Done.** Train and Tokyo-evaluate `gpt_classical` (`LFM2.5-350M`,
+   classical head): frozen, epoch 16, Tokyo accuracy 0.9575.
+3. **In progress.** Train `gpt_quantum` (same backbone, Qiskit VQC head; 4
+   qubits/depth 1, chosen from wall-clock benchmarking, not Tokyo) on the same
+   five locations; validate on the same development holdout; freeze the
+   checkpoint.
+4. Evaluate `gpt_quantum` on Tokyo once frozen.
+5. Report `gpt_classical` vs `gpt_quantum` side by side (accuracy, macro-phase
+   accuracy, per-phase accuracy, latency, Tokyo throughput/retransmission box
+   plots). Name the missing `classical_twin` control as a stated limitation.
+
+The four-model modern-backbone-vs-paper sequence that used to occupy this
+section is preserved under `archive/docs/adr/` (ADR-0001–0012, ADR-0016) and
+`archive/docs/` for provenance; it is not part of the current sequence.
+
+The current `gpt_quantum` training command and configuration are recorded in
+`docs/CONTEXT.md` and `docs/adr/ADR-0017-under400m-quantum-gpt-parent-and-protocol-freeze.md`.
+`archive/docs/LARGE_MODEL_TRAINING.md` documents the earlier large-backbone
+operations guide and is historical only.
 
 ## 6. Current repository architecture
 
@@ -412,6 +529,14 @@ These rules are mandatory for any AI that reads, writes, reviews, or runs code i
 
 ### 9.0 Non-negotiable agent contract
 
+A new agent must first read, in order: `README.md`, this file,
+`docs/CONTEXT.md`, `docs/SKILL.md`, and `docs/adr/ADR-0017-under400m-quantum-gpt-parent-and-protocol-freeze.md`;
+then the applicable ADR, affected source/tests, and current git diff.
+`archive/` holds an earlier, broader-scope direction for provenance only. For
+manuscript work it must additionally read `archive/docs/PAPER_DRAFT.md` (the
+earlier draft) and every manifest/reference supporting the edited claim.
+Conversation summaries are navigation aids, not research authority.
+
 Before changing code, every agent must be able to complete this sentence:
 
 > This change supports **[shared BBR pipeline / GPT classical control / GPT classical twin / Quantum-GPT / modern baseline / evaluation]** and does not alter **the 11-action task, phase mask, shared data split, shared labels, or held-out Tokyo protocol**.
@@ -483,6 +608,11 @@ An AI agent must not, without explicit approval:
 - silently substitute synthetic data when real data is missing;
 - hard-code secrets, tokens, local absolute paths, or private dataset locations;
 - invent paper requirements, citations, results, or tutor decisions;
+- invent scientific names, abbreviations, model roles, method labels, or rename
+  a paper/codebase term merely for style;
+- choose the Quantum-GPT parent or head from Tokyo performance;
+- combine paper-published values and repository-measured values as if they came
+  from the same samples, epoch budget, or hardware;
 - change the research scope merely to make implementation easier.
 
 ### 9.4 When uncertain
@@ -553,16 +683,35 @@ Golden tests should compare a small fixed dataset through all model adapters to 
 
 ## 11. Decision log and unresolved items
 
-The following must be confirmed before final-scale training:
-
-- [ ] Exact downloadable GPT checkpoint used for both `gpt_classical` and `gpt_quantum`.
-- [ ] Exact modern model baselines and their pinned revisions.
-- [ ] Quantum insertion point: action-position hidden state is the current default.
-- [ ] Qubit count, circuit depth, Qiskit simulator/hardware backend, analytic vs finite shots.
-- [ ] LoRA targets and whether the same tuning policy is feasible for every baseline.
-- [ ] Seed set and compute budget.
-- [ ] Validation protocol and checkpoint-selection rule using training locations only.
+- [x] Backbone for both `gpt_classical` and `gpt_quantum`: `LFM2.5-350M` (ADR-0017, development-only evidence).
+- [x] Under-400M modern baseline set and revisions frozen for the 16-epoch Tokyo extension (out of current scope, kept for provenance in `archive/`).
+- [x] Quantum insertion point: action-position hidden state.
+- [x] Qubit count, circuit depth: 4 qubits, depth 1, `trainable_ry_layers`, chosen by wall-clock benchmark (~13-15x faster than 8 qubits/depth 2) — see `docs/CONTEXT.md`.
+- [x] Qiskit backend: local `StatevectorEstimator`, analytic, no finite shots.
+- [x] LoRA: rank 128, alpha 32, dropout 0.05, same target modules as `gpt_classical` (only the head differs).
+- [x] Seed: `100003`. Single-seed only — a stated limitation, not resolved.
+- [x] Validation protocol: frozen development holdout, same as `gpt_classical`.
 - [ ] Whether final evaluation remains surrogate-only or includes TCP-in-the-loop tests.
+
+The Tokyo pool was generated on 2026-09-03 with approved location flag 5.
+`gpt_classical` has a Tokyo result. `gpt_quantum`'s circuit was chosen from a
+training-data wall-clock benchmark only — no Tokyo evidence was used.
+
+### 11.1 Paper-writing evidence contract
+
+Every manuscript statement must be traceable to exactly one evidence class:
+
+- `published_reference`: the main paper, identified by section/table/figure/equation;
+- `measured_exploratory`: a local manifest marked non-reportable;
+- `measured_final`: a frozen run/evaluation manifest eligible for reporting;
+- `interpretation`: an explicitly identified inference supported by cited evidence.
+
+Do not turn missing values into zeros, infer exact values from a plot without
+labelling digitization, promote a smoke test to a result, hide failed seeds, or
+write “same as the paper” when a backbone, epoch budget, preprocessing
+assumption, or runtime differs. `archive/docs/PAPER_DRAFT.md` is a draft view
+of the earlier, broader-scope evidence; manifests and source papers remain
+authoritative.
 
 Until these are confirmed, agents may build interfaces, tests, a small smoke-test model, and deterministic preprocessing. They must not present exploratory runs as final research results.
 
@@ -580,4 +729,4 @@ A result is ready for research reporting only when:
 
 ---
 
-**One-sentence scope check:** This repository develops a quantum-enhanced, downloadable GPT model for the original 11-action SLM-BBR Starlink task and compares it fairly with the same classical GPT and modern downloadable language models without changing the underlying research problem.
+**One-sentence scope check:** This repository attaches a Qiskit VQC action head to one SLM (`LFM2.5-350M`) for the original 11-action SLM-BBR Starlink task and compares it fairly with the same SLM's classical head, without changing the underlying research problem.

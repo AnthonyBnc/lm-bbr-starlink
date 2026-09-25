@@ -1,0 +1,55 @@
+{
+  "source_type": "published_paper_reference",
+  "source": "project_sources/2607.07142v1 copy.pdf",
+  "paper": "Small Language Model-based Control for BBR over Low Earth Orbit Satellite Internet",
+  "training_epochs": 150,
+  "tokyo_action_accuracy_available": false,
+  "tokyo_action_loss_available": false,
+  "figure_9_note": "Tokyo throughput and retransmission results are box plots without an accompanying exact numeric table. Values must not be silently inferred as exact.",
+  "models": [
+    {
+      "model_key": "gpt2",
+      "display_name": "GPT-2",
+      "parameters": 137000000,
+      "trainable_parameter_percent": 9.44,
+      "inference_latency_ms_per_action": 4.42,
+      "mean_vram_usage_gb": 1.41,
+      "vram_source": "Figure 8(b)",
+      "latency_source": "Figure 10",
+      "tokyo_throughput_retransmission_source": "Figure 9; plot-only"
+    },
+    {
+      "model_key": "t5",
+      "display_name": "T5",
+      "parameters": 237000000,
+      "trainable_parameter_percent": 5.97,
+      "inference_latency_ms_per_action": 4.47,
+      "mean_vram_usage_gb": 1.89,
+      "vram_source": "Figure 8(b)",
+      "latency_source": "Figure 10",
+      "tokyo_throughput_retransmission_source": "Figure 9; plot-only"
+    },
+    {
+      "model_key": "gpt_neo",
+      "display_name": "GPT-Neo",
+      "parameters": 132000000,
+      "trainable_parameter_percent": 5.35,
+      "inference_latency_ms_per_action": 4.31,
+      "mean_vram_usage_gb": 1.54,
+      "vram_source": "Figure 8(b)",
+      "latency_source": "Figure 10",
+      "tokyo_throughput_retransmission_source": "Figure 9; plot-only"
+    },
+    {
+      "model_key": "smollm2",
+      "display_name": "SmolLM2",
+      "parameters": 388000000,
+      "trainable_parameter_percent": 6.76,
+      "inference_latency_ms_per_action": 4.8,
+      "mean_vram_usage_gb": 2.57,
+      "vram_source": "Figure 8(b)",
+      "latency_source": "Figure 10",
+      "tokyo_throughput_retransmission_source": "Figure 9; plot-only"
+    }
+  ]
+}
