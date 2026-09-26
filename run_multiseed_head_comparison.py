@@ -86,6 +86,16 @@ REFERENCE_SHA256 = {
     "split.manifest.json": "a6c5a4c910b894d7dca334cbc7a652f1c468f98c8ba4157a5a21154cab66a109",
 }
 TOKYO_POOL_SHA256 = "800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b"
+# Accepted Tokyo pool files. The original lab file is not in git; the rebuilt
+# file comes from reports/rebuild_tokyo_pool.py and was verified to match the
+# seed-100003 evaluation on all 12,000 evaluated samples (sample_id, phase,
+# expert action, stream flag, observed throughput and retransmissions). Its
+# bytes differ only because the pool metadata records the rebuild.
+ACCEPTED_TOKYO_POOLS = {
+    TOKYO_POOL_SHA256: "original",
+    "0c53677a759d300454c816211c008bbf42fd8d214c31a040688560e512414c83":
+        "rebuilt_from_raw_traces_verified_12000_samples",
+}
 
 # Seed 100003 already exists (four_model_100epoch_v1) and is reused by the
 # summary script; these four are the additional training seeds.
@@ -294,8 +304,8 @@ def preflight(args):
     if not args.skip_eval:
         if not args.tokyo_pool.is_file():
             problems.append("missing Tokyo pool {}".format(args.tokyo_pool))
-        elif sha256(args.tokyo_pool) != TOKYO_POOL_SHA256:
-            problems.append("Tokyo pool checksum differs from the frozen protocol")
+        elif sha256(args.tokyo_pool) not in ACCEPTED_TOKYO_POOLS:
+            problems.append("Tokyo pool checksum is neither the original nor the verified rebuild")
         if not args.freeze_manifest.is_file():
             problems.append("missing freeze manifest {}".format(args.freeze_manifest))
     if not (REPO / "train_modern_lora.py").is_file():
@@ -588,8 +598,9 @@ def evaluate_one(args):
     freeze_manifest = read_json(args.freeze_manifest)
     if freeze_manifest.get("tokyo_opened") is not True:
         raise ValueError("Tokyo pool has not passed the frozen protocol gate")
-    if sha256(args.tokyo_pool) != TOKYO_POOL_SHA256:
-        raise ValueError("Tokyo pool checksum does not match the frozen protocol")
+    tokyo_pool_sha256 = sha256(args.tokyo_pool)
+    if tokyo_pool_sha256 not in ACCEPTED_TOKYO_POOLS:
+        raise ValueError("Tokyo pool checksum is neither the original nor the verified rebuild")
     with open(args.tokyo_pool, "rb") as stream:
         pool = pickle.load(stream)
     if pool.metadata.get("split_role") != "held_out_test":
@@ -620,7 +631,8 @@ def evaluate_one(args):
         "model_revision": run_manifest["model_revision"],
         "run_dir": args.run_dir.as_posix(),
         "checkpoint_files_sha256": frozen["checkpoint_files_sha256"],
-        "tokyo_pool_sha256": TOKYO_POOL_SHA256,
+        "tokyo_pool_sha256": tokyo_pool_sha256,
+        "tokyo_pool_provenance": ACCEPTED_TOKYO_POOLS[tokyo_pool_sha256],
         "sequence_length": run_manifest["sequence_length"],
         "sample_step": run_manifest["sample_step"],
         "inference_only": True,
