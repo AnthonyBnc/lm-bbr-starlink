@@ -1,0 +1,2 @@
+# Committed evaluation data: keep bytes exactly as written (checksums are verified)
+data/processed/** -text

@@ -1,0 +1,115 @@
+{
+  "checkpoint_selection_rule": "final_epoch_16_fixed_before_tokyo",
+  "comparison_claim": "The four new models are evaluated directly on the frozen Tokyo pool. The four paper models use published aggregate/figure values and are a contextual reference, not a same-sample or same-runtime rerun.",
+  "frozen_at": "2026-09-03T03:55:00.572164+00:00",
+  "held_out_location": "Tokyo",
+  "modern_models": [
+    {
+      "checkpoint": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/granite_4_0_350m_rank128_epochs16_seed100003_train/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "72de02e1eaf39564c33864d00a562a3a3480d5c33d1435ec01a12c44aa379eaa",
+        "adapter/adapter_model.safetensors": "f19e9c188e81500f9d6b40fd4dedb0be24277c3a8e6d416000f3ba311d84aa63",
+        "task_modules.pt": "11f0e5d8f4a662dae681d56a85110a1e401889e62ca23f501a2f596e66bf0541",
+        "training_state.json": "a6910e5bdf3039680f6145fa3220e71c36c2390140e3675a1e6b0303b1fe345d"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 16,
+      "model_id": "ibm-granite/granite-4.0-350m",
+      "model_key": "granite_4_0_350m",
+      "model_revision": "bd8a1497065c0d6ba1ef19af6b0d2b14bacf71c2",
+      "run_dir": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/granite_4_0_350m_rank128_epochs16_seed100003_train",
+      "run_manifest": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/granite_4_0_350m_rank128_epochs16_seed100003_train/run.manifest.json",
+      "run_manifest_sha256": "6c2b8608528798063c94448254cbd4c365728587ebaa70b264b36949eb191fb0",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/pleias_rag_350m_rank128_epochs16_seed100003_train/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "0c8145d6b4ac6da38e335df1fac2811417eba2d63e4a94ea53ffecb95d8a518e",
+        "adapter/adapter_model.safetensors": "443efba4b571dfd3d2ebb027f86c5bba65ae4d072745e626eb049526f7bda045",
+        "task_modules.pt": "b1e93303824c32233a5fd2925f4e2bcd3f7f917c1689f4a47ffae05636507dac",
+        "training_state.json": "8e556a7fca93634c1c6cee59886e3b30b55e21f1783689268d741faf35da5a45"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 16,
+      "model_id": "PleIAs/Pleias-RAG-350M",
+      "model_key": "pleias_rag_350m",
+      "model_revision": "db001b29a33532583d14979c3c38ef04b6d59352",
+      "run_dir": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/pleias_rag_350m_rank128_epochs16_seed100003_train",
+      "run_manifest": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/pleias_rag_350m_rank128_epochs16_seed100003_train/run.manifest.json",
+      "run_manifest_sha256": "03386114eb373497c617992b3247979b3b27c1ac1d0a6be7223bd4a27d2f47df",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/lfm2_5_350m_rank128_epochs16_seed100003_train/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "ac6b568451d14b8fb975296699d48cb671c72e5d9d3bc46b4147934e0bd6126c",
+        "adapter/adapter_model.safetensors": "722e420e44b836819324daab6da22b8a14ec8ab1ee876865a41bd49f812b377d",
+        "task_modules.pt": "e2a8ad838fd048afd605caeedb935e2dece633845c7dcec2086e6ece44999ff8",
+        "training_state.json": "c403622eabf738fc80613e1725e879d98ad0bc0bfc8b54a02e7b00267683ff96"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 16,
+      "model_id": "LiquidAI/LFM2.5-350M",
+      "model_key": "lfm2_5_350m",
+      "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+      "run_dir": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/lfm2_5_350m_rank128_epochs16_seed100003_train",
+      "run_manifest": "data/processed/lora_training/under400_rank128_epochs16_seed100003_v1/lfm2_5_350m_rank128_epochs16_seed100003_train/run.manifest.json",
+      "run_manifest_sha256": "6fea69faf81f9fbbd36e0410bb73737b455de98df5c31b1f760277b6e073dd73",
+      "seed": 100003
+    },
+    {
+      "checkpoint": "data/processed/lora_training/gemma3_270m_rank128_epochs16_seed100003_v1/gemma_3_270m_rank128_epochs16_seed100003_train/checkpoint",
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "f2acc647dcf88b5154eb2684b499a047723bc343efdc2f52f29aae81273ee119",
+        "adapter/adapter_model.safetensors": "27645b4a3e716116a0fda6801be55ddd80a01acb745a172a7e5b95cb28cd8f68",
+        "task_modules.pt": "124289729828bfa4ffa5dd3aabb0cf81df0dc2b4699daa094ce33302d249e93f",
+        "training_state.json": "fb3b511541f0c872382b2315746a41bbf42962f351503a268b97e7053c30c262"
+      },
+      "checkpoint_reload": "PASS",
+      "checkpoint_rule": "final_epoch",
+      "epochs": 16,
+      "model_id": "google/gemma-3-270m",
+      "model_key": "gemma_3_270m",
+      "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+      "run_dir": "data/processed/lora_training/gemma3_270m_rank128_epochs16_seed100003_v1/gemma_3_270m_rank128_epochs16_seed100003_train",
+      "run_manifest": "data/processed/lora_training/gemma3_270m_rank128_epochs16_seed100003_v1/gemma_3_270m_rank128_epochs16_seed100003_train/run.manifest.json",
+      "run_manifest_sha256": "b1952503b58d08edf2c52d32fb4d9d2677ac8e0cc967ec908c09cc87a6333a63",
+      "seed": 100003
+    }
+  ],
+  "paper_models": [
+    {
+      "model_key": "gpt2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "t5",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "gpt_neo",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    },
+    {
+      "model_key": "smollm2",
+      "source": "project_sources/2607.07142v1 copy.pdf",
+      "status": "published_reference"
+    }
+  ],
+  "schema_version": 1,
+  "status": "modern_checkpoints_frozen",
+  "tokyo_location_flag": 5,
+  "tokyo_location_flag_status": "user_approved_2026-09-03",
+  "tokyo_opened": true,
+  "tokyo_opened_at": "2026-09-03T03:55:03.739706+00:00",
+  "tokyo_pool": "data/processed/evaluation/tokyo_8model_comparison_v1/tokyo.pkl",
+  "tokyo_pool_manifest": "data/processed/evaluation/tokyo_8model_comparison_v1/tokyo.manifest.json",
+  "tokyo_pool_sha256": "800f1a444fcf1610720b83f6feadf0743fb2acaca81ed8d251f264fad012f27b"
+}
