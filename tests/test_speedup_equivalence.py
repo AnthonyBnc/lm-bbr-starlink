@@ -131,10 +131,11 @@ class SpeedupEquivalenceTests(unittest.TestCase):
             old = old_utils.process_bbr_batch(batch, device=device)
             new = new_utils.process_bbr_batch(batch, device=device)
             self.assertEqual(old[-1], new[-1])
-            for a, b in zip(old[:-1], new[:-1]):
-                self.assertEqual(a.dtype, b.dtype)
-                self.assertEqual(a.device.type, b.device.type)
-                self.assertTrue(torch.equal(a.cpu(), b.cpu()))
+            names = ("states", "actions", "returns", "timesteps", "labels")
+            for name, a, b in zip(names, old[:-1], new[:-1]):
+                self.assertEqual(a.dtype, b.dtype, name)
+                self.assertEqual(a.device.type, b.device.type, name)
+                self.assertTrue(torch.equal(a.cpu(), b.cpu()), "{} differs on {}".format(name, device))
             bad = list(batch)
             bad[1] = [torch.tensor(11.0)] * 20
             with self.assertRaises(ValueError):

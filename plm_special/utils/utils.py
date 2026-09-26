@@ -22,7 +22,13 @@ def _to_device(tensor, device):
 
 
 def _process_tensors_cpu(batch):
-    """Build and validate the batch tensors on the CPU (no GPU synchronisation)."""
+    """Build and validate the batch tensors on the CPU (no GPU synchronisation).
+
+    ``actions`` is returned as raw action indices (float32); the scaling to
+    (a + 1) / ACTION_LEVELS happens on the target device in
+    ``_finish_on_device`` so the values are bit-identical to the old code
+    (CUDA divides by a scalar via its reciprocal, the CPU divides exactly).
+    """
     states, actions, returns, timesteps = batch
 
     states = torch.cat(states, dim=0).unsqueeze(0).float()
@@ -32,15 +38,22 @@ def _process_tensors_cpu(batch):
         raise ValueError(
             f"Action labels must be integer indices in [0, {ACTION_LEVELS - 1}]"
         )
-    actions = ((actions + 1) / ACTION_LEVELS).unsqueeze(2)
     returns = torch.as_tensor(returns, dtype=torch.float32).reshape(1, -1, 1)
     timesteps = torch.as_tensor(timesteps, dtype=torch.int32).unsqueeze(0)
 
     return states, actions, returns, timesteps, labels
 
 
+def _finish_on_device(cpu_tensors, device):
+    states, actions, returns, timesteps, labels = (
+        _to_device(tensor, device) for tensor in cpu_tensors
+    )
+    actions = ((actions + 1) / ACTION_LEVELS).unsqueeze(2)
+    return states, actions, returns, timesteps, labels
+
+
 def _process_tensors(batch, device):
-    return tuple(_to_device(tensor, device) for tensor in _process_tensors_cpu(batch))
+    return _finish_on_device(_process_tensors_cpu(batch), device)
 
 
 def process_batch(batch, device='cpu'):
@@ -59,7 +72,7 @@ def process_bbr_batch(batch, device='cpu'):
 
     states, actions, returns, timesteps, collated_phases = batch
     cpu_tensors = _process_tensors_cpu((states, actions, returns, timesteps))
-    tensors = tuple(_to_device(tensor, device) for tensor in cpu_tensors)
+    tensors = _finish_on_device(cpu_tensors, device)
     phases = []
     for item in collated_phases:
         if isinstance(item, str):
