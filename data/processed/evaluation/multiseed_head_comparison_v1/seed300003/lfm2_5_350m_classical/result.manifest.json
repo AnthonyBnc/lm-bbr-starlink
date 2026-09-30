@@ -1,0 +1,180 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "475046c6b6a199d57991b45633b595bc1ad45cba7581216b7bec6e58a5725016",
+    "adapter/adapter_model.safetensors": "04f15d947e335b74660cc4e0eca71823b35c0eb5e5a3c917f12f5947d8523e3b",
+    "task_modules.pt": "b0500b3e5dbe015e4c9b8db3ec1ea52b9bff7088709370d610fc3fcf80714534",
+    "training_state.json": "4de2731d11c096651bdb07f8a37336736320705a5115383ec177a552bb2d0a2c"
+  },
+  "evidence_class": "measured_final",
+  "experiment": "multiseed_head_comparison_v1",
+  "head_config": {
+    "type": "linear"
+  },
+  "head_type": "classical",
+  "inference_only": true,
+  "metrics": {
+    "accuracy": 0.9600833333333333,
+    "label_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 407,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 136,
+      "7": 140,
+      "8": 96,
+      "9": 168
+    },
+    "latency": {
+      "mean_milliseconds_per_action": 0.7479482016940954,
+      "timed_batches": 595,
+      "warmup_batches_excluded": 5
+    },
+    "loss": 0.5104476868649381,
+    "macro_phase_accuracy": 0.8313973952833509,
+    "paper_surrogate_by_stream_group": {
+      "downlink-competitive-logs": {
+        "mean_retransmissions": 3.685188440442545,
+        "mean_throughput": 9410031.286187498,
+        "samples": 3000
+      },
+      "downlink-sequential-logs": {
+        "mean_retransmissions": 44.47633433570354,
+        "mean_throughput": 228985646.93592,
+        "samples": 3000
+      },
+      "uplink-competitive-logs": {
+        "mean_retransmissions": 1.5980941670213027,
+        "mean_throughput": 10748013.3846875,
+        "samples": 3000
+      },
+      "uplink-sequential-logs": {
+        "mean_retransmissions": 10.252720222081075,
+        "mean_throughput": 45558982.302710004,
+        "samples": 3000
+      }
+    },
+    "per_phase_accuracy": {
+      "BW_CRUISE": 1.0,
+      "BW_DOWN": 1.0,
+      "BW_UP": 0.4941921858500528
+    },
+    "per_phase_label_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 407,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 136,
+        "7": 140,
+        "8": 96,
+        "9": 168
+      }
+    },
+    "per_phase_prediction_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 521,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 146,
+        "7": 54,
+        "8": 48,
+        "9": 178
+      }
+    },
+    "per_phase_samples": {
+      "BW_CRUISE": 10419,
+      "BW_DOWN": 634,
+      "BW_UP": 947
+    },
+    "prediction_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 521,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 146,
+      "7": 54,
+      "8": 48,
+      "9": 178
+    },
+    "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+    "samples": 12000
+  },
+  "model_id": "LiquidAI/LFM2.5-350M",
+  "model_key": "lfm2_5_350m",
+  "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+  "model_role": "gpt_classical",
+  "phase_mask_applied_before_loss_and_argmax": true,
+  "predictions": "data/processed/evaluation/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_classical/predictions.csv",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_classical__attempt02",
+  "sample_step": 20,
+  "seed": 300003,
+  "sequence_length": 20,
+  "status": "held_out_tokyo_evaluation_completed",
+  "tokyo_pool_provenance": "rebuilt_from_raw_traces_verified_12000_samples",
+  "tokyo_pool_sha256": "0c53677a759d300454c816211c008bbf42fd8d214c31a040688560e512414c83"
+}

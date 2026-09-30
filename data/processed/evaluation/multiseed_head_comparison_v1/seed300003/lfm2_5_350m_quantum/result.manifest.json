@@ -1,0 +1,199 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "8d28a91073e10bbdec3b60ace4342adf80c03cae6e3f2e63b00bab268f694aa0",
+    "adapter/adapter_model.safetensors": "8ea24d6cfedf4b9a59102812b7d4091b9cea86b4d82c308a7d3dcffcc07e2fc0",
+    "task_modules.pt": "7edad735214d7c93af1289c3c99ed16968d950de88523d22d492b46b10f6a43e",
+    "training_state.json": "10c4faeb810dc39e994b2f9639db0b29d096b7f397e437eeaa376e224d2ce243"
+  },
+  "evidence_class": "measured_final",
+  "experiment": "multiseed_head_comparison_v1",
+  "head_config": {
+    "angle_scale": "pi",
+    "ansatz": "trainable_ry_layers",
+    "backend": "torch",
+    "default_precision": 0.0,
+    "depth": 1,
+    "encoding": "bounded_ry_angle_encoding",
+    "entanglement": "cnot_ring",
+    "estimator": "torch_exact_statevector",
+    "framework": "qiskit",
+    "gradient_method": "autograd",
+    "input_layernorm": true,
+    "measurement": "per_qubit_pauli_z_expectation",
+    "n_qubits": 8,
+    "qiskit_machine_learning_version": "0.9.1",
+    "qiskit_version": "2.5.2",
+    "shots": null,
+    "simulator": "torch_statevector",
+    "temperature": 4.0,
+    "trainable_circuit_parameters": 8,
+    "type": "qiskit_estimator_qnn_vqc"
+  },
+  "head_type": "quantum",
+  "inference_only": true,
+  "metrics": {
+    "accuracy": 0.95775,
+    "label_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 407,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 136,
+      "7": 140,
+      "8": 96,
+      "9": 168
+    },
+    "latency": {
+      "mean_milliseconds_per_action": 12.80049215118839,
+      "timed_batches": 595,
+      "warmup_batches_excluded": 5
+    },
+    "loss": 0.12110576974647036,
+    "macro_phase_accuracy": 0.8215417106652586,
+    "paper_surrogate_by_stream_group": {
+      "downlink-competitive-logs": {
+        "mean_retransmissions": 4.984034078098764,
+        "mean_throughput": 9410031.286187498,
+        "samples": 3000
+      },
+      "downlink-sequential-logs": {
+        "mean_retransmissions": 52.007332331818915,
+        "mean_throughput": 228985646.93592,
+        "samples": 3000
+      },
+      "uplink-competitive-logs": {
+        "mean_retransmissions": 2.4773030293603884,
+        "mean_throughput": 10748013.3846875,
+        "samples": 3000
+      },
+      "uplink-sequential-logs": {
+        "mean_retransmissions": 14.67843822793211,
+        "mean_throughput": 45558982.302710004,
+        "samples": 3000
+      }
+    },
+    "per_phase_accuracy": {
+      "BW_CRUISE": 1.0,
+      "BW_DOWN": 1.0,
+      "BW_UP": 0.46462513199577615
+    },
+    "per_phase_label_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 407,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 136,
+        "7": 140,
+        "8": 96,
+        "9": 168
+      }
+    },
+    "per_phase_prediction_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 737,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 210,
+        "9": 0
+      }
+    },
+    "per_phase_samples": {
+      "BW_CRUISE": 10419,
+      "BW_DOWN": 634,
+      "BW_UP": 947
+    },
+    "prediction_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 737,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 0,
+      "7": 0,
+      "8": 210,
+      "9": 0
+    },
+    "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+    "samples": 12000
+  },
+  "model_id": "LiquidAI/LFM2.5-350M",
+  "model_key": "lfm2_5_350m",
+  "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+  "model_role": "gpt_quantum",
+  "phase_mask_applied_before_loss_and_argmax": true,
+  "predictions": "data/processed/evaluation/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_quantum/predictions.csv",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_quantum__attempt03",
+  "sample_step": 20,
+  "seed": 300003,
+  "sequence_length": 20,
+  "status": "held_out_tokyo_evaluation_completed",
+  "tokyo_pool_provenance": "rebuilt_from_raw_traces_verified_12000_samples",
+  "tokyo_pool_sha256": "0c53677a759d300454c816211c008bbf42fd8d214c31a040688560e512414c83"
+}
