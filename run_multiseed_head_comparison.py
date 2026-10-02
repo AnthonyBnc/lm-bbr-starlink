@@ -78,8 +78,18 @@ REPO = Path(__file__).resolve().parent
 # Frozen protocol (copied from the seed-100003 run manifests in
 # data/processed/lora_training/four_model_100epoch_v1/lfm2_5_350m_{classical,quantum})
 # ----------------------------------------------------------------------------
-MODEL_KEY = "lfm2_5_350m"
-MODEL_REVISION = "9e6c6ccf47cd318696e137d381a7ded8fe4df09f"
+# Backbone is chosen with the environment variable MULTISEED_MODEL_KEY
+# (default lfm2_5_350m). Revision and dtype match the four_model_100epoch_v1 runs.
+BACKBONES = {
+    "lfm2_5_350m": ("9e6c6ccf47cd318696e137d381a7ded8fe4df09f", "float16"),
+    "granite_4_0_350m": ("bd8a1497065c0d6ba1ef19af6b0d2b14bacf71c2", "bfloat16"),
+    "pleias_rag_350m": ("db001b29a33532583d14979c3c38ef04b6d59352", "bfloat16"),
+    "gemma_3_270m": ("9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1", "bfloat16"),
+}
+MODEL_KEY = os.environ.get("MULTISEED_MODEL_KEY", "lfm2_5_350m")
+if MODEL_KEY not in BACKBONES:
+    raise SystemExit("MULTISEED_MODEL_KEY must be one of {}".format(sorted(BACKBONES)))
+MODEL_REVISION, MODEL_DTYPE = BACKBONES[MODEL_KEY]
 REFERENCE_SHA256 = {
     "train.pkl": "dae037d4f34c428747763cedb4f2ae9cf1e047b3bceb042638325e188af2a937",
     "validation.pkl": "6d53da7aa0a5c0c994977eb5eb2349fb5f3b2e66c17d1b3f8d55cafdf856d060",
@@ -106,7 +116,7 @@ EPOCHS = 100
 
 COMMON_TRAIN_ARGS = [
     "--model-key", MODEL_KEY,
-    "--dtype", "float16",
+    "--dtype", MODEL_DTYPE,
     "--rank", "128",
     "--alpha", "32",
     "--dropout", "0.05",
