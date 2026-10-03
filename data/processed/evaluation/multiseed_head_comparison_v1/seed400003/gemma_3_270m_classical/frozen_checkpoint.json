@@ -1,0 +1,24 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "ebf8e3b8966c3a5c598c9606ec2765b9c25c0cec583913d1dd8fcd14ef4d9297",
+    "adapter/adapter_model.safetensors": "90de2509cf9cb9d87e659d738591474aa6a047cd5b97f140604150137f01fa49",
+    "task_modules.pt": "4929767e2c5c3fb5a076aaaa945378887859a88ab9ec6ab5986a53e4433711d8",
+    "training_state.json": "c1bb605bc562d70d9d14c9fd3f54abc0643393d9deeab432cb933209f77c59f7"
+  },
+  "checkpoint_rule": "final_epoch_100_fixed_before_tokyo",
+  "final_validation": {
+    "macro_phase_accuracy": 0.7843373493975904,
+    "max_up_prediction_share": 0.25301204819277107,
+    "overall_accuracy": 0.95525,
+    "up_accuracy": 0.3530120481927711
+  },
+  "frozen_at": "2026-10-03T00:39:13.913836+00:00",
+  "git_commit": "856269d6cb0de2be476180cd2ea203d92e5c6aba",
+  "git_dirty": false,
+  "head_type": "classical",
+  "model_role": "gpt_classical",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/gemma_3_270m_classical",
+  "run_manifest_sha256": "2213f02568c99e997ec6e846e131ad1377588710539777c45e6f37fcd2ee5f61",
+  "seed": 400003,
+  "status": "checkpoint_frozen_before_tokyo"
+}

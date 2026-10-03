@@ -1,0 +1,180 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "ebf8e3b8966c3a5c598c9606ec2765b9c25c0cec583913d1dd8fcd14ef4d9297",
+    "adapter/adapter_model.safetensors": "90de2509cf9cb9d87e659d738591474aa6a047cd5b97f140604150137f01fa49",
+    "task_modules.pt": "4929767e2c5c3fb5a076aaaa945378887859a88ab9ec6ab5986a53e4433711d8",
+    "training_state.json": "c1bb605bc562d70d9d14c9fd3f54abc0643393d9deeab432cb933209f77c59f7"
+  },
+  "evidence_class": "measured_final",
+  "experiment": "multiseed_head_comparison_v1",
+  "head_config": {
+    "type": "linear"
+  },
+  "head_type": "classical",
+  "inference_only": true,
+  "metrics": {
+    "accuracy": 0.95825,
+    "label_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 407,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 136,
+      "7": 140,
+      "8": 96,
+      "9": 168
+    },
+    "latency": {
+      "mean_milliseconds_per_action": 2.833749546098108,
+      "timed_batches": 595,
+      "warmup_batches_excluded": 5
+    },
+    "loss": 0.45668887225175825,
+    "macro_phase_accuracy": 0.8236536430834214,
+    "paper_surrogate_by_stream_group": {
+      "downlink-competitive-logs": {
+        "mean_retransmissions": 3.68115636589047,
+        "mean_throughput": 9410031.286187498,
+        "samples": 3000
+      },
+      "downlink-sequential-logs": {
+        "mean_retransmissions": 38.75032481136616,
+        "mean_throughput": 228985646.93592,
+        "samples": 3000
+      },
+      "uplink-competitive-logs": {
+        "mean_retransmissions": 1.7521910396760796,
+        "mean_throughput": 10748013.3846875,
+        "samples": 3000
+      },
+      "uplink-sequential-logs": {
+        "mean_retransmissions": 9.904391038009335,
+        "mean_throughput": 45558982.302710004,
+        "samples": 3000
+      }
+    },
+    "per_phase_accuracy": {
+      "BW_CRUISE": 1.0,
+      "BW_DOWN": 1.0,
+      "BW_UP": 0.470960929250264
+    },
+    "per_phase_label_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 407,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 136,
+        "7": 140,
+        "8": 96,
+        "9": 168
+      }
+    },
+    "per_phase_prediction_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 567,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 110,
+        "7": 90,
+        "8": 47,
+        "9": 133
+      }
+    },
+    "per_phase_samples": {
+      "BW_CRUISE": 10419,
+      "BW_DOWN": 634,
+      "BW_UP": 947
+    },
+    "prediction_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 567,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 110,
+      "7": 90,
+      "8": 47,
+      "9": 133
+    },
+    "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+    "samples": 12000
+  },
+  "model_id": "google/gemma-3-270m",
+  "model_key": "gemma_3_270m",
+  "model_revision": "9b0cfec892e2bc2afd938c98eabe4e4a7b1e0ca1",
+  "model_role": "gpt_classical",
+  "phase_mask_applied_before_loss_and_argmax": true,
+  "predictions": "data/processed/evaluation/multiseed_head_comparison_v1/seed400003/gemma_3_270m_classical/predictions.csv",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/gemma_3_270m_classical",
+  "sample_step": 20,
+  "seed": 400003,
+  "sequence_length": 20,
+  "status": "held_out_tokyo_evaluation_completed",
+  "tokyo_pool_provenance": "rebuilt_from_raw_traces_verified_12000_samples",
+  "tokyo_pool_sha256": "0c53677a759d300454c816211c008bbf42fd8d214c31a040688560e512414c83"
+}

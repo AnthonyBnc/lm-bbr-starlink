@@ -1,0 +1,180 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "34434b09614565c18d35389996c50361fc66c51619fa6e4d4dde2e20c595af2d",
+    "adapter/adapter_model.safetensors": "a13ca5ec1408dffd68acacff2ee80239856ec9d55f3f1b454e9643fd7b979a6e",
+    "task_modules.pt": "d110c8c89bc7115893ddb9456904178afec78e3bf0e06918d6e2668ffb129f27",
+    "training_state.json": "2d6694e6ae297cc67b6ba8afb2ca751a9e48bbd1b7113059921cef5c704e547e"
+  },
+  "evidence_class": "measured_final",
+  "experiment": "multiseed_head_comparison_v1",
+  "head_config": {
+    "type": "linear"
+  },
+  "head_type": "classical",
+  "inference_only": true,
+  "metrics": {
+    "accuracy": 0.9589166666666666,
+    "label_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 407,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 136,
+      "7": 140,
+      "8": 96,
+      "9": 168
+    },
+    "latency": {
+      "mean_milliseconds_per_action": 2.6167007817831984,
+      "timed_batches": 595,
+      "warmup_batches_excluded": 5
+    },
+    "loss": 0.32384327446661604,
+    "macro_phase_accuracy": 0.8264695529743048,
+    "paper_surrogate_by_stream_group": {
+      "downlink-competitive-logs": {
+        "mean_retransmissions": 3.355112478756823,
+        "mean_throughput": 9410031.286187498,
+        "samples": 3000
+      },
+      "downlink-sequential-logs": {
+        "mean_retransmissions": 36.30539785562607,
+        "mean_throughput": 228985646.93592,
+        "samples": 3000
+      },
+      "uplink-competitive-logs": {
+        "mean_retransmissions": 1.7593807476334669,
+        "mean_throughput": 10748013.3846875,
+        "samples": 3000
+      },
+      "uplink-sequential-logs": {
+        "mean_retransmissions": 11.095671426359544,
+        "mean_throughput": 45558982.302710004,
+        "samples": 3000
+      }
+    },
+    "per_phase_accuracy": {
+      "BW_CRUISE": 1.0,
+      "BW_DOWN": 1.0,
+      "BW_UP": 0.47940865892291445
+    },
+    "per_phase_label_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 407,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 136,
+        "7": 140,
+        "8": 96,
+        "9": 168
+      }
+    },
+    "per_phase_prediction_distribution": {
+      "BW_CRUISE": {
+        "0": 0,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10419,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_DOWN": {
+        "0": 634,
+        "1": 0,
+        "10": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "BW_UP": {
+        "0": 0,
+        "1": 0,
+        "10": 619,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 119,
+        "7": 77,
+        "8": 63,
+        "9": 69
+      }
+    },
+    "per_phase_samples": {
+      "BW_CRUISE": 10419,
+      "BW_DOWN": 634,
+      "BW_UP": 947
+    },
+    "prediction_distribution": {
+      "0": 634,
+      "1": 0,
+      "10": 619,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 10419,
+      "6": 119,
+      "7": 77,
+      "8": 63,
+      "9": 69
+    },
+    "sample_ids_sha256": "56260fb31a589b1437bb55f3cd8b5ddc1c4de6a415c4933586dfaf86aecfbeb0",
+    "samples": 12000
+  },
+  "model_id": "PleIAs/Pleias-RAG-350M",
+  "model_key": "pleias_rag_350m",
+  "model_revision": "db001b29a33532583d14979c3c38ef04b6d59352",
+  "model_role": "gpt_classical",
+  "phase_mask_applied_before_loss_and_argmax": true,
+  "predictions": "data/processed/evaluation/multiseed_head_comparison_v1/seed400003/pleias_rag_350m_classical/predictions.csv",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/pleias_rag_350m_classical",
+  "sample_step": 20,
+  "seed": 400003,
+  "sequence_length": 20,
+  "status": "held_out_tokyo_evaluation_completed",
+  "tokyo_pool_provenance": "rebuilt_from_raw_traces_verified_12000_samples",
+  "tokyo_pool_sha256": "0c53677a759d300454c816211c008bbf42fd8d214c31a040688560e512414c83"
+}

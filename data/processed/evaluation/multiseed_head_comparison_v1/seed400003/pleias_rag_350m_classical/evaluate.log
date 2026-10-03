@@ -1,0 +1,11 @@
+
+# 2026-10-03T00:14:49.278905+00:00  C:\Users\User\Desktop\lm-bbr-starlink-train-4models-quantum-100epochs\.venv\Scripts\python.exe -u C:\Users\User\Desktop\lm-bbr-starlink-train-4models-quantum-100epochs\run_multiseed_head_comparison.py evaluate-one --run-dir data\processed\lora_training\multiseed_head_comparison_v1\seed400003\pleias_rag_350m_classical --output-dir data\processed\evaluation\multiseed_head_comparison_v1\seed400003\pleias_rag_350m_classical --seed 400003 --head classical --tokyo-pool data\processed\evaluation\tokyo_8model_comparison_v1\tokyo.pkl --freeze-manifest data\processed\evaluation\tokyo_8model_comparison_v1\frozen_checkpoints.manifest.json --device cuda
+
+Loading weights:   0%|          | 0/236 [00:00<?, ?it/s]
+Loading weights:  24%|##4       | 57/236 [00:00<00:00, 563.39it/s]
+Loading weights:  61%|######1   | 145/236 [00:00<00:00, 731.13it/s]
+Loading weights:  99%|#########9| 234/236 [00:00<00:00, 800.17it/s]
+Loading weights: 100%|##########| 236/236 [00:00<00:00, 771.38it/s]
+rl_policy: action_levels 11
+[INFO] Normalized rewards with min_reward=-4.931095505517519, max_reward=1.0
+accuracy 0.9589166666666666 macro_phase 0.8264695529743048

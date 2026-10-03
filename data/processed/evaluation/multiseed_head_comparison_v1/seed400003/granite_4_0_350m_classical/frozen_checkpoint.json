@@ -1,0 +1,24 @@
+{
+  "checkpoint_files_sha256": {
+    "adapter/adapter_config.json": "e86074ecfbda55fcec55162effcf62380eb05e572fdf886c8cf5c58e378e3f55",
+    "adapter/adapter_model.safetensors": "ed34fce27a9bba112272d358052fd43bbd85665565551de0bc0c295d2209de48",
+    "task_modules.pt": "31cf501c13a92b82396ff097934b2e63e0879e66b9428c53906c7f880f0b2415",
+    "training_state.json": "de9fbc5ee80f383638e4ba813d297c68aba6de6946ae6bc85b5dc742d37037e2"
+  },
+  "checkpoint_rule": "final_epoch_100_fixed_before_tokyo",
+  "final_validation": {
+    "macro_phase_accuracy": 0.7859437751004016,
+    "max_up_prediction_share": 0.25180722891566265,
+    "overall_accuracy": 0.9555833333333333,
+    "up_accuracy": 0.3578313253012048
+  },
+  "frozen_at": "2026-10-03T01:24:50.230995+00:00",
+  "git_commit": "856269d6cb0de2be476180cd2ea203d92e5c6aba",
+  "git_dirty": false,
+  "head_type": "classical",
+  "model_role": "gpt_classical",
+  "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/granite_4_0_350m_classical",
+  "run_manifest_sha256": "074f18ffde1c4b9aeba1e83b296e2521b5a587a91f8548fb08175d031878daef",
+  "seed": 400003,
+  "status": "checkpoint_frozen_before_tokyo"
+}
