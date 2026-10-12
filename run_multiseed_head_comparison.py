@@ -110,8 +110,9 @@ ACCEPTED_TOKYO_POOLS = {
 # Seed 100003 already exists (four_model_100epoch_v1) and is reused by the
 # summary script; these four are the additional training seeds.
 DEFAULT_SEEDS = (200003, 300003, 400003, 500003)
-HEADS = ("classical", "quantum")
-ROLE = {"classical": "gpt_classical", "quantum": "gpt_quantum"}
+HEADS = ("classical", "quantum", "classical_twin")
+ROLE = {"classical": "gpt_classical", "quantum": "gpt_quantum",
+        "classical_twin": "gpt_classical_twin"}
 EPOCHS = 100
 
 COMMON_TRAIN_ARGS = [
@@ -145,6 +146,20 @@ HEAD_TRAIN_ARGS = {
         "--quantum-angle-scale", "pi",
         "--quantum-backend", "torch",
     ],
+    # Classical control for the quantum head: same LayerNorm -> Linear(d, 8)
+    # -> tanh(./T) path with T = 4, then Linear(8, 11). Only the circuit is
+    # removed, so it isolates the eight-dimensional bottleneck.
+    "classical_twin": [
+        "--head-type", "classical_twin",
+        "--n-qubits", "8",
+        "--head-input-layernorm",
+        "--bottleneck-temperature", "4",
+    ],
+}
+EXPECTED_TWIN_HEAD = {
+    "bottleneck_dim": 8,
+    "input_layernorm": True,
+    "temperature": 4.0,
 }
 EXPECTED_QUANTUM_HEAD = {
     "n_qubits": 8,
@@ -511,6 +526,10 @@ def verify_run(run_dir, seed, head):
         config = manifest.get("head_config") or {}
         for key, value in EXPECTED_QUANTUM_HEAD.items():
             checks["quantum_" + key] = config.get(key) == value
+    if head == "classical_twin":
+        config = manifest.get("head_config") or {}
+        for key, value in EXPECTED_TWIN_HEAD.items():
+            checks["twin_" + key] = config.get(key) == value
     failed = sorted(name for name, ok in checks.items() if not ok)
     if failed:
         raise RuntimeError("Run {} failed comparability checks: {}".format(run_dir, failed))

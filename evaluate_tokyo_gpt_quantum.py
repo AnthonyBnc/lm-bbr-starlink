@@ -74,7 +74,7 @@ def load_policy_from_run(run_dir, device, local_model_root):
         device_out=device,
         head_type=manifest["head_type"],
         quantum_config={
-            "n_qubits": head.get("n_qubits"),
+            "n_qubits": head.get("n_qubits", head.get("bottleneck_dim")),
             "depth": head.get("depth"),
             "ansatz": head.get("ansatz"),
             "input_layernorm": head.get("input_layernorm", False),

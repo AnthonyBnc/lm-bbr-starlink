@@ -24,6 +24,11 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 UP = [1.05, 1.10, 1.15, 1.20, 1.25]
 ROLES = {"classical": "gpt_classical", "quantum": "gpt_quantum"}
+# Optional classical control with the same 1024 -> 8 -> 11 path as the quantum
+# head (run_multiseed_head_comparison.py --heads classical_twin). It is added
+# for a seed only when that seed already has a paired classical/quantum result.
+TWIN = "classical_twin"
+ALL_ROLES = dict(ROLES, **{TWIN: "gpt_classical_twin"})
 REFERENCE_SEED = 100003
 REFERENCE_DIRS = {
     "classical": ROOT / "data/processed/evaluation/four_model_100epoch_v1/results/lfm2_5_350m",
@@ -88,6 +93,10 @@ def collect(eval_root, include_reference):
         dirs = {h: seed_dir / "lfm2_5_350m_{}".format(h) for h in ROLES}
         if all((d / "result.manifest.json").is_file() for d in dirs.values()):
             runs[seed] = dirs
+    for seed in runs:
+        twin_dir = Path(eval_root) / "seed{}".format(seed) / "lfm2_5_350m_{}".format(TWIN)
+        if (twin_dir / "result.manifest.json").is_file():
+            runs[seed][TWIN] = twin_dir
     return runs
 
 
@@ -111,33 +120,47 @@ def main():
                 sample_ids = ids
             elif not np.array_equal(ids, sample_ids):
                 raise SystemExit("Tokyo sample ids differ for seed {} {}".format(seed, head))
-            rows.append({"seed": seed, "head": head, "role": ROLES[head], **m})
+            rows.append({"seed": seed, "head": head, "role": ALL_ROLES[head], **m})
     table = pd.DataFrame(rows)
 
     summary = {}
-    for head in ROLES:
+    heads_present = [h for h in ALL_ROLES if (table["head"] == h).any()]
+    for head in heads_present:
         sub = table[table["head"] == head]
-        summary[ROLES[head]] = {
+        summary[ALL_ROLES[head]] = {
             key: {"mean": float(sub[key].mean()),
                   "sd": float(sub[key].std(ddof=1)) if len(sub) > 1 else None,
                   "min": float(sub[key].min()), "max": float(sub[key].max())}
             for key, _ in METRICS
         }
-        summary[ROLES[head]]["seeds_with_single_bw_up_action"] = int((sub.bw_up_distinct_predictions == 1).sum())
-        summary[ROLES[head]]["seeds_at_or_below_majority_baseline"] = int(
+        summary[ALL_ROLES[head]]["n_seeds"] = int(len(sub))
+        summary[ALL_ROLES[head]]["seeds_with_single_bw_up_action"] = int((sub.bw_up_distinct_predictions == 1).sum())
+        summary[ALL_ROLES[head]]["seeds_at_or_below_majority_baseline"] = int(
             (sub.bw_up_accuracy <= sub.bw_up_majority_accuracy + 1e-12).sum())
 
     wide = table.pivot(index="seed", columns="head")
-    paired = {}
-    for key in ("bw_up_accuracy", "bw_up_macro_f1", "bw_up_balanced_accuracy", "accuracy", "macro_phase_accuracy"):
-        diff = wide[key]["classical"] - wide[key]["quantum"]
-        paired[key] = {
-            "per_seed": {int(s): float(v) for s, v in diff.items()},
-            "mean": float(diff.mean()),
-            "sd": float(diff.std(ddof=1)) if len(diff) > 1 else None,
-            "seeds_classical_better": int((diff > 0).sum()),
-            "n_seeds": int(len(diff)),
-        }
+    paired_keys = ("bw_up_accuracy", "bw_up_macro_f1", "bw_up_balanced_accuracy", "accuracy", "macro_phase_accuracy")
+
+    def paired_diff(first, second):
+        result = {}
+        for key in paired_keys:
+            diff = (wide[key][first] - wide[key][second]).dropna()
+            result[key] = {
+                "per_seed": {int(s): float(v) for s, v in diff.items()},
+                "mean": float(diff.mean()),
+                "sd": float(diff.std(ddof=1)) if len(diff) > 1 else None,
+                "seeds_{}_better".format(first): int((diff > 0).sum()),
+                "n_seeds": int(len(diff)),
+            }
+        return result
+
+    paired = paired_diff("classical", "quantum")
+    for key in paired:
+        paired[key]["seeds_classical_better"] = paired[key].pop("seeds_classical_better")
+    twin_pairs = {}
+    if TWIN in heads_present:
+        twin_pairs["twin_minus_quantum"] = paired_diff(TWIN, "quantum")
+        twin_pairs["classical_minus_twin"] = paired_diff("classical", TWIN)
 
     out = {
         "evidence_class": "measured_final",
@@ -148,6 +171,8 @@ def main():
         "summary": summary,
         "paired_classical_minus_quantum": paired,
     }
+    if twin_pairs:
+        out["paired_with_classical_twin"] = twin_pairs
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(out, indent=2), encoding="utf-8")
 
@@ -160,20 +185,30 @@ def main():
             s = stats[key]
             sd = "n/a" if s["sd"] is None else "{:.4f}".format(s["sd"])
             print("  {:<18} {:.4f} +/- {}  [{:.4f}, {:.4f}]".format(label, s["mean"], sd, s["min"], s["max"]))
-        print("  seeds with a single BW_UP action: {}/{}".format(stats["seeds_with_single_bw_up_action"], len(runs)))
+        print("  seeds with a single BW_UP action: {}/{}".format(stats["seeds_with_single_bw_up_action"], stats["n_seeds"]))
     print("\nPaired (classical - quantum) over seeds:")
     for key, d in paired.items():
         sd = "n/a" if d["sd"] is None else "{:.4f}".format(d["sd"])
         print("  {:<24} {:+.4f} +/- {}   classical better in {}/{}".format(
             key, d["mean"], sd, d["seeds_classical_better"], d["n_seeds"]))
+    for name, block in twin_pairs.items():
+        print("\nPaired ({}) over seeds with a twin run:".format(name.replace("_minus_", " - ")))
+        for key, d in block.items():
+            sd = "n/a" if d["sd"] is None else "{:.4f}".format(d["sd"])
+            better = [k for k in d if k.startswith("seeds_") and k.endswith("_better")][0]
+            print("  {:<24} {:+.4f} +/- {}   first better in {}/{}".format(
+                key, d["mean"], sd, d[better], d["n_seeds"]))
 
     def cell(role, key, digits=4):
         s = summary[role][key]
         return "{:.{d}f}".format(s["mean"], d=digits) if s["sd"] is None else \
             "{:.{d}f} $\\pm$ {:.{d}f}".format(s["mean"], s["sd"], d=digits)
     print("\nLaTeX rows (Table II, mean $\\pm$ SD over {} seeds):".format(len(runs)))
-    for role, name in (("gpt_classical", "LFM2.5-350M (\\texttt{gpt\\_classical})"),
-                       ("gpt_quantum", "\\texttt{gpt\\_quantum}")):
+    latex_rows = [("gpt_classical", "LFM2.5-350M (\\texttt{gpt\\_classical})"),
+                  ("gpt_quantum", "\\texttt{gpt\\_quantum}")]
+    if "gpt_classical_twin" in summary:
+        latex_rows.append(("gpt_classical_twin", "Classical 1024--8--11 twin"))
+    for role, name in latex_rows:
         distinct = summary[role]["bw_up_distinct_predictions"]
         print("{} & {} & {} & {} & {:.1f} & {} & {} & {} \\\\".format(
             name, cell(role, "bw_up_accuracy"), cell(role, "bw_up_macro_f1"),
