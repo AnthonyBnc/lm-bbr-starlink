@@ -1,0 +1,196 @@
+{
+  "backbone_parameters": 366673664,
+  "batch_size": 1,
+  "checkpoint": "checkpoint",
+  "checkpoint_reload": "PASS",
+  "checkpoint_rule": "final completed epoch for slm_bbr_modern_backbone_extension",
+  "dataset_version": "slm-bbr-paper-w10-eq2-3-labels-v1-exploratory",
+  "device": "cuda",
+  "dtype": "float16",
+  "early_stopping": {
+    "min_delta": 0.0,
+    "patience": 0,
+    "stopped_early": false
+  },
+  "effective_sequences_per_optimizer_step": 32,
+  "epoch_checkpoint_root": "epoch_checkpoints",
+  "epochs": 100,
+  "epochs_executed_this_run": 100,
+  "final_validation_criteria": {
+    "all_declared_criteria_pass": null,
+    "checks": {},
+    "declared": {
+      "macro_phase_accuracy": null,
+      "max_up_prediction_share": null,
+      "overall_accuracy": null,
+      "up_accuracy": null
+    },
+    "observed": {
+      "macro_phase_accuracy": 0.7967871485943775,
+      "max_up_prediction_share": 0.21445783132530122,
+      "overall_accuracy": 0.9578333333333333,
+      "up_accuracy": 0.39036144578313253
+    }
+  },
+  "git_commit": "ac86ca7f7fe71bbe04f5e14e69b3986319efca4c",
+  "git_dirty": false,
+  "gradient_accumulation_steps": 32,
+  "gradient_clip_norm": 0.25,
+  "hardware": "Windows-11-10.0.26200-SP0",
+  "head_config": {
+    "type": "linear"
+  },
+  "head_type": "classical",
+  "held_out_location": "Tokyo",
+  "learning_rate": 0.0001,
+  "learning_rate_scheduler": "constant",
+  "lora_config": {
+    "adapter_module_count": 38,
+    "alpha": 32,
+    "dropout": 0.05,
+    "rank": 128,
+    "target_modules": [
+      "q_proj",
+      "v_proj",
+      "in_proj",
+      "out_proj"
+    ]
+  },
+  "lora_trainable_parameters": 12189696,
+  "max_train_steps": null,
+  "max_validation_steps": null,
+  "method_provenance": {
+    "backbone_substitution": true,
+    "canonical_method": "Small Language Model-based Control for BBR over Low Earth Orbit Satellite Internet",
+    "official_source_commit": "c0afba6521e62c09d4f558095fb83e577a1f7c80",
+    "paper_reproduction_claim": false
+  },
+  "metrics": "metrics.json",
+  "metrics_sha256": "fbc85d8cd12080db5d4d7c8ff24c88cb60654a564f26378e5f5372df8d48432b",
+  "model_id": "LiquidAI/LFM2.5-350M",
+  "model_key": "lfm2_5_350m",
+  "model_revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+  "model_role": "modern_baseline",
+  "optimizer": "AdamW",
+  "quantum_config": null,
+  "reportable_result": false,
+  "resume_data_order_policy": null,
+  "resume_source_git_commit": null,
+  "resume_source_hardware": null,
+  "resume_source_software_versions": null,
+  "resumed_from_epoch": null,
+  "resumed_from_run": null,
+  "run_completed_at": "2026-09-07T15:34:01.035576+00:00",
+  "run_purpose": "slm_bbr_modern_backbone_extension",
+  "sample_step": 20,
+  "seed": 100003,
+  "sequence_length": 20,
+  "software_versions": {
+    "python": "3.12.10",
+    "torch": "2.14.0+cu130",
+    "transformers": "5.16.1"
+  },
+  "split_manifest_sha256": "a6c5a4c910b894d7dca334cbc7a652f1c468f98c8ba4157a5a21154cab66a109",
+  "split_status": "exploratory_pending_supervisor_approval",
+  "split_version": "dev-trace-stratified-80-20-seed-100003-v1-exploratory",
+  "state_feature_dim": 256,
+  "status": "slm_bbr_modern_backbone_extension",
+  "target_epochs": 100,
+  "task_trainable_parameters": 2701835,
+  "tokyo_isolation": "PASS",
+  "total_trainable_parameters": 14891531,
+  "train_pool": "data/processed/slm_bbr_w10_eq2_3_dev_split_seed100003/train.pkl",
+  "train_pool_sha256": "dae037d4f34c428747763cedb4f2ae9cf1e047b3bceb042638325e188af2a937",
+  "train_sample_ids_sha256": "2f4123014ec3d0e6a1972db470770aac0fa49f5280250b24e9cc8b41091b25a5",
+  "train_windows": 2400,
+  "trainability_diagnostics": false,
+  "training_loss_weighting": "none",
+  "training_sampling": {
+    "down_penalty": null,
+    "location_action_window_quotas": null,
+    "replacement_windows": null,
+    "seed": 100003,
+    "selected_distribution": {
+      "action_positions": {
+        "0": 2579,
+        "1": 0,
+        "10": 875,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 42035,
+        "6": 708,
+        "7": 607,
+        "8": 643,
+        "9": 553
+      },
+      "dataset_indices_sha256": "fd9dec696d2773cc8cef630a9645a8df49bcbf5cf4f1d840ec561ddceeed3df4",
+      "phase_positions": {
+        "BW_CRUISE": 42035,
+        "BW_DOWN": 2579,
+        "BW_UP": 3386
+      },
+      "repeated_windows": 0,
+      "unique_windows": 2400,
+      "windows": 2400
+    },
+    "selected_location_windows": {
+      "London": 480,
+      "Mumbai": 480,
+      "Ohio": 480,
+      "SaoPaulo": 480,
+      "Sydney": 480
+    },
+    "source_distribution": {
+      "action_positions": {
+        "0": 2579,
+        "1": 0,
+        "10": 875,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 42035,
+        "6": 708,
+        "7": 607,
+        "8": 643,
+        "9": 553
+      },
+      "dataset_indices_sha256": "fd9dec696d2773cc8cef630a9645a8df49bcbf5cf4f1d840ec561ddceeed3df4",
+      "phase_positions": {
+        "BW_CRUISE": 42035,
+        "BW_DOWN": 2579,
+        "BW_UP": 3386
+      },
+      "repeated_windows": 0,
+      "unique_windows": 2400,
+      "windows": 2400
+    },
+    "source_location_windows": {
+      "London": 480,
+      "Mumbai": 480,
+      "Ohio": 480,
+      "SaoPaulo": 480,
+      "Sydney": 480
+    },
+    "strategy": "original",
+    "target_windows": 2400,
+    "up_action_window_quotas": null,
+    "up_density_power": null,
+    "with_replacement": false
+  },
+  "validation_loss_weighting": "none",
+  "validation_pool": "data/processed/slm_bbr_w10_eq2_3_dev_split_seed100003/validation.pkl",
+  "validation_pool_sha256": "6d53da7aa0a5c0c994977eb5eb2349fb5f3b2e66c17d1b3f8d55cafdf856d060",
+  "validation_sample_ids_sha256": "d5daa82e0172d9759d41c4988ecaaf4389638a5e53241f3c22f01cb0cb3b96a9",
+  "validation_sampling": "original_unmodified_distribution",
+  "validation_success_thresholds": {
+    "macro_phase_accuracy": null,
+    "max_up_prediction_share": null,
+    "overall_accuracy": null,
+    "up_accuracy": null
+  },
+  "validation_windows": 600,
+  "wall_clock_seconds": 43036.72379779816,
+  "warmup_steps": 0,
+  "weight_decay": 0.0001
+}

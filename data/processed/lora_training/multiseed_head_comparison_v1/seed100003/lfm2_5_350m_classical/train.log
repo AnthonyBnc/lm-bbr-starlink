@@ -1,0 +1,53 @@
+
+# 2026-10-12T03:39:45.315685+00:00  C:\Users\User\Desktop\lm-bbr-starlink-train-4models-quantum-100epochs\.venv\Scripts\python.exe -u -c import runpy, sys, torch; torch.backends.cudnn.benchmark = True; sys.argv = sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__') C:\Users\User\Desktop\lm-bbr-starlink-train-4models-quantum-100epochs\train_modern_lora.py --model-key lfm2_5_350m --dtype float16 --rank 128 --alpha 32 --dropout 0.05 --epochs 100 --sequence-length 20 --sample-step 20 --state-feature-dim 256 --learning-rate 1e-4 --weight-decay 1e-4 --grad-accum-steps 32 --run-purpose slm_bbr_modern_backbone_extension --head-type classical --seed 100003 --device cuda --split-dir data\processed\slm_bbr_w10_eq2_3_dev_split_seed100003 --output-dir data\processed\lora_training\multiseed_head_comparison_v1\seed100003\lfm2_5_350m_classical
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 148/148 [00:00<00:00, 1908.68it/s]
+[INFO] Normalized rewards with min_reward=-42.21478818820717, max_reward=1.0
+[INFO] Normalized rewards with min_reward=-95.66893940531484, max_reward=1.0
+rl_policy: action_levels 11
+epoch 1/100
+train step 1 loss 0.013699
+train step 25 loss 0.652202
+train step 50 loss 0.004515
+train step 75 loss 0.363127
+train step 100 loss 0.115312
+train step 125 loss 0.056684
+train step 150 loss 0.088639
+train step 175 loss 0.217400
+train step 200 loss 0.114084
+train step 225 loss 0.181840
+train step 250 loss 0.178778
+train step 275 loss 0.072929
+train step 300 loss 0.049502
+train step 325 loss 0.219478
+train step 350 loss 0.125419
+train step 375 loss 0.134515
+train step 400 loss 0.149775
+train step 425 loss 0.000000
+train step 450 loss 0.248273
+train step 475 loss 0.145016
+train step 500 loss 0.080950
+train step 525 loss 0.169973
+train step 550 loss 0.000005
+train step 575 loss 0.091275
+train step 600 loss 0.000000
+train step 625 loss 0.079245
+train step 650 loss 0.077214
+train step 675 loss 0.137876
+train step 700 loss 0.071575
+train step 725 loss 0.144990
+train step 750 loss 0.089656
+train step 775 loss 0.232606
+train step 800 loss 0.175034
+train step 825 loss 0.096914
+train step 850 loss 0.188683
+train step 875 loss 0.000000
+train step 900 loss 0.231521
+train step 925 loss 0.102593
+train step 950 loss 0.044830
+train step 975 loss 0.000000
+train step 1000 loss 0.846712
+train step 1025 loss 0.055199
+train step 1050 loss 0.510543
+train step 1075 loss 0.056829

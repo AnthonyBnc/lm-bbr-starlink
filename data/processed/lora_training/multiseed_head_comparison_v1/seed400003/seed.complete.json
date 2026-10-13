@@ -1,0 +1,72 @@
+{
+  "completed_at": "2026-10-12T13:13:16.913563+00:00",
+  "heads": {
+    "gpt_classical": {
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "93c183ed99c92a0f61c949178b98cd3613f2860350fd2b4f04c43709ae002877",
+        "adapter/adapter_model.safetensors": "547dffee54e5737ac9e0cd51b1a09b4edff2d48981aacdf4d29c73e6de7646a0",
+        "task_modules.pt": "2e9bddffc4781703a5069873df6fbb1ce6a2a30281acc48e7cee86b658110a18",
+        "training_state.json": "013e99eafc9073fc5d93df99321e36da77c242f89be2dcef13b7bbfb1e1e2897"
+      },
+      "final_validation": {
+        "macro_phase_accuracy": 0.7975903614457831,
+        "max_up_prediction_share": 0.25180722891566265,
+        "overall_accuracy": 0.958,
+        "up_accuracy": 0.3927710843373494
+      },
+      "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical",
+      "tokyo": {
+        "accuracy": 0.9588,
+        "bw_up_accuracy": 0.4784,
+        "bw_up_distinct_predictions": 5,
+        "bw_up_macro_f1": 0.3286
+      },
+      "tokyo_result": "data/processed/evaluation/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical/result.manifest.json"
+    },
+    "gpt_classical_twin": {
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "ea9385413805d28e0c05e56376c9b00ff2da5dee7eb450c02d30c4076044ee0a",
+        "adapter/adapter_model.safetensors": "6e00a7b8a59e36ad94a348083df71ae542f8af8c82c07846b20a0dc5b5d16781",
+        "task_modules.pt": "20d58e6324e03d4b31a8a3d48bb1674a3edc4ab14015dff3382c1281d7e0f880",
+        "training_state.json": "85d33cf7a30f84bab65bef4d21a30c0c12c8abad019caa9f36a44a7608786629"
+      },
+      "final_validation": {
+        "macro_phase_accuracy": 0.7357429718875502,
+        "max_up_prediction_share": 1.0,
+        "overall_accuracy": 0.9451666666666667,
+        "up_accuracy": 0.20722891566265061
+      },
+      "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical_twin",
+      "tokyo": {
+        "accuracy": 0.955,
+        "bw_up_accuracy": 0.4298,
+        "bw_up_distinct_predictions": 1,
+        "bw_up_macro_f1": 0.1202
+      },
+      "tokyo_result": "data/processed/evaluation/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical_twin/result.manifest.json"
+    },
+    "gpt_quantum": {
+      "checkpoint_files_sha256": {
+        "adapter/adapter_config.json": "890abf354d38424a031721ab21cdd29f9f752e2e8f938121b9622495729f405f",
+        "adapter/adapter_model.safetensors": "279b541553c9aef0367364a9df5f263f1bbd0f0b588b73600163ba9c5033def3",
+        "task_modules.pt": "7d2fcafa9f52f29fdcf5e46e1804f3f621d73832bc70c1e707afb3d938edda2f",
+        "training_state.json": "2b349fd221397900fbe9bd973f64f34262605ed7da82a4cebe64cbbef14e8741"
+      },
+      "final_validation": {
+        "macro_phase_accuracy": 0.7991308853929041,
+        "max_up_prediction_share": 0.2783132530120482,
+        "overall_accuracy": 0.9583333333333334,
+        "up_accuracy": 0.39879518072289155
+      },
+      "run_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_quantum__attempt02",
+      "tokyo": {
+        "accuracy": 0.9602,
+        "bw_up_accuracy": 0.4952,
+        "bw_up_distinct_predictions": 5,
+        "bw_up_macro_f1": 0.2946
+      },
+      "tokyo_result": "data/processed/evaluation/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_quantum/result.manifest.json"
+    }
+  },
+  "seed": 400003
+}

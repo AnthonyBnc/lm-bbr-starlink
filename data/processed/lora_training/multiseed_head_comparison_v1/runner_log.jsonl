@@ -1,0 +1,126 @@
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical", "quantum"], "parallel": 1, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-26T04:09:31.880925+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:09:31.881904+00:00"}
+{"event": "interrupted", "head": "classical", "seed": 200003, "time": "2026-09-26T04:12:33.457483+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical", "quantum"], "parallel": 8, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-26T04:15:49.332701+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:15:49.334654+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_quantum", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:16:09.335806+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-09-26T04:16:29.338121+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_quantum", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-09-26T04:16:49.338906+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-26T04:19:08.851916+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:19:08.853870+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["quantum"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-26T04:19:19.479843+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_quantum__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:19:19.481797+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_classical__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-09-26T04:19:28.855084+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_quantum__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-09-26T04:19:39.485668+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-09-26T04:19:48.856234+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_quantum", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-09-26T04:19:59.485731+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed500003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 500003, "time": "2026-09-26T04:20:08.857385+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed500003/lfm2_5_350m_quantum", "resume_epoch": 0, "resume_from": null, "seed": 500003, "time": "2026-09-26T04:20:19.486454+00:00"}
+{"event": "interrupted", "time": "2026-09-26T04:23:02.661703+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["quantum"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-26T04:23:22.798070+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_quantum__attempt03", "resume_epoch": 0, "resume_from": null, "seed": 200003, "time": "2026-09-26T04:23:22.801975+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_quantum__attempt03", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-09-26T04:23:42.803354+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_quantum__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-09-26T04:24:02.804639+00:00"}
+{"event": "train_start", "head": "quantum", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed500003/lfm2_5_350m_quantum__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 500003, "time": "2026-09-26T04:24:22.806266+00:00"}
+{"event": "train_failed", "head": "classical", "returncode": 1, "seed": 200003, "time": "2026-09-26T15:48:14.580767+00:00"}
+{"error": "training failed for seed 200003 head classical (exit 1); see data\\processed\\lora_training\\multiseed_head_comparison_v1\\seed200003\\lfm2_5_350m_classical__attempt02\\train.log", "event": "error", "head": "classical", "seed": 200003, "time": "2026-09-26T15:48:14.580767+00:00"}
+{"event": "train_done", "head": "classical", "hours": 17.12, "seed": 400003, "time": "2026-09-26T21:27:03.792539+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 400003, "time": "2026-09-26T21:27:03.864689+00:00"}
+{"event": "train_done", "head": "classical", "hours": 17.14, "seed": 300003, "time": "2026-09-26T21:27:47.156399+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 300003, "time": "2026-09-26T21:27:47.223694+00:00"}
+{"event": "train_done", "head": "classical", "hours": 17.14, "seed": 500003, "time": "2026-09-26T21:28:31.721008+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 500003, "time": "2026-09-26T21:28:31.793046+00:00"}
+{"event": "train_done", "head": "quantum", "hours": 21.49, "seed": 300003, "time": "2026-09-27T01:53:24.250268+00:00"}
+{"event": "checkpoint_frozen", "head": "quantum", "seed": 300003, "time": "2026-09-27T01:53:24.318228+00:00"}
+{"event": "train_done", "head": "quantum", "hours": 21.5, "seed": 400003, "time": "2026-09-27T01:54:16.905389+00:00"}
+{"event": "checkpoint_frozen", "head": "quantum", "seed": 400003, "time": "2026-09-27T01:54:16.972141+00:00"}
+{"event": "train_done", "head": "quantum", "hours": 21.5, "seed": 500003, "time": "2026-09-27T01:54:21.713522+00:00"}
+{"event": "checkpoint_frozen", "head": "quantum", "seed": 500003, "time": "2026-09-27T01:54:21.778178+00:00"}
+{"event": "train_done", "head": "quantum", "hours": 21.55, "seed": 200003, "time": "2026-09-27T01:56:33.856584+00:00"}
+{"event": "checkpoint_frozen", "head": "quantum", "seed": 200003, "time": "2026-09-27T01:56:33.927780+00:00"}
+{"event": "tokyo_eval_phase_start", "time": "2026-09-27T01:56:47.367379+00:00"}
+{"event": "tokyo_eval_start", "head": "quantum", "seed": 200003, "time": "2026-09-27T01:56:47.368370+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "quantum", "seed": 200003, "time": "2026-09-27T01:59:53.778387+00:00"}
+{"event": "tokyo_eval_start", "head": "quantum", "seed": 300003, "time": "2026-09-27T01:59:53.780341+00:00"}
+{"accuracy": 0.9577, "bw_up_accuracy": 0.4646, "bw_up_distinct_predictions": 2, "bw_up_macro_f1": 0.1893, "event": "tokyo_eval_done", "head": "quantum", "seed": 300003, "time": "2026-09-27T02:02:38.419168+00:00"}
+{"event": "tokyo_eval_start", "head": "quantum", "seed": 400003, "time": "2026-09-27T02:02:38.421112+00:00"}
+{"accuracy": 0.9602, "bw_up_accuracy": 0.4952, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.2946, "event": "tokyo_eval_done", "head": "quantum", "seed": 400003, "time": "2026-09-27T02:05:23.247857+00:00"}
+{"event": "tokyo_eval_start", "head": "quantum", "seed": 500003, "time": "2026-09-27T02:05:23.248834+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "quantum", "seed": 500003, "time": "2026-09-27T02:08:06.412594+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-28T02:43:14.358388+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt03", "resume_epoch": 63, "resume_from": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt02", "seed": 200003, "time": "2026-09-28T02:43:14.381522+00:00"}
+{"event": "train_failed", "head": "classical", "returncode": 1, "seed": 200003, "time": "2026-09-28T03:09:52.197495+00:00"}
+{"error": "training failed for seed 200003 head classical (exit 1); see data\\processed\\lora_training\\multiseed_head_comparison_v1\\seed200003\\lfm2_5_350m_classical__attempt03\\train.log", "event": "error", "head": "classical", "seed": 200003, "time": "2026-09-28T03:09:52.199010+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-28T03:32:00.264012+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt04", "resume_epoch": 69, "resume_from": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt03", "seed": 200003, "time": "2026-09-28T03:32:00.266970+00:00"}
+{"event": "train_failed", "head": "classical", "returncode": 1, "seed": 200003, "time": "2026-09-28T03:43:48.852745+00:00"}
+{"error": "training failed for seed 200003 head classical (exit 1); see data\\processed\\lora_training\\multiseed_head_comparison_v1\\seed200003\\lfm2_5_350m_classical__attempt04\\train.log", "event": "error", "head": "classical", "seed": 200003, "time": "2026-09-28T03:43:48.852745+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 4, "seeds": [200003, 300003, 400003, 500003], "time": "2026-09-28T05:14:29.336347+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt05", "resume_epoch": 70, "resume_from": "data/processed/lora_training/multiseed_head_comparison_v1/seed200003/lfm2_5_350m_classical__attempt04", "seed": 200003, "time": "2026-09-28T05:14:29.339804+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 4, "seeds": [300003, 400003, 500003], "time": "2026-09-28T05:23:37.102572+00:00"}
+{"event": "tokyo_eval_phase_start", "time": "2026-09-28T05:24:57.109047+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 300003, "time": "2026-09-28T05:24:57.110040+00:00"}
+{"event": "train_failed", "head": "classical", "returncode": 1, "seed": 200003, "time": "2026-09-28T05:25:04.239758+00:00"}
+{"error": "training failed for seed 200003 head classical (exit 1); see data\\processed\\lora_training\\multiseed_head_comparison_v1\\seed200003\\lfm2_5_350m_classical__attempt05\\train.log", "event": "error", "head": "classical", "seed": 200003, "time": "2026-09-28T05:25:04.240735+00:00"}
+{"accuracy": 0.9601, "bw_up_accuracy": 0.4942, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3528, "event": "tokyo_eval_done", "head": "classical", "seed": 300003, "time": "2026-09-28T05:25:13.003066+00:00"}
+{"event": "seed_complete", "seed": 300003, "time": "2026-09-28T05:25:13.060934+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 400003, "time": "2026-09-28T05:25:13.060934+00:00"}
+{"accuracy": 0.9588, "bw_up_accuracy": 0.4784, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3286, "event": "tokyo_eval_done", "head": "classical", "seed": 400003, "time": "2026-09-28T05:25:28.920480+00:00"}
+{"event": "seed_complete", "seed": 400003, "time": "2026-09-28T05:25:28.976423+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 500003, "time": "2026-09-28T05:25:28.977394+00:00"}
+{"accuracy": 0.9608, "bw_up_accuracy": 0.5037, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3805, "event": "tokyo_eval_done", "head": "classical", "seed": 500003, "time": "2026-09-28T05:25:44.718037+00:00"}
+{"event": "seed_complete", "seed": 500003, "time": "2026-09-28T05:25:44.777859+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 1, "seeds": [400003], "time": "2026-10-02T06:26:53.919773+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/granite_4_0_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-10-02T06:26:53.920750+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 1, "seeds": [400003], "time": "2026-10-02T06:27:06.619869+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/pleias_rag_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-10-02T06:27:06.619869+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical"], "parallel": 1, "seeds": [400003], "time": "2026-10-02T06:27:15.285681+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/gemma_3_270m_classical", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-10-02T06:27:15.285681+00:00"}
+{"event": "train_done", "head": "classical", "hours": 17.8, "seed": 400003, "time": "2026-10-03T00:14:49.208245+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 400003, "time": "2026-10-03T00:14:49.277403+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 400003, "time": "2026-10-03T00:14:49.278905+00:00"}
+{"accuracy": 0.9589, "bw_up_accuracy": 0.4794, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3099, "event": "tokyo_eval_done", "head": "classical", "seed": 400003, "time": "2026-10-03T00:15:55.247424+00:00"}
+{"event": "train_done", "head": "classical", "hours": 18.2, "seed": 400003, "time": "2026-10-03T00:39:13.907481+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 400003, "time": "2026-10-03T00:39:13.949147+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 400003, "time": "2026-10-03T00:39:13.949147+00:00"}
+{"accuracy": 0.9583, "bw_up_accuracy": 0.471, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3188, "event": "tokyo_eval_done", "head": "classical", "seed": 400003, "time": "2026-10-03T00:39:59.603919+00:00"}
+{"event": "train_done", "head": "classical", "hours": 18.97, "seed": 400003, "time": "2026-10-03T01:24:50.222719+00:00"}
+{"event": "checkpoint_frozen", "head": "classical", "seed": 400003, "time": "2026-10-03T01:24:50.293465+00:00"}
+{"event": "tokyo_eval_start", "head": "classical", "seed": 400003, "time": "2026-10-03T01:24:50.295420+00:00"}
+{"accuracy": 0.9583, "bw_up_accuracy": 0.472, "bw_up_distinct_predictions": 5, "bw_up_macro_f1": 0.3242, "event": "tokyo_eval_done", "head": "classical", "seed": 400003, "time": "2026-10-03T01:25:40.446177+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical", "quantum", "classical_twin"], "parallel": 1, "seeds": [100003, 300003, 400003, 500003], "time": "2026-10-12T03:39:45.314702+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed100003/lfm2_5_350m_classical", "resume_epoch": 0, "resume_from": null, "seed": 100003, "time": "2026-10-12T03:39:45.314702+00:00"}
+{"event": "interrupted", "head": "classical", "seed": 100003, "time": "2026-10-12T03:41:40.593567+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical", "quantum", "classical_twin"], "parallel": 1, "seeds": [100003, 300003, 400003, 500003], "time": "2026-10-12T03:41:44.497509+00:00"}
+{"event": "train_start", "head": "classical", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed100003/lfm2_5_350m_classical__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 100003, "time": "2026-10-12T03:41:44.497509+00:00"}
+{"event": "interrupted", "head": "classical", "seed": 100003, "time": "2026-10-12T03:42:57.154503+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical_twin"], "parallel": 1, "seeds": [100003, 300003, 400003, 500003], "time": "2026-10-12T03:43:14.244092+00:00"}
+{"event": "train_start", "head": "classical_twin", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed100003/lfm2_5_350m_classical_twin", "resume_epoch": 0, "resume_from": null, "seed": 100003, "time": "2026-10-12T03:43:14.244092+00:00"}
+{"event": "interrupted", "head": "classical_twin", "seed": 100003, "time": "2026-10-12T03:45:10.936161+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical_twin"], "parallel": 1, "seeds": [100003], "time": "2026-10-12T03:46:29.255328+00:00"}
+{"event": "train_start", "head": "classical_twin", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed100003/lfm2_5_350m_classical_twin__attempt02", "resume_epoch": 0, "resume_from": null, "seed": 100003, "time": "2026-10-12T03:46:29.256304+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical_twin"], "parallel": 1, "seeds": [300003], "time": "2026-10-12T03:46:37.018063+00:00"}
+{"event": "train_start", "head": "classical_twin", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed300003/lfm2_5_350m_classical_twin", "resume_epoch": 0, "resume_from": null, "seed": 300003, "time": "2026-10-12T03:46:37.018063+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical_twin"], "parallel": 1, "seeds": [400003], "time": "2026-10-12T03:46:44.181453+00:00"}
+{"event": "train_start", "head": "classical_twin", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed400003/lfm2_5_350m_classical_twin", "resume_epoch": 0, "resume_from": null, "seed": 400003, "time": "2026-10-12T03:46:44.183456+00:00"}
+{"cudnn_benchmark": true, "device": "cuda", "dry_run": false, "event": "runner_start", "heads": ["classical_twin"], "parallel": 1, "seeds": [500003], "time": "2026-10-12T03:46:51.510174+00:00"}
+{"event": "train_start", "head": "classical_twin", "output_dir": "data/processed/lora_training/multiseed_head_comparison_v1/seed500003/lfm2_5_350m_classical_twin", "resume_epoch": 0, "resume_from": null, "seed": 500003, "time": "2026-10-12T03:46:51.510174+00:00"}
+{"event": "train_done", "head": "classical_twin", "hours": 9.43, "seed": 100003, "time": "2026-10-12T13:12:17.401477+00:00"}
+{"event": "checkpoint_frozen", "head": "classical_twin", "seed": 100003, "time": "2026-10-12T13:12:17.455462+00:00"}
+{"event": "tokyo_eval_start", "head": "classical_twin", "seed": 100003, "time": "2026-10-12T13:12:17.456438+00:00"}
+{"event": "train_done", "head": "classical_twin", "hours": 9.43, "seed": 300003, "time": "2026-10-12T13:12:17.566274+00:00"}
+{"event": "checkpoint_frozen", "head": "classical_twin", "seed": 300003, "time": "2026-10-12T13:12:17.621253+00:00"}
+{"event": "tokyo_eval_start", "head": "classical_twin", "seed": 300003, "time": "2026-10-12T13:12:17.621253+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "classical_twin", "seed": 300003, "time": "2026-10-12T13:12:47.132901+00:00"}
+{"event": "train_done", "head": "classical_twin", "hours": 9.43, "seed": 500003, "time": "2026-10-12T13:12:47.194692+00:00"}
+{"event": "seed_complete", "seed": 300003, "time": "2026-10-12T13:12:47.232431+00:00"}
+{"event": "checkpoint_frozen", "head": "classical_twin", "seed": 500003, "time": "2026-10-12T13:12:47.246201+00:00"}
+{"event": "tokyo_eval_start", "head": "classical_twin", "seed": 500003, "time": "2026-10-12T13:12:47.246201+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "classical_twin", "seed": 100003, "time": "2026-10-12T13:12:47.274608+00:00"}
+{"event": "train_done", "head": "classical_twin", "hours": 9.44, "seed": 400003, "time": "2026-10-12T13:13:00.317939+00:00"}
+{"event": "checkpoint_frozen", "head": "classical_twin", "seed": 400003, "time": "2026-10-12T13:13:00.386590+00:00"}
+{"event": "tokyo_eval_start", "head": "classical_twin", "seed": 400003, "time": "2026-10-12T13:13:00.386590+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "classical_twin", "seed": 500003, "time": "2026-10-12T13:13:05.538715+00:00"}
+{"event": "seed_complete", "seed": 500003, "time": "2026-10-12T13:13:05.666064+00:00"}
+{"accuracy": 0.955, "bw_up_accuracy": 0.4298, "bw_up_distinct_predictions": 1, "bw_up_macro_f1": 0.1202, "event": "tokyo_eval_done", "head": "classical_twin", "seed": 400003, "time": "2026-10-12T13:13:16.913563+00:00"}
+{"event": "seed_complete", "seed": 400003, "time": "2026-10-12T13:13:17.003919+00:00"}

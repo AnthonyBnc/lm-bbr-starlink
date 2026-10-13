@@ -1,0 +1,8 @@
+{
+  "best_validation_loss": 0.10374844184685547,
+  "completed_epochs": 63,
+  "data_order_resume_policy": "continuous_generator_from_seed",
+  "non_improving_epochs": 49,
+  "resumed_from_epoch": null,
+  "target_epochs": 100
+}
